@@ -3,7 +3,7 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { Reveal } from "./motion";
-import { company, clientLogos } from "@/lib/site-data";
+import { company, clientLogos, media } from "@/lib/site-data";
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
@@ -215,5 +215,39 @@ export function CtaBand({
         </div>
       </Reveal>
     </section>
+  );
+}
+export function LegalPage({
+  crumbs,
+  title,
+  lead,
+  sections,
+}: {
+  crumbs: string;
+  title: string;
+  lead: string;
+  sections: { h: string; p: string }[];
+}) {
+  return (
+    <>
+      <PageHero eyebrow="Legal" crumbs={crumbs} title={title} lead={lead} image={media.about1} />
+      <section className="shell py-10 lg:py-12">
+        <div className="mx-auto grid max-w-3xl gap-4">
+          {sections.map((s, i) => (
+            <Reveal key={s.h} delay={i * 70} className="card-premium p-5 transition-all duration-300 hover:-translate-y-0.5">
+              <h2 className="text-base font-semibold text-foreground">{s.h}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.p}</p>
+            </Reveal>
+          ))}
+          <p className="mt-2 text-xs text-muted-foreground">
+            Questions? Write to{" "}
+            <a href={`mailto:${company.email}`} className="font-semibold text-primary hover:underline">
+              {company.email}
+            </a>
+            .
+          </p>
+        </div>
+      </section>
+    </>
   );
 }

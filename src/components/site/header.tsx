@@ -66,31 +66,23 @@ export function Header() {
             <span className="leading-none">
               <span
                 className={cn(
-                  "block font-[family-name:var(--font-display)] text-base font-bold tracking-tight lg:text-lg",
+                  "block whitespace-nowrap font-[family-name:var(--font-display)] text-base font-bold tracking-tight lg:text-lg",
                   transparent ? "text-white" : "text-foreground",
                 )}
               >
                 Payal Decor
               </span>
-              <span
-                className={cn(
-                  "mt-0.5 block text-[0.6rem] font-semibold tracking-[0.16em] uppercase",
-                  transparent ? "text-white/70" : "text-muted-foreground",
-                )}
-              >
-                Since 1992 · Pune
-              </span>
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
             {navLinks.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
                 activeOptions={{ exact: l.to === "/" }}
                 className={cn(
-                  "relative rounded-full px-3 py-2 text-[0.82rem] font-medium transition-colors",
+                  "relative rounded-full px-2.5 py-2 text-[0.8rem] font-medium whitespace-nowrap transition-all duration-300 hover:-translate-y-px",
                   transparent ? "text-white/80 hover:text-white" : "text-muted-foreground hover:text-foreground",
                 )}
                 activeProps={{
@@ -109,7 +101,7 @@ export function Header() {
             <a
               href={company.phoneHref}
               className={cn(
-                "hidden items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold transition-colors lg:inline-flex",
+                "hidden items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold whitespace-nowrap transition-colors xl:inline-flex",
                 transparent
                   ? "border-white/25 text-white hover:bg-white/10"
                   : "border-border text-foreground hover:border-primary hover:text-primary",
@@ -120,7 +112,7 @@ export function Header() {
             </a>
             <Link
               to="/contact"
-              className="hidden rounded-full bg-brand-gradient px-4 py-2.5 text-xs font-semibold text-primary-foreground shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)] sm:inline-flex"
+              className="hidden whitespace-nowrap rounded-full bg-brand-gradient px-4 py-2.5 text-xs font-semibold text-primary-foreground shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)] sm:inline-flex"
             >
               Book Free Consultation
             </Link>
@@ -130,7 +122,7 @@ export function Header() {
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               className={cn(
-                "inline-flex size-10 items-center justify-center rounded-full border transition-colors xl:hidden",
+                "inline-flex size-10 items-center justify-center rounded-full border transition-colors lg:hidden",
                 transparent ? "border-white/25 text-white" : "border-border text-foreground",
               )}
             >
@@ -141,7 +133,7 @@ export function Header() {
 
         <div
           className={cn(
-            "overflow-hidden border-t border-border bg-background transition-[max-height,opacity] duration-500 xl:hidden",
+            "overflow-hidden border-t border-border bg-background transition-[max-height,opacity] duration-500 lg:hidden",
             open ? "max-h-[34rem] opacity-100" : "max-h-0 opacity-0",
           )}
         >

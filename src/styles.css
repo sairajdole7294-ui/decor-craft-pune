@@ -249,7 +249,7 @@
 
 /* ---- Surfaces ---- */
 @utility surface-glass {
-  background: color-mix(in oklab, var(--background) 72%, transparent);
+  background: color-mix(in oklab, var(--background) 90%, transparent);
   backdrop-filter: blur(18px) saturate(160%);
   border-bottom: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
 }

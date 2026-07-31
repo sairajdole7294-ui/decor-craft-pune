@@ -120,7 +120,7 @@ function Services() {
       </section>
 
       <section className="shell py-10 lg:py-12">
-        <SectionHead eyebrow="Budget Planner" title="Estimate your project cost" lead="Six quick steps to an indicative range — then talk to a real estimator." />
+        <SectionHead eyebrow="Project Planner" title="Share your project brief" lead="Six quick steps — send the details on WhatsApp and our team returns a customised quotation." />
         <CostCalculator />
       </section>
 

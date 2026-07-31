@@ -32,7 +32,7 @@ const chips = [
   { label: "Office Furniture", to: "/services" },
   { label: "Commercial Interiors", to: "/services" },
   { label: "Manufacturing", to: "/manufacturing" },
-  { label: "Cost Calculator", to: "/contact" },
+  { label: "Project Planner", to: "/contact" },
   { label: "Projects", to: "/projects" },
   { label: "Gallery", to: "/gallery" },
   { label: "Book Visit", to: "/contact" },
@@ -116,7 +116,7 @@ function Index() {
           <img src={media.about1} alt="Payal Decor commercial interior project in Pune" className="h-[22rem] w-full object-cover lg:h-[28rem]" loading="lazy" />
           <div className="absolute bottom-4 left-4 rounded-2xl bg-card/95 px-4 py-3 shadow-[var(--shadow-card)] backdrop-blur">
             <p className="font-[family-name:var(--font-display)] text-2xl font-bold text-gradient-brand">
-              <Counter to={33} suffix="+" />
+              <Counter to={30} suffix="+" />
             </p>
             <p className="text-[0.68rem] font-semibold text-muted-foreground">Years of measured craft</p>
           </div>
@@ -138,11 +138,32 @@ function Index() {
               </Reveal>
             ))}
           </div>
-          <Reveal delay={180} className="mt-4 flex items-center gap-3 rounded-2xl border border-border bg-secondary/50 p-4">
-            <img src={media.founder} alt="Swaroop Suthar" className="size-14 rounded-full object-cover" loading="lazy" />
-            <div>
-              <p className="text-sm italic">“Every material tells a story. Our role is to shape it with intent.”</p>
-              <p className="mt-1 text-xs font-semibold text-muted-foreground">Swaroop Suthar · Founder & CEO</p>
+          <Reveal delay={180} className="group relative mt-5 overflow-hidden rounded-3xl border border-border bg-secondary/40 p-5 transition-all duration-500 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[var(--shadow-lift)]">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-16 -right-10 size-44 rounded-full bg-brand-gradient opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-25"
+            />
+            <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center">
+              <div className="relative shrink-0">
+                <span
+                  aria-hidden="true"
+                  className="absolute -inset-1 rounded-full bg-brand-gradient opacity-60 blur-[2px] transition-opacity duration-500 group-hover:opacity-100"
+                />
+                <img
+                  src={media.founder}
+                  alt="Swaroop Suthar, Founder & CEO of Payal Decor"
+                  className="relative size-28 rounded-full border-2 border-card object-cover shadow-[var(--shadow-card)] transition-transform duration-700 group-hover:scale-[1.04] sm:size-32"
+                  loading="lazy"
+                />
+              </div>
+              <div>
+                <span className="text-[0.62rem] font-bold tracking-[0.16em] text-primary uppercase">Leadership</span>
+                <p className="mt-2 text-base leading-relaxed font-medium italic sm:text-lg">
+                  &ldquo;Every material tells a story. Our role is to shape it with intent.&rdquo;
+                </p>
+                <p className="mt-2 text-sm font-bold">Swaroop Suthar</p>
+                <p className="text-xs font-semibold text-muted-foreground">Founder &amp; CEO · Payal Decor</p>
+              </div>
             </div>
           </Reveal>
         </div>
@@ -336,8 +357,8 @@ function Index() {
         <div className="shell">
           <SectionHead
             eyebrow="Budget Planner"
-            title="Estimate your interior cost in a minute"
-            lead="Six quick steps to an indicative range for your fit-out, kitchen or furniture package — then talk to a real estimator."
+            title="Plan your project in a minute"
+            lead="Six quick steps to a complete brief for your fit-out, kitchen or furniture package — sent straight to our team on WhatsApp."
           />
           <CostCalculator />
         </div>

@@ -66,7 +66,7 @@ export function Header() {
             <span className="leading-none">
               <span
                 className={cn(
-                  "block font-[family-name:var(--font-display)] text-base font-bold tracking-tight lg:text-lg",
+                  "block whitespace-nowrap font-[family-name:var(--font-display)] text-base font-bold tracking-tight lg:text-lg",
                   transparent ? "text-white" : "text-foreground",
                 )}
               >
@@ -82,7 +82,7 @@ export function Header() {
                 to={l.to}
                 activeOptions={{ exact: l.to === "/" }}
                 className={cn(
-                  "relative rounded-full px-3 py-2 text-[0.82rem] font-medium transition-colors",
+                  "relative rounded-full px-2.5 py-2 text-[0.8rem] font-medium whitespace-nowrap transition-all duration-300 hover:-translate-y-px",
                   transparent ? "text-white/80 hover:text-white" : "text-muted-foreground hover:text-foreground",
                 )}
                 activeProps={{
@@ -101,7 +101,7 @@ export function Header() {
             <a
               href={company.phoneHref}
               className={cn(
-                "hidden items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold transition-colors lg:inline-flex",
+                "hidden items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold whitespace-nowrap transition-colors xl:inline-flex",
                 transparent
                   ? "border-white/25 text-white hover:bg-white/10"
                   : "border-border text-foreground hover:border-primary hover:text-primary",
@@ -112,7 +112,7 @@ export function Header() {
             </a>
             <Link
               to="/contact"
-              className="hidden rounded-full bg-brand-gradient px-4 py-2.5 text-xs font-semibold text-primary-foreground shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)] sm:inline-flex"
+              className="hidden whitespace-nowrap rounded-full bg-brand-gradient px-4 py-2.5 text-xs font-semibold text-primary-foreground shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)] sm:inline-flex"
             >
               Book Free Consultation
             </Link>

@@ -25,7 +25,7 @@ export const Route = createFileRoute("/contact")({
 
 function Contact() {
   const items = [
-    { icon: Phone, label: "Phone", value: company.phoneDisplay, href: `tel:${company.phone}` },
+    { icon: Phone, label: "Phone", value: company.phone, href: `tel:${company.phone}` },
     { icon: Mail, label: "Email", value: company.email, href: `mailto:${company.email}` },
     { icon: MapPin, label: "Studio & Factory", value: company.address },
     { icon: Clock, label: "Working hours", value: "Mon – Sat, 9:30 am – 7:00 pm" },
@@ -36,7 +36,7 @@ function Contact() {
         eyebrow="Get In Touch"
         crumbs="Contact Us"
         title="Let's plan your space"
-        lead="Share a floor plate, a brief or just a deadline. We'll come back with a realistic scope, a cost range and a schedule."
+        lead="Share a floor plate, a brief or just a deadline. We'll come back with a realistic scope, a clear scope and a schedule."
         image={media.about1}
       />
 

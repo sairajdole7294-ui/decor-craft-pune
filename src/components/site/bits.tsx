@@ -3,7 +3,7 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { Reveal } from "./motion";
-import { company, clientLogos } from "@/lib/site-data";
+import { company, clientLogos, media } from "@/lib/site-data";
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
@@ -230,7 +230,7 @@ export function LegalPage({
 }) {
   return (
     <>
-      <PageHero eyebrow="Legal" crumbs={crumbs} title={title} lead={lead} image={company.legalImage} />
+      <PageHero eyebrow="Legal" crumbs={crumbs} title={title} lead={lead} image={media.about1} />
       <section className="shell py-10 lg:py-12">
         <div className="mx-auto grid max-w-3xl gap-4">
           {sections.map((s, i) => (

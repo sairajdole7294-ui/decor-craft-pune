@@ -72,18 +72,10 @@ export function Header() {
               >
                 Payal Decor
               </span>
-              <span
-                className={cn(
-                  "mt-0.5 block text-[0.6rem] font-semibold tracking-[0.16em] uppercase",
-                  transparent ? "text-white/70" : "text-muted-foreground",
-                )}
-              >
-                Since 1992 · Pune
-              </span>
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
             {navLinks.map((l) => (
               <Link
                 key={l.to}
@@ -130,7 +122,7 @@ export function Header() {
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               className={cn(
-                "inline-flex size-10 items-center justify-center rounded-full border transition-colors xl:hidden",
+                "inline-flex size-10 items-center justify-center rounded-full border transition-colors lg:hidden",
                 transparent ? "border-white/25 text-white" : "border-border text-foreground",
               )}
             >
@@ -141,7 +133,7 @@ export function Header() {
 
         <div
           className={cn(
-            "overflow-hidden border-t border-border bg-background transition-[max-height,opacity] duration-500 xl:hidden",
+            "overflow-hidden border-t border-border bg-background transition-[max-height,opacity] duration-500 lg:hidden",
             open ? "max-h-[34rem] opacity-100" : "max-h-0 opacity-0",
           )}
         >

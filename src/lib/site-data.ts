@@ -31,8 +31,8 @@ export const company = {
 };
 
 export const stats = [
-  { value: 33, suffix: "+", label: "Years of Craft", note: "Since 1992" },
-  { value: 1000, suffix: "+", label: "Projects Delivered", note: "Across Pune & Maharashtra" },
+  { value: 30, suffix: "+", label: "Years Experience", note: "Since 1992" },
+  { value: 500, suffix: "+", label: "Projects Delivered", note: "Across Pune & Maharashtra" },
   { value: 100, suffix: "%", label: "In-House Manufacturing", note: "Own CNC & press lines" },
   { value: 9001, prefix: "ISO ", suffix: ":2015", label: "Certified Quality", note: "Documented QC", raw: "ISO 9001:2015" },
 ];

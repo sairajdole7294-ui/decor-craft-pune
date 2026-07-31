@@ -33,7 +33,7 @@ function Privacy() {
         { h: "Sharing", p: "Details may be shared internally with our design, estimation and production teams, and where necessary with vendors engaged on your specific project. Any sharing is limited to what the work requires." },
         { h: "Retention", p: "Enquiry and project records are retained for as long as needed to service the relationship and to meet statutory record-keeping obligations. You can ask us to delete records that we are not required to retain." },
         { h: "Cookies and analytics", p: "This website may use basic cookies and analytics to understand page performance. These do not identify you personally and can be blocked in your browser without affecting the site." },
-        { h: "Your requests", p: `To access, correct or delete the information we hold about you, write to ${company.email} or call ${company.phoneDisplay}. We aim to respond within seven working days.` },
+        { h: "Your requests", p: `To access, correct or delete the information we hold about you, write to ${company.email} or call ${company.phone}. We aim to respond within seven working days.` },
       ]}
     />
   );

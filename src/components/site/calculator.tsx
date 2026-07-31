@@ -1,37 +1,36 @@
-import { useMemo, useState } from "react";
-import { Check, ChevronLeft, ChevronRight, Calculator as CalcIcon, RefreshCw } from "lucide-react";
+import { useState } from "react";
+import { Check, ChevronLeft, ChevronRight, ClipboardList, RefreshCw, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { Reveal } from "./motion";
 import { BrandButton } from "./bits";
 import { company } from "@/lib/site-data";
 
+const WA_NUMBER = "918007180059";
+
 const projectTypes = [
-  { id: "office", label: "Office Fit-out", rate: 1750 },
-  { id: "commercial", label: "Commercial / Retail", rate: 1950 },
-  { id: "hospitality", label: "Hospitality", rate: 2200 },
-  { id: "institutional", label: "Campus / Institutional", rate: 1550 },
-  { id: "kitchen", label: "Modular Kitchen", rate: 2100 },
-  { id: "wardrobe", label: "Wardrobes & Storage", rate: 1650 },
+  { id: "office", label: "Office Fit-out" },
+  { id: "commercial", label: "Commercial / Retail" },
+  { id: "hospitality", label: "Hospitality" },
+  { id: "institutional", label: "Campus / Institutional" },
+  { id: "kitchen", label: "Modular Kitchen" },
+  { id: "wardrobe", label: "Wardrobes & Storage" },
 ];
 
 const grades = [
-  { id: "essential", label: "Essential", mult: 0.85, note: "Laminate finishes, MR-grade carcass, standard hardware." },
-  { id: "premium", label: "Premium", mult: 1, note: "Mixed veneer & laminate, soft-close hardware, acoustic zones." },
-  { id: "signature", label: "Signature", mult: 1.32, note: "Veneer, solid surface, back-lit detailing, imported fittings." },
+  { id: "essential", label: "Essential", note: "Laminate finishes, MR-grade carcass, standard hardware." },
+  { id: "premium", label: "Premium", note: "Mixed veneer & laminate, soft-close hardware, acoustic zones." },
+  { id: "signature", label: "Signature", note: "Veneer, solid surface, back-lit detailing, imported fittings." },
 ];
 
-const budgets = ["Under ₹10 L", "₹10 – 25 L", "₹25 – 50 L", "₹50 L – 1 Cr", "Above ₹1 Cr"];
+const budgets = ["Under ₹10 L", "₹10 – 25 L", "₹25 – 50 L", "₹50 L – 1 Cr", "Above ₹1 Cr", "Prefer to discuss"];
 const timelines = [
-  { id: "fast", label: "Under 8 weeks", mult: 1.12 },
-  { id: "standard", label: "8 – 16 weeks", mult: 1 },
-  { id: "flexible", label: "Flexible / phased", mult: 0.96 },
+  { id: "fast", label: "Under 8 weeks" },
+  { id: "standard", label: "8 – 16 weeks" },
+  { id: "flexible", label: "Flexible / phased" },
 ];
 
-const steps = ["Project Type", "Area", "Material Grade", "Budget", "Timeline", "Your Details", "Estimate"];
-
-const inr = (n: number) =>
-  new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(n);
+const steps = ["Project Type", "Area", "Material Grade", "Budget Preference", "Timeline", "Your Details", "Send Enquiry"];
 
 function Option({
   active,
@@ -52,7 +51,7 @@ function Option({
         "group relative rounded-xl border p-3.5 text-left transition-all duration-300",
         active
           ? "border-primary bg-accent shadow-[var(--shadow-card)]"
-          : "border-border bg-card hover:-translate-y-0.5 hover:border-primary/50",
+          : "border-border bg-card hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-[var(--shadow-card)]",
       )}
     >
       <span className="flex items-start justify-between gap-2">
@@ -71,6 +70,47 @@ function Option({
   );
 }
 
+function Field({
+  label,
+  value,
+  onChange,
+  type = "text",
+  placeholder,
+  error,
+  textarea,
+  className,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  type?: string;
+  placeholder?: string;
+  error?: string;
+  textarea?: boolean;
+  className?: string;
+}) {
+  const cls = cn(
+    "rounded-lg border bg-background px-3 py-2.5 text-sm outline-none transition-colors focus:border-primary",
+    error ? "border-destructive" : "border-border",
+  );
+  return (
+    <label className={cn("flex flex-col gap-1", className)}>
+      <span className="text-[0.68rem] font-bold tracking-[0.12em] text-muted-foreground uppercase">{label}</span>
+      {textarea ? (
+        <textarea rows={3} value={value} maxLength={600} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} className={cls} />
+      ) : (
+        <input type={type} value={value} maxLength={140} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} className={cls} />
+      )}
+      {error ? <span className="text-[0.68rem] text-destructive">{error}</span> : null}
+    </label>
+  );
+}
+
+function openWhatsApp(lines: string[]) {
+  const text = encodeURIComponent(lines.join("\n"));
+  window.open(`https://wa.me/${WA_NUMBER}?text=${text}`, "_blank", "noopener,noreferrer");
+}
+
 export function CostCalculator() {
   const [step, setStep] = useState(0);
   const [type, setType] = useState("");
@@ -78,17 +118,10 @@ export function CostCalculator() {
   const [grade, setGrade] = useState("premium");
   const [budget, setBudget] = useState("");
   const [timeline, setTimeline] = useState("standard");
-  const [form, setForm] = useState({ name: "", phone: "", email: "", company: "" });
+  const [form, setForm] = useState({ name: "", phone: "", email: "", city: "", details: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const estimate = useMemo(() => {
-    const t = projectTypes.find((p) => p.id === type);
-    const g = grades.find((x) => x.id === grade);
-    const tl = timelines.find((x) => x.id === timeline);
-    if (!t || !g || !tl) return null;
-    const base = t.rate * area * g.mult * tl.mult;
-    return { low: Math.round((base * 0.9) / 1000) * 1000, high: Math.round((base * 1.12) / 1000) * 1000, rate: Math.round(t.rate * g.mult * tl.mult) };
-  }, [type, area, grade, timeline]);
+  const set = (k: keyof typeof form) => (v: string) => setForm((f) => ({ ...f, [k]: v }));
 
   const canAdvance = () => {
     if (step === 0) return !!type;
@@ -100,18 +133,34 @@ export function CostCalculator() {
   const validateDetails = () => {
     const e: Record<string, string> = {};
     if (form.name.trim().length < 2) e.name = "Please enter your name.";
-    if (!/^[0-9+\-\s()]{8,16}$/.test(form.phone.trim())) e.phone = "Enter a valid phone number.";
+    if (!/^[0-9+\-\s()]{8,16}$/.test(form.phone.trim())) e.phone = "Enter a valid mobile number.";
     if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim()))
       e.email = "Enter a valid email address.";
+    if (form.city.trim().length < 2) e.city = "Please enter your city.";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
 
+  const summary: [string, string][] = [
+    ["Name", form.name || "—"],
+    ["Mobile", form.phone || "—"],
+    ["Email", form.email || "—"],
+    ["City", form.city || "—"],
+    ["Project Type", projectTypes.find((p) => p.id === type)?.label ?? "—"],
+    ["Area", `${area.toLocaleString("en-IN")} sq.ft.`],
+    ["Material Grade", grades.find((g) => g.id === grade)?.label ?? "—"],
+    ["Budget Preference", budget || "—"],
+    ["Timeline", timelines.find((t) => t.id === timeline)?.label ?? "—"],
+    ["Additional Requirements", form.details.trim() || "—"],
+  ];
+
+  const sendToWhatsApp = () => {
+    openWhatsApp(["*New Interior Project Enquiry*", "", ...summary.map(([k, v]) => `${k}: ${v}`)]);
+    toast.success("Opening WhatsApp", { description: "Your enquiry details are pre-filled — just hit send." });
+  };
+
   const next = () => {
-    if (step === 5) {
-      if (!validateDetails()) return;
-      toast.success("Estimate ready", { description: "Our team will call you within one business day." });
-    }
+    if (step === 5 && !validateDetails()) return;
     setStep((s) => Math.min(steps.length - 1, s + 1));
   };
 
@@ -122,7 +171,7 @@ export function CostCalculator() {
     setGrade("premium");
     setBudget("");
     setTimeline("standard");
-    setForm({ name: "", phone: "", email: "", company: "" });
+    setForm({ name: "", phone: "", email: "", city: "", details: "" });
     setErrors({});
   };
 
@@ -131,10 +180,10 @@ export function CostCalculator() {
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-secondary/60 px-5 py-4">
         <div className="flex items-center gap-2.5">
           <span className="inline-flex size-9 items-center justify-center rounded-xl bg-brand-gradient text-primary-foreground">
-            <CalcIcon className="size-4" />
+            <ClipboardList className="size-4" />
           </span>
           <div>
-            <p className="text-sm font-semibold">Interior Cost Estimator</p>
+            <p className="text-sm font-semibold">Project Planner</p>
             <p className="text-xs text-muted-foreground">
               Step {step + 1} of {steps.length} · {steps[step]}
             </p>
@@ -169,7 +218,7 @@ export function CostCalculator() {
           {step === 1 ? (
             <div>
               <p className="text-sm font-semibold">Carpet area to be delivered</p>
-              <p className="mt-1 text-xs text-muted-foreground">Slide or type the approximate area in square feet.</p>
+              <p className="mt-1 text-xs text-muted-foreground">Slide or pick the approximate area in square feet.</p>
               <div className="mt-5 flex items-end gap-4">
                 <span className="font-[family-name:var(--font-display)] text-4xl font-bold text-gradient-brand">
                   {area.toLocaleString("en-IN")}
@@ -196,7 +245,7 @@ export function CostCalculator() {
                     key={a}
                     type="button"
                     onClick={() => setArea(a)}
-                    className="rounded-full border border-border px-3 py-1.5 text-xs font-semibold transition-colors hover:border-primary hover:text-primary"
+                    className="rounded-full border border-border px-3 py-1.5 text-xs font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:text-primary"
                   >
                     {a.toLocaleString("en-IN")} sq.ft.
                   </button>
@@ -214,7 +263,7 @@ export function CostCalculator() {
           ) : null}
 
           {step === 3 ? (
-            <div className="grid gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
+            <div className="grid gap-2.5 sm:grid-cols-3">
               {budgets.map((b) => (
                 <Option key={b} active={budget === b} onClick={() => setBudget(b)} title={b} />
               ))}
@@ -231,65 +280,58 @@ export function CostCalculator() {
 
           {step === 5 ? (
             <div className="grid gap-3 sm:grid-cols-2">
-              {([
-                ["name", "Full name*", "text", "Your name"],
-                ["phone", "Phone*", "tel", "+91 ..."],
-                ["email", "Email", "email", "you@company.com"],
-                ["company", "Company", "text", "Organisation"],
-              ] as const).map(([key, label, inputType, ph]) => (
-                <label key={key} className="flex flex-col gap-1">
-                  <span className="text-[0.68rem] font-bold tracking-[0.12em] text-muted-foreground uppercase">{label}</span>
-                  <input
-                    type={inputType}
-                    value={form[key]}
-                    maxLength={120}
-                    placeholder={ph}
-                    onChange={(e) => setForm((f) => ({ ...f, [key]: e.target.value }))}
-                    className={cn(
-                      "rounded-lg border bg-background px-3 py-2.5 text-sm outline-none transition-colors focus:border-primary",
-                      errors[key] ? "border-destructive" : "border-border",
-                    )}
-                  />
-                  {errors[key] ? <span className="text-[0.68rem] text-destructive">{errors[key]}</span> : null}
-                </label>
-              ))}
+              <Field label="Full name*" value={form.name} onChange={set("name")} placeholder="Your name" error={errors.name} />
+              <Field label="Mobile number*" type="tel" value={form.phone} onChange={set("phone")} placeholder="+91 ..." error={errors.phone} />
+              <Field label="Email" type="email" value={form.email} onChange={set("email")} placeholder="you@company.com" error={errors.email} />
+              <Field label="City*" value={form.city} onChange={set("city")} placeholder="Pune" error={errors.city} />
+              <Field
+                className="sm:col-span-2"
+                label="Additional requirements"
+                value={form.details}
+                onChange={set("details")}
+                placeholder="Site status, drawings available, preferred site visit date…"
+                textarea
+              />
               <p className="text-[0.68rem] text-muted-foreground sm:col-span-2">
-                We use these details only to share your estimate and schedule a consultation.
+                We use these details only to review your enquiry and share a customised quotation.
               </p>
             </div>
           ) : null}
 
-          {step === 6 && estimate ? (
-            <div className="grid gap-5 lg:grid-cols-[1.2fr_1fr]">
+          {step === 6 ? (
+            <div className="grid gap-5 lg:grid-cols-[1.1fr_1fr]">
               <div className="rounded-2xl surface-ink p-5">
-                <p className="text-[0.62rem] font-bold tracking-[0.16em] text-primary uppercase">Indicative estimate</p>
-                <p className="mt-2 font-[family-name:var(--font-display)] text-3xl font-bold text-ink-foreground sm:text-4xl">
-                  {inr(estimate.low)} – {inr(estimate.high)}
+                <p className="text-[0.62rem] font-bold tracking-[0.16em] text-primary uppercase">Enquiry ready</p>
+                <p className="mt-2 font-[family-name:var(--font-display)] text-2xl leading-tight font-bold text-ink-foreground sm:text-3xl">
+                  Send your project brief on WhatsApp
                 </p>
-                <p className="mt-2 text-sm text-ink-foreground/65">
-                  Approximately {inr(estimate.rate)} per sq.ft. across {area.toLocaleString("en-IN")} sq.ft.
-                </p>
-                <p className="mt-3 text-xs leading-relaxed text-ink-foreground/50">
-                  This is a budgeting range, not a quotation. A firm price follows a site measurement and a signed-off
-                  design — our team will walk you through both.
+                <p className="mt-3 text-sm leading-relaxed text-ink-foreground/65">
+                  Our team reviews every brief personally and comes back with a customised quotation after understanding
+                  your site, scope and finishes. No automated pricing — only a real conversation.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2.5">
-                  <BrandButton to="/contact">Book Consultation</BrandButton>
-                  <BrandButton href={company.whatsapp} variant="ghost-light">Send on WhatsApp</BrandButton>
+                  <button
+                    type="button"
+                    onClick={sendToWhatsApp}
+                    className="group inline-flex items-center gap-2 rounded-full bg-brand-gradient px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]"
+                  >
+                    <MessageCircle className="size-4 transition-transform duration-300 group-hover:scale-110" />
+                    Send to WhatsApp
+                  </button>
+                  <BrandButton href={company.phoneHref} variant="ghost-light">Call {company.phone}</BrandButton>
                 </div>
               </div>
               <dl className="grid grid-cols-2 gap-3 self-start">
-                {[
-                  ["Project type", projectTypes.find((p) => p.id === type)?.label ?? "—"],
-                  ["Area", `${area.toLocaleString("en-IN")} sq.ft.`],
-                  ["Material grade", grades.find((g) => g.id === grade)?.label ?? "—"],
-                  ["Budget band", budget || "—"],
-                  ["Timeline", timelines.find((t) => t.id === timeline)?.label ?? "—"],
-                  ["Contact", form.name || "—"],
-                ].map(([k, v]) => (
-                  <div key={k} className="rounded-xl border border-border p-3">
+                {summary.map(([k, v]) => (
+                  <div
+                    key={k}
+                    className={cn(
+                      "rounded-xl border border-border p-3 transition-colors hover:border-primary/50",
+                      k === "Additional Requirements" && "col-span-2",
+                    )}
+                  >
                     <dt className="text-[0.62rem] font-bold tracking-[0.12em] text-muted-foreground uppercase">{k}</dt>
-                    <dd className="mt-1 text-sm font-semibold">{v}</dd>
+                    <dd className="mt-1 text-sm font-semibold break-words">{v}</dd>
                   </div>
                 ))}
               </dl>
@@ -313,11 +355,91 @@ export function CostCalculator() {
               disabled={!canAdvance()}
               className="inline-flex items-center gap-1.5 rounded-full bg-brand-gradient px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all disabled:opacity-40 hover:enabled:-translate-y-0.5 hover:enabled:shadow-[var(--shadow-lift)]"
             >
-              {step === 5 ? "Calculate estimate" : "Continue"} <ChevronRight className="size-4" />
+              {step === 5 ? "Review enquiry" : "Continue"} <ChevronRight className="size-4" />
             </button>
           </div>
-        ) : null}
+        ) : (
+          <div className="mt-6 flex items-center justify-between gap-3 border-t border-border pt-4">
+            <button
+              type="button"
+              onClick={() => setStep(5)}
+              className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm font-semibold transition-colors hover:border-primary hover:text-primary"
+            >
+              <ChevronLeft className="size-4" /> Edit details
+            </button>
+            <button
+              type="button"
+              onClick={reset}
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:text-primary"
+            >
+              <RefreshCw className="size-3.5" /> Start over
+            </button>
+          </div>
+        )}
       </div>
     </Reveal>
+  );
+}
+
+export function ContactForm() {
+  const [form, setForm] = useState({ name: "", phone: "", email: "", city: "", type: "", message: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const set = (k: keyof typeof form) => (v: string) => setForm((f) => ({ ...f, [k]: v }));
+
+  const submit = () => {
+    const e: Record<string, string> = {};
+    if (form.name.trim().length < 2) e.name = "Please enter your name.";
+    if (!/^[0-9+\-\s()]{8,16}$/.test(form.phone.trim())) e.phone = "Enter a valid mobile number.";
+    if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim())) e.email = "Enter a valid email address.";
+    if (form.message.trim().length < 5) e.message = "Tell us a little about the project.";
+    setErrors(e);
+    if (Object.keys(e).length) return;
+    openWhatsApp([
+      "*New Interior Project Enquiry*",
+      "",
+      `Name: ${form.name}`,
+      `Mobile: ${form.phone}`,
+      `Email: ${form.email || "—"}`,
+      `City: ${form.city || "—"}`,
+      `Project Type: ${form.type || "—"}`,
+      `Additional Requirements: ${form.message}`,
+    ]);
+    toast.success("Opening WhatsApp", { description: "Your enquiry is pre-filled — just hit send." });
+  };
+
+  return (
+    <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-card)]">
+      <div className="border-b border-border bg-secondary/60 px-5 py-4">
+        <p className="text-sm font-semibold">Send us an enquiry</p>
+        <p className="text-xs text-muted-foreground">We reply within one business day with a customised quotation.</p>
+      </div>
+      <div className="grid gap-3 p-5 sm:grid-cols-2 sm:p-6">
+        <Field label="Full name*" value={form.name} onChange={set("name")} placeholder="Your name" error={errors.name} />
+        <Field label="Mobile number*" type="tel" value={form.phone} onChange={set("phone")} placeholder="+91 ..." error={errors.phone} />
+        <Field label="Email" type="email" value={form.email} onChange={set("email")} placeholder="you@company.com" error={errors.email} />
+        <Field label="City" value={form.city} onChange={set("city")} placeholder="Pune" />
+        <Field className="sm:col-span-2" label="Project type" value={form.type} onChange={set("type")} placeholder="Office fit-out, modular kitchen…" />
+        <Field
+          className="sm:col-span-2"
+          label="Project details*"
+          value={form.message}
+          onChange={set("message")}
+          placeholder="Area, site status, timeline, finishes you have in mind…"
+          error={errors.message}
+          textarea
+        />
+        <div className="flex flex-wrap gap-2.5 sm:col-span-2">
+          <button
+            type="button"
+            onClick={submit}
+            className="group inline-flex items-center gap-2 rounded-full bg-brand-gradient px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)]"
+          >
+            <MessageCircle className="size-4 transition-transform duration-300 group-hover:scale-110" />
+            Send on WhatsApp
+          </button>
+          <BrandButton href={company.phoneHref} variant="outline">Call {company.phone}</BrandButton>
+        </div>
+      </div>
+    </div>
   );
 }

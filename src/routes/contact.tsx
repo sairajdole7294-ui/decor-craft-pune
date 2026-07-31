@@ -7,7 +7,7 @@ import { ContactForm } from "@/components/site/calculator";
 
 const title = "Contact Payal Decor — Interiors & Manufacturing, Pune";
 const description =
-  "Talk to the Payal Decor team in Katraj, Pune. Share your drawings, book a factory visit or request an estimate for your commercial interior project.";
+  "Talk to the Payal Decor team in Katraj, Pune. Share your drawings, book a factory visit or request a customised quotation for your commercial interior project.";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({

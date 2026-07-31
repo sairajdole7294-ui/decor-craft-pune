@@ -32,7 +32,7 @@ const chips = [
   { label: "Office Furniture", to: "/services" },
   { label: "Commercial Interiors", to: "/services" },
   { label: "Manufacturing", to: "/manufacturing" },
-  { label: "Cost Calculator", to: "/contact" },
+  { label: "Project Planner", to: "/contact" },
   { label: "Projects", to: "/projects" },
   { label: "Gallery", to: "/gallery" },
   { label: "Book Visit", to: "/contact" },
@@ -357,8 +357,8 @@ function Index() {
         <div className="shell">
           <SectionHead
             eyebrow="Budget Planner"
-            title="Estimate your interior cost in a minute"
-            lead="Six quick steps to an indicative range for your fit-out, kitchen or furniture package — then talk to a real estimator."
+            title="Plan your project in a minute"
+            lead="Six quick steps to a complete brief for your fit-out, kitchen or furniture package — sent straight to our team on WhatsApp."
           />
           <CostCalculator />
         </div>

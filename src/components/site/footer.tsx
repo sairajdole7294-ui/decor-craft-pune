@@ -19,7 +19,7 @@ const columns = [
       { to: "/services", label: "Services" },
       { to: "/projects", label: "Projects" },
       { to: "/gallery", label: "Gallery" },
-      { to: "/contact", label: "Cost Estimator" },
+      { to: "/contact", label: "Project Planner" },
       { to: "/contact", label: "Book Consultation" },
     ],
   },

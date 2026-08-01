@@ -31,7 +31,7 @@ function Projects() {
         lead="Designed, manufactured and installed by our teams. Search, filter and open any project for the full detail panel."
         image={media.about1}
       />
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <ProjectsExplorer />
       </section>
       <CtaBand title="Your project could be next on this list." />

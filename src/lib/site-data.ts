@@ -1,16 +1,24 @@
-const CDN = "https://radiant-homes-studio.lovable.app/__l5e/assets-v1";
-export const asset = (p: string) => `${CDN}/${p}`;
+// All media is stored locally inside the repository (public/media, public/videos)
+// so the project is fully self-contained when cloned and run locally.
+export const asset = (p: string) => `/media/${p.split("/").pop()}`;
 
 export const media = {
-  logo: asset("21446598-c9b5-40c4-a93a-8d04071516dc/logo.png"),
-  heroVideo: asset("bf464ed4-ee9c-4803-854c-f3fa08e1fd23/hero.mp4"),
-  workVideo: asset("c9bc6ac2-ba0b-4c8e-9f52-2a12b2ab0cbf/work.mp4"),
+  logo: "/media/logo.png",
+  heroVideo: "/videos/hero.mp4",
+  workVideo: "/videos/work.mp4",
+  factoryVideo: "/videos/factory.mp4",
+  interviewVideo: "/videos/interview.mp4",
+  kitchen: "/media/modular-kitchen.jpg",
+  wardrobe: "/media/modular-wardrobe.jpg",
   about1: asset("1ee7d578-c29a-4f3c-b069-effbc0fd5bc8/about1.webp"),
   about3: asset("4fb63c99-0e7c-458e-bfda-977f9df889a3/about3.jpg"),
   banner: asset("15bff683-d5ac-4a0c-a339-47e202e5c43c/aboutbanner.jpg"),
   founder: asset("d5236da7-7c2c-4a02-badb-f6cb4916319a/founder.png"),
   workshop: asset("d1e6fcf5-2ee1-415d-bc38-6ed7e23371af/tab11.jpg"),
   vb: asset("4352fc35-b585-49e5-9a12-399f70ddc14a/vb.jpg"),
+  // Before / after frames from the SAME project (EKA Mobility HQ)
+  beforeImage: asset("x/eka1.jpg"),
+  afterImage: asset("x/eka.jpg"),
 };
 
 export const company = {
@@ -51,7 +59,7 @@ export const services = [
     id: "manufacturing",
     n: "02",
     title: "Custom Manufacturing",
-    image: asset("561c0347-f6e7-4a08-8942-e4ecef38abf2/tabm2.webp"),
+    image: media.wardrobe,
     summary:
       "Custom furniture and modular manufacturing tailored to your brand identity, space requirements and design preferences — produced on our own lines.",
     points: ["CNC routing & nesting", "Automatic edge banding", "Post-forming & hot press", "Powder coating & upholstery"],
@@ -79,12 +87,12 @@ export const services = [
 export const products = [
   {
     title: "Modular Wardrobes",
-    image: asset("561c0347-f6e7-4a08-8942-e4ecef38abf2/tabm2.webp"),
+    image: media.wardrobe,
     desc: "Full-height wardrobe systems with engineered shutters, soft-close hardware and internal organisers.",
   },
   {
     title: "Modular Kitchens",
-    image: asset("20f3cd0d-b936-45b7-86de-04529908a98a/tabt3.jpg"),
+    image: media.kitchen,
     desc: "Post-formed and laminated kitchen systems built on moisture-resistant carcasses.",
   },
   {
@@ -229,7 +237,7 @@ export const projects: Project[] = [
     materials: ["MR ply carcass", "Post-formed shutters", "Quartz counter", "Soft-close hinges"],
     scope: ["Modular kitchen", "Tall units", "Counter fabrication", "Installation"],
     images: [
-      asset("20f3cd0d-b936-45b7-86de-04529908a98a/tabt3.jpg"),
+      media.kitchen,
       asset("313966bc-5ce1-4c91-9e06-7d649f6cac0a/tabm4.jpg"),
       asset("f93a9afc-8e61-43a6-9908-85694edf0335/tabm5.jpg"),
     ],
@@ -247,7 +255,7 @@ export const projects: Project[] = [
     materials: ["Engineered shutters", "Aluminium profiles", "Internal organisers", "Mirror inserts"],
     scope: ["Wardrobe manufacturing", "Site measurement", "Installation", "After-sales servicing"],
     images: [
-      asset("561c0347-f6e7-4a08-8942-e4ecef38abf2/tabm2.webp"),
+      media.wardrobe,
       asset("0a33e764-4556-4e54-a7e4-32473d239e30/tabc2.jpg"),
       asset("8c4d7045-c3f0-4376-940f-3736eb2c018b/tabc3.jpg"),
     ],
@@ -405,10 +413,10 @@ export const galleryItems = [
   { src: asset("b39d9fbd-c660-4197-8345-1dc3ed783e64/vishwa.jpg"), cat: "Hospitality", title: "Vishwakarma campus" },
   { src: asset("99d45b4a-3875-43b1-acdf-5d6c5ba15466/vishwa1.jpg"), cat: "Hospitality", title: "Reception counter" },
   { src: asset("d99cbf0b-d870-4a65-92e9-eaf358f5fdc4/vishwa2.jpg"), cat: "Hospitality", title: "Faculty zone" },
-  { src: asset("20f3cd0d-b936-45b7-86de-04529908a98a/tabt3.jpg"), cat: "Modular", title: "Modular kitchen" },
+  { src: media.kitchen, cat: "Modular", title: "Modular kitchen" },
   { src: asset("313966bc-5ce1-4c91-9e06-7d649f6cac0a/tabm4.jpg"), cat: "Modular", title: "Tall unit run" },
   { src: asset("f93a9afc-8e61-43a6-9908-85694edf0335/tabm5.jpg"), cat: "Modular", title: "Counter detail" },
-  { src: asset("561c0347-f6e7-4a08-8942-e4ecef38abf2/tabm2.webp"), cat: "Modular", title: "Wardrobe system" },
+  { src: media.wardrobe, cat: "Modular", title: "Wardrobe system" },
   { src: asset("8ccb363c-d0ff-4f00-a790-369dfabd201a/tabc1.webp"), cat: "Commercial", title: "Commercial fit-out" },
   { src: asset("0a33e764-4556-4e54-a7e4-32473d239e30/tabc2.jpg"), cat: "Commercial", title: "Retail joinery" },
   { src: asset("8c4d7045-c3f0-4376-940f-3736eb2c018b/tabc3.jpg"), cat: "Commercial", title: "Display wall" },
@@ -441,11 +449,11 @@ export const faqs = [
 
 export const posts = [
   { slug: "in-house-manufacturing", title: "Why in-house manufacturing changes the deadline maths", date: "12 June 2026", tag: "Manufacturing", excerpt: "When the factory and the site team report to the same programme, a fit-out stops depending on a vendor's queue. Here is what that does to a schedule.", image: asset("c25170cc-6f50-4dbb-94c0-007ab83d1bbb/biesse-rover.jpg") },
-  { slug: "specifying-boards", title: "Specifying boards and laminates for commercial wear", date: "28 May 2026", tag: "Materials", excerpt: "Residential-grade material fails fast in a 300-person office. A practical guide to carcass, edge and surface specification for commercial life.", image: asset("561c0347-f6e7-4a08-8942-e4ecef38abf2/tabm2.webp") },
+  { slug: "specifying-boards", title: "Specifying boards and laminates for commercial wear", date: "28 May 2026", tag: "Materials", excerpt: "Residential-grade material fails fast in a 300-person office. A practical guide to carcass, edge and surface specification for commercial life.", image: media.wardrobe },
   { slug: "occupied-fitouts", title: "Delivering a fit-out without stopping the business", date: "09 May 2026", tag: "Execution", excerpt: "Phasing, factory-finished modules and weekend installs — how we hand over floors while the client keeps working.", image: asset("8ccb363c-d0ff-4f00-a790-369dfabd201a/tabc1.webp") },
   { slug: "workstation-ergonomics", title: "Workstation ergonomics that survive an audit", date: "21 April 2026", tag: "Design", excerpt: "Clearances, cable management and privacy screens: the details that decide whether a workstation is comfortable three years in.", image: asset("7f087a03-d9c0-434f-80ef-c46388f6f644/mahale.jpg") },
   { slug: "reception-first-impression", title: "The reception desk is the brand statement", date: "03 April 2026", tag: "Projects", excerpt: "Veneer, solid surface and back-lit detailing — how the arrival experience gets engineered before it gets styled.", image: asset("3702b250-9057-4210-92f6-c6d2c0b8cf51/eka.jpg") },
-  { slug: "modular-kitchen-carcass", title: "Moisture-resistant carcasses are non-negotiable", date: "18 March 2026", tag: "Modular", excerpt: "The part of a modular kitchen nobody sees is the part that decides how long it lasts. A look inside our carcass specification.", image: asset("20f3cd0d-b936-45b7-86de-04529908a98a/tabt3.jpg") },
+  { slug: "modular-kitchen-carcass", title: "Moisture-resistant carcasses are non-negotiable", date: "18 March 2026", tag: "Modular", excerpt: "The part of a modular kitchen nobody sees is the part that decides how long it lasts. A look inside our carcass specification.", image: media.kitchen },
 ];
 
 export const openRoles = [
@@ -484,4 +492,107 @@ export const awards = [
 
 export const team = [
   { name: "Swaroop Suthar", role: "Founder & CEO", image: media.founder, note: "Three decades of shaping material with intent." },
+];
+// ---------------------------------------------------------------------------
+// Product range, categories, industry solutions & catalogue (Services page)
+// ---------------------------------------------------------------------------
+
+export type ProductCategory = {
+  slug: string;
+  name: string;
+  image: string;
+  desc: string;
+  features: string[];
+  applications: string[];
+  catalogue?: boolean;
+};
+
+export const productRange: ProductCategory[] = [
+  {
+    slug: "premium-office-tables",
+    name: "Premium Office Tables",
+    image: "/media/products/p28.jpg",
+    desc: "Executive and managerial desks built on engineered carcasses with cable-managed tops, storage pedestals and a finish schedule tuned to your brand.",
+    features: ["25 mm MR-grade engineered top", "PUR-sealed 2 mm edge banding", "Integrated cable trays & grommets", "Soft-close pedestal drawers"],
+    applications: ["Corporate cabins", "Managing director suites", "Consulting rooms", "Branch offices"],
+    catalogue: true,
+  },
+  {
+    slug: "reception-tables",
+    name: "Reception Tables",
+    image: "/media/products/p29.jpg",
+    desc: "Signature reception counters in veneer, solid surface and back-lit finishes — the first brand statement a visitor reads in your space.",
+    features: ["Curved solid-surface fascia", "Concealed LED cove lighting", "Dual-height transaction counter", "Lockable back storage"],
+    applications: ["Corporate lobbies", "Hotels & hospitality", "Hospitals & clinics", "Campus admin blocks"],
+    catalogue: true,
+  },
+  {
+    slug: "conference-tables",
+    name: "Conference & Meeting Tables",
+    image: "/media/products/p30.jpg",
+    desc: "Boardroom tables in wood, veneer and laminate with pop-up power modules, AV routing and seating layouts planned around the room.",
+    features: ["6 to 24-seat configurations", "Flip-top power & data modules", "Post-formed rolled edges", "Concealed cable spine"],
+    applications: ["Boardrooms", "Training rooms", "Faculty meeting halls", "Client presentation rooms"],
+    catalogue: true,
+  },
+  {
+    slug: "workstation-desks",
+    name: "Workstation Desks",
+    image: "/media/products/p32.jpg",
+    desc: "Linear, cluster and cubicle workstation systems with fabric privacy screens, shared spines and repeatable quality across every seat.",
+    features: ["Linear, L and cluster layouts", "Acoustic fabric tack screens", "Aluminium raceway spine", "Mobile pedestals with castors"],
+    applications: ["Open-plan offices", "IT & BPO floors", "Engineering design centres", "Co-working spaces"],
+    catalogue: true,
+  },
+  {
+    slug: "executive-office-tables",
+    name: "Executive Office Tables",
+    image: "/media/products/p33.jpg",
+    desc: "Statement executive desks with veneer detailing, credenza units and finishes selected for a decade of daily commercial use.",
+    features: ["Matched natural veneer", "Side credenza & return unit", "Leather / PU inlay options", "Concealed CPU housing"],
+    applications: ["CXO cabins", "Directors' offices", "Partner rooms", "Legal & finance chambers"],
+    catalogue: true,
+  },
+  {
+    slug: "modular-office-desks",
+    name: "Modular Office Desks",
+    image: "/media/products/p35.jpg",
+    desc: "Reconfigurable modular desking that grows with your headcount — every module engineered to your floor plate, never to a catalogue size.",
+    features: ["Add-on modular seats", "Tool-free reconfiguration", "Shared power spine", "Standard & height-adjustable frames"],
+    applications: ["Growing startups", "Project war rooms", "Shared service centres", "Satellite offices"],
+    catalogue: true,
+  },
+  {
+    slug: "modular-kitchens",
+    name: "Modular Kitchens",
+    image: media.kitchen,
+    desc: "Post-formed and laminated kitchen systems on moisture-resistant carcasses, with tall units, appliance housings and soft-close everything.",
+    features: ["MR / BWP ply carcass", "Post-formed shutters", "Quartz & granite counters", "Soft-close hinges and channels"],
+    applications: ["Residences", "Corporate pantries", "Cafeterias", "Hostel & campus kitchens"],
+    catalogue: true,
+  },
+  {
+    slug: "modular-wardrobes",
+    name: "Modular Wardrobes",
+    image: media.wardrobe,
+    desc: "Full-height wardrobe systems with engineered shutters, profile-lit interiors, mirror inserts and internal organisers built around what you store.",
+    features: ["Hinged, sliding & glass profiles", "Profile-lit internal shelving", "Pull-out shoe and accessory racks", "Aluminium framed shutters"],
+    applications: ["Residences", "Hotel rooms", "Hostels & guest houses", "Serviced apartments"],
+    catalogue: true,
+  },
+];
+
+export const industrySolutions = [
+  { name: "Corporate Offices", desc: "Reception units, workstations, cabins and collaboration zones delivered floor by floor without stopping operations.", points: ["Test fits & space planning", "Phased occupied-site installs", "Acoustic & ergonomic compliance"] },
+  { name: "Education & Campuses", desc: "Heavy-duty furniture and interiors for classrooms, labs, libraries and admin blocks — built for daily student footfall.", points: ["Impact-resistant finishes", "Lab & library joinery", "Auditorium & seminar fit-outs"] },
+  { name: "Healthcare & Hospitals", desc: "Hygienic, wipe-clean surfaces and nursing stations engineered for infection control and 24×7 use.", points: ["Seamless solid-surface counters", "Anti-bacterial laminates", "Reception & records storage"] },
+  { name: "Retail & Showrooms", desc: "Display systems, cash counters and back-lit brand walls that survive merchandising changes every season.", points: ["Modular display joinery", "Integrated lighting", "Fast turnaround installs"] },
+  { name: "Hospitality", desc: "Guest rooms, lobbies and F&B interiors combining premium finishes with commercial durability.", points: ["Room wardrobes & headboards", "Lobby & concierge counters", "Restaurant joinery"] },
+  { name: "Manufacturing & Industrial", desc: "Plant offices, canteens and QC rooms delivered inside live industrial environments with strict safety protocol.", points: ["Plant-floor site discipline", "Canteen & locker systems", "Shift-friendly scheduling"] },
+];
+
+export const catalogueSheets = [
+  { title: "Office Furniture Catalogue", desc: "Desks, workstations, conference and reception systems with sizes and finish options.", items: "38 products" },
+  { title: "Modular Kitchen & Wardrobe Catalogue", desc: "Carcass specification, shutter finishes, hardware and internal organiser options.", items: "24 systems" },
+  { title: "Manufacturing Capability Profile", desc: "Machine list, capacity, quality process and the seven-stage production flow.", items: "Company profile" },
 ];

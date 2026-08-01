@@ -33,7 +33,7 @@ function Manufacturing() {
         image={media.workshop}
       />
 
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <SectionHead eyebrow="Machinery" title="Interactive machine floor" lead="Hover any machine to see what it adds to your project." />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {machines.map((m, i) => (
@@ -56,7 +56,7 @@ function Manufacturing() {
         </div>
       </section>
 
-      <section className="bg-sand py-10 lg:py-12">
+      <section className="bg-sand py-7 lg:py-9">
         <div className="shell grid gap-8 lg:grid-cols-2 lg:items-center">
           <div>
             <SectionHead eyebrow="Capability" title="What the floor can absorb" lead="Capacity utilisation across the disciplines we run in-house." />
@@ -76,13 +76,13 @@ function Manufacturing() {
             </div>
           </div>
           <Reveal delay={120}>
-            <VideoShowcase />
+            <VideoShowcase src={media.factoryVideo} poster={media.workshop} />
             <p className="mt-2 text-center text-[0.7rem] text-muted-foreground">Inside the Payal Decor production facility.</p>
           </Reveal>
         </div>
       </section>
 
-      <section className="surface-ink py-10 lg:py-12">
+      <section className="surface-ink py-7 lg:py-9">
         <div className="shell">
           <SectionHead tone="ink" eyebrow="Manufacturing Process" title="Raw material to installation" lead="Seven documented stages, every one of them under our own roof and our own supervision." />
           <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

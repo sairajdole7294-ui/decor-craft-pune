@@ -42,7 +42,7 @@ function Careers() {
         <BrandButton href={`mailto:${company.email}?subject=Career%20enquiry`}>Send your CV</BrandButton>
       </PageHero>
 
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <SectionHead eyebrow="Why Join" title="What working here actually looks like" />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {perks.map((p, i) => (
@@ -54,7 +54,7 @@ function Careers() {
         </div>
       </section>
 
-      <section className="bg-sand py-10 lg:py-12">
+      <section className="bg-sand py-7 lg:py-9">
         <div className="shell">
           <SectionHead eyebrow="Open Roles" title="Positions we're hiring for" lead="Apply by email with your CV and a note about the work you're proudest of." />
           <div className="space-y-3">

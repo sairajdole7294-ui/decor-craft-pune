@@ -128,13 +128,19 @@ export function BeforeAfter({
   );
 }
 
-export function VideoShowcase() {
+export function VideoShowcase({
+  src = media.workVideo,
+  poster = media.workshop,
+}: {
+  src?: string;
+  poster?: string;
+}) {
   return (
     <div className="overflow-hidden rounded-2xl border border-border shadow-[var(--shadow-card)]">
       <video
         className="aspect-video w-full object-cover"
-        src={media.workVideo}
-        poster={media.workshop}
+        src={src}
+        poster={poster}
         controls
         playsInline
         preload="none"

@@ -11,7 +11,7 @@ import { BeforeAfter } from "@/components/site/gallery-explorer";
 
 const title = "Payal Decor — Commercial Interiors & Manufacturing in Pune";
 const description =
-  "Turnkey commercial interiors, modular furniture and in-house manufacturing in Pune since 1992. ISO 9001:2015 certified, 1000+ projects delivered.";
+  "Turnkey commercial interiors, modular furniture and in-house manufacturing in Pune since 1992. ISO 9001:2015 certified, 500+ projects delivered.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -41,7 +41,7 @@ const chips = [
 function Index() {
   return (
     <>
-      <section className="relative isolate min-h-[86dvh] overflow-hidden">
+      <section className="relative isolate -mt-16 min-h-[84dvh] overflow-hidden lg:-mt-[4.5rem]">
         <video
           className="absolute inset-0 size-full object-cover"
           src={media.heroVideo}
@@ -52,13 +52,14 @@ function Index() {
           playsInline
           aria-hidden="true"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-ink/92 via-ink/78 to-ink/55" />
+        <div aria-hidden="true" className="absolute inset-0 bg-ink/55" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-ink/45 via-ink/25 to-transparent" />
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[radial-gradient(900px_400px_at_10%_10%,color-mix(in_oklab,var(--primary)_32%,transparent),transparent_65%)]"
         />
 
-        <div className="shell relative flex min-h-[86dvh] flex-col justify-center py-14 lg:py-16">
+        <div className="shell relative flex min-h-[84dvh] flex-col justify-center pt-24 pb-12 lg:pt-28 lg:pb-14">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[0.68rem] font-semibold tracking-[0.14em] text-white uppercase backdrop-blur-md">
               <span className="size-1.5 animate-pulse rounded-full bg-primary" />
@@ -111,7 +112,7 @@ function Index() {
       </section>
 
       {/* Story */}
-      <section className="shell grid gap-8 py-10 lg:grid-cols-2 lg:items-center lg:py-12">
+      <section className="shell grid gap-6 py-7 lg:grid-cols-2 lg:items-center lg:py-9">
         <Reveal className="hover-zoom relative overflow-hidden rounded-3xl border border-border">
           <img src={media.about1} alt="Payal Decor commercial interior project in Pune" className="h-[22rem] w-full object-cover lg:h-[28rem]" loading="lazy" />
           <div className="absolute bottom-4 left-4 rounded-2xl bg-card/95 px-4 py-3 shadow-[var(--shadow-card)] backdrop-blur">
@@ -170,7 +171,7 @@ function Index() {
       </section>
 
       {/* Services */}
-      <section className="bg-sand py-10 lg:py-12">
+      <section className="bg-sand py-7 lg:py-9">
         <div className="shell">
           <SectionHead
             eyebrow="What We Do"
@@ -208,7 +209,7 @@ function Index() {
       </section>
 
       {/* USPs */}
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <SectionHead
           eyebrow="Why Payal Decor"
           title={<>Eight reasons clients keep <span className="text-gradient-brand">coming back</span></>}
@@ -235,7 +236,7 @@ function Index() {
       </section>
 
       {/* Products */}
-      <section className="surface-ink py-10 lg:py-12">
+      <section className="surface-ink py-7 lg:py-9">
         <div className="shell">
           <SectionHead
             tone="ink"
@@ -264,7 +265,7 @@ function Index() {
       </section>
 
       {/* Projects preview */}
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <SectionHead
           eyebrow="Selected Work"
           title="Projects delivered across Pune"
@@ -294,7 +295,7 @@ function Index() {
       </section>
 
       {/* Factory capability */}
-      <section className="bg-sand py-10 lg:py-12">
+      <section className="bg-sand py-7 lg:py-9">
         <div className="shell grid gap-8 lg:grid-cols-2 lg:items-center">
           <div>
             <SectionHead
@@ -330,7 +331,7 @@ function Index() {
       </section>
 
       {/* Process */}
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <SectionHead
           eyebrow="How We Work"
           title="A process built on published dates"
@@ -353,7 +354,7 @@ function Index() {
       </section>
 
       {/* Calculator */}
-      <section className="bg-sand py-10 lg:py-12">
+      <section className="bg-sand py-7 lg:py-9">
         <div className="shell">
           <SectionHead
             eyebrow="Budget Planner"
@@ -365,7 +366,7 @@ function Index() {
       </section>
 
       {/* Clients */}
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <SectionHead
           eyebrow="Trusted By"
           title="Companies that specify Payal Decor"
@@ -386,7 +387,7 @@ function Index() {
       </section>
 
       {/* Testimonials */}
-      <section className="surface-ink py-10 lg:py-12">
+      <section className="surface-ink py-7 lg:py-9">
         <div className="shell">
           <SectionHead tone="ink" eyebrow="Client Voices" title="What our clients say" lead="Testimonials from the corporates, campuses and studios whose spaces we've delivered." />
           <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">
@@ -415,7 +416,7 @@ function Index() {
       </section>
 
       {/* FAQ */}
-      <section className="shell grid gap-8 py-10 lg:grid-cols-[1fr_1.3fr] lg:py-12">
+      <section className="shell grid gap-6 py-7 lg:grid-cols-[1fr_1.3fr] lg:py-9">
         <div>
           <Eyebrow>Questions</Eyebrow>
           <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">Everything clients ask before award</h2>

@@ -59,7 +59,7 @@ export const services = [
     id: "manufacturing",
     n: "02",
     title: "Custom Manufacturing",
-    image: asset("561c0347-f6e7-4a08-8942-e4ecef38abf2/tabm2.webp"),
+    image: media.wardrobe,
     summary:
       "Custom furniture and modular manufacturing tailored to your brand identity, space requirements and design preferences — produced on our own lines.",
     points: ["CNC routing & nesting", "Automatic edge banding", "Post-forming & hot press", "Powder coating & upholstery"],
@@ -87,12 +87,12 @@ export const services = [
 export const products = [
   {
     title: "Modular Wardrobes",
-    image: asset("561c0347-f6e7-4a08-8942-e4ecef38abf2/tabm2.webp"),
+    image: media.wardrobe,
     desc: "Full-height wardrobe systems with engineered shutters, soft-close hardware and internal organisers.",
   },
   {
     title: "Modular Kitchens",
-    image: asset("20f3cd0d-b936-45b7-86de-04529908a98a/tabt3.jpg"),
+    image: media.kitchen,
     desc: "Post-formed and laminated kitchen systems built on moisture-resistant carcasses.",
   },
   {
@@ -237,7 +237,7 @@ export const projects: Project[] = [
     materials: ["MR ply carcass", "Post-formed shutters", "Quartz counter", "Soft-close hinges"],
     scope: ["Modular kitchen", "Tall units", "Counter fabrication", "Installation"],
     images: [
-      asset("20f3cd0d-b936-45b7-86de-04529908a98a/tabt3.jpg"),
+      media.kitchen,
       asset("313966bc-5ce1-4c91-9e06-7d649f6cac0a/tabm4.jpg"),
       asset("f93a9afc-8e61-43a6-9908-85694edf0335/tabm5.jpg"),
     ],
@@ -255,7 +255,7 @@ export const projects: Project[] = [
     materials: ["Engineered shutters", "Aluminium profiles", "Internal organisers", "Mirror inserts"],
     scope: ["Wardrobe manufacturing", "Site measurement", "Installation", "After-sales servicing"],
     images: [
-      asset("561c0347-f6e7-4a08-8942-e4ecef38abf2/tabm2.webp"),
+      media.wardrobe,
       asset("0a33e764-4556-4e54-a7e4-32473d239e30/tabc2.jpg"),
       asset("8c4d7045-c3f0-4376-940f-3736eb2c018b/tabc3.jpg"),
     ],
@@ -413,10 +413,10 @@ export const galleryItems = [
   { src: asset("b39d9fbd-c660-4197-8345-1dc3ed783e64/vishwa.jpg"), cat: "Hospitality", title: "Vishwakarma campus" },
   { src: asset("99d45b4a-3875-43b1-acdf-5d6c5ba15466/vishwa1.jpg"), cat: "Hospitality", title: "Reception counter" },
   { src: asset("d99cbf0b-d870-4a65-92e9-eaf358f5fdc4/vishwa2.jpg"), cat: "Hospitality", title: "Faculty zone" },
-  { src: asset("20f3cd0d-b936-45b7-86de-04529908a98a/tabt3.jpg"), cat: "Modular", title: "Modular kitchen" },
+  { src: media.kitchen, cat: "Modular", title: "Modular kitchen" },
   { src: asset("313966bc-5ce1-4c91-9e06-7d649f6cac0a/tabm4.jpg"), cat: "Modular", title: "Tall unit run" },
   { src: asset("f93a9afc-8e61-43a6-9908-85694edf0335/tabm5.jpg"), cat: "Modular", title: "Counter detail" },
-  { src: asset("561c0347-f6e7-4a08-8942-e4ecef38abf2/tabm2.webp"), cat: "Modular", title: "Wardrobe system" },
+  { src: media.wardrobe, cat: "Modular", title: "Wardrobe system" },
   { src: asset("8ccb363c-d0ff-4f00-a790-369dfabd201a/tabc1.webp"), cat: "Commercial", title: "Commercial fit-out" },
   { src: asset("0a33e764-4556-4e54-a7e4-32473d239e30/tabc2.jpg"), cat: "Commercial", title: "Retail joinery" },
   { src: asset("8c4d7045-c3f0-4376-940f-3736eb2c018b/tabc3.jpg"), cat: "Commercial", title: "Display wall" },
@@ -449,7 +449,7 @@ export const faqs = [
 
 export const posts = [
   { slug: "in-house-manufacturing", title: "Why in-house manufacturing changes the deadline maths", date: "12 June 2026", tag: "Manufacturing", excerpt: "When the factory and the site team report to the same programme, a fit-out stops depending on a vendor's queue. Here is what that does to a schedule.", image: asset("c25170cc-6f50-4dbb-94c0-007ab83d1bbb/biesse-rover.jpg") },
-  { slug: "specifying-boards", title: "Specifying boards and laminates for commercial wear", date: "28 May 2026", tag: "Materials", excerpt: "Residential-grade material fails fast in a 300-person office. A practical guide to carcass, edge and surface specification for commercial life.", image: asset("561c0347-f6e7-4a08-8942-e4ecef38abf2/tabm2.webp") },
+  { slug: "specifying-boards", title: "Specifying boards and laminates for commercial wear", date: "28 May 2026", tag: "Materials", excerpt: "Residential-grade material fails fast in a 300-person office. A practical guide to carcass, edge and surface specification for commercial life.", image: media.wardrobe },
   { slug: "occupied-fitouts", title: "Delivering a fit-out without stopping the business", date: "09 May 2026", tag: "Execution", excerpt: "Phasing, factory-finished modules and weekend installs — how we hand over floors while the client keeps working.", image: asset("8ccb363c-d0ff-4f00-a790-369dfabd201a/tabc1.webp") },
   { slug: "workstation-ergonomics", title: "Workstation ergonomics that survive an audit", date: "21 April 2026", tag: "Design", excerpt: "Clearances, cable management and privacy screens: the details that decide whether a workstation is comfortable three years in.", image: asset("7f087a03-d9c0-434f-80ef-c46388f6f644/mahale.jpg") },
   { slug: "reception-first-impression", title: "The reception desk is the brand statement", date: "03 April 2026", tag: "Projects", excerpt: "Veneer, solid surface and back-lit detailing — how the arrival experience gets engineered before it gets styled.", image: asset("3702b250-9057-4210-92f6-c6d2c0b8cf51/eka.jpg") },

@@ -11,7 +11,7 @@ import { BeforeAfter } from "@/components/site/gallery-explorer";
 
 const title = "Payal Decor — Commercial Interiors & Manufacturing in Pune";
 const description =
-  "Turnkey commercial interiors, modular furniture and in-house manufacturing in Pune since 1992. ISO 9001:2015 certified, 1000+ projects delivered.";
+  "Turnkey commercial interiors, modular furniture and in-house manufacturing in Pune since 1992. ISO 9001:2015 certified, 500+ projects delivered.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -52,13 +52,14 @@ function Index() {
           playsInline
           aria-hidden="true"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-ink/92 via-ink/78 to-ink/55" />
+        <div aria-hidden="true" className="absolute inset-0 bg-ink/55" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-ink/45 via-ink/25 to-transparent" />
         <div
           aria-hidden="true"
           className="absolute inset-0 bg-[radial-gradient(900px_400px_at_10%_10%,color-mix(in_oklab,var(--primary)_32%,transparent),transparent_65%)]"
         />
 
-        <div className="shell relative flex min-h-[86dvh] flex-col justify-center py-10 lg:py-9">
+        <div className="shell relative flex min-h-[86dvh] flex-col justify-center py-12 lg:py-14">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[0.68rem] font-semibold tracking-[0.14em] text-white uppercase backdrop-blur-md">
               <span className="size-1.5 animate-pulse rounded-full bg-primary" />

@@ -33,7 +33,7 @@ function Gallery() {
         image={media.vb}
       />
 
-      <section className="shell grid gap-6 py-10 lg:grid-cols-2 lg:py-12">
+      <section className="shell grid gap-6 py-7 lg:grid-cols-2 lg:py-9">
         <Reveal>
           <SectionHead eyebrow="Film" title="Our work in motion" lead="A short cut from the studio, the factory and the site." />
           <VideoShowcase />

@@ -193,7 +193,7 @@ export function CtaBand({
 }) {
   return (
     <section className="shell py-7 lg:py-9">
-      <Reveal className="relative isolate overflow-hidden rounded-3xl surface-ink px-6 py-10 sm:px-10 lg:px-14">
+      <Reveal className="relative isolate overflow-hidden rounded-3xl surface-ink px-6 py-8 sm:px-10 lg:px-14">
         <div
           aria-hidden="true"
           className="absolute -top-24 -right-16 size-72 rounded-full bg-brand-gradient opacity-25 blur-3xl"

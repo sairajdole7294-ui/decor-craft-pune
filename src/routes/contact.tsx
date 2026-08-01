@@ -40,7 +40,7 @@ function Contact() {
         image={media.about1}
       />
 
-      <section className="shell grid gap-8 py-10 lg:grid-cols-[1fr_1.1fr] lg:py-12">
+      <section className="shell grid gap-6 py-7 lg:grid-cols-[1fr_1.1fr] lg:py-9">
         <div>
           <SectionHead eyebrow="Reach Us" title="Direct lines to the team" />
           <div className="grid gap-3 sm:grid-cols-2">

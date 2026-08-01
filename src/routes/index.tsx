@@ -58,7 +58,7 @@ function Index() {
           className="absolute inset-0 bg-[radial-gradient(900px_400px_at_10%_10%,color-mix(in_oklab,var(--primary)_32%,transparent),transparent_65%)]"
         />
 
-        <div className="shell relative flex min-h-[86dvh] flex-col justify-center py-14 lg:py-16">
+        <div className="shell relative flex min-h-[86dvh] flex-col justify-center py-10 lg:py-12">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[0.68rem] font-semibold tracking-[0.14em] text-white uppercase backdrop-blur-md">
               <span className="size-1.5 animate-pulse rounded-full bg-primary" />
@@ -170,7 +170,7 @@ function Index() {
       </section>
 
       {/* Services */}
-      <section className="bg-sand py-10 lg:py-12">
+      <section className="bg-sand py-7 lg:py-9">
         <div className="shell">
           <SectionHead
             eyebrow="What We Do"
@@ -208,7 +208,7 @@ function Index() {
       </section>
 
       {/* USPs */}
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <SectionHead
           eyebrow="Why Payal Decor"
           title={<>Eight reasons clients keep <span className="text-gradient-brand">coming back</span></>}
@@ -235,7 +235,7 @@ function Index() {
       </section>
 
       {/* Products */}
-      <section className="surface-ink py-10 lg:py-12">
+      <section className="surface-ink py-7 lg:py-9">
         <div className="shell">
           <SectionHead
             tone="ink"
@@ -264,7 +264,7 @@ function Index() {
       </section>
 
       {/* Projects preview */}
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <SectionHead
           eyebrow="Selected Work"
           title="Projects delivered across Pune"
@@ -294,7 +294,7 @@ function Index() {
       </section>
 
       {/* Factory capability */}
-      <section className="bg-sand py-10 lg:py-12">
+      <section className="bg-sand py-7 lg:py-9">
         <div className="shell grid gap-8 lg:grid-cols-2 lg:items-center">
           <div>
             <SectionHead
@@ -330,7 +330,7 @@ function Index() {
       </section>
 
       {/* Process */}
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <SectionHead
           eyebrow="How We Work"
           title="A process built on published dates"
@@ -353,7 +353,7 @@ function Index() {
       </section>
 
       {/* Calculator */}
-      <section className="bg-sand py-10 lg:py-12">
+      <section className="bg-sand py-7 lg:py-9">
         <div className="shell">
           <SectionHead
             eyebrow="Budget Planner"
@@ -365,7 +365,7 @@ function Index() {
       </section>
 
       {/* Clients */}
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <SectionHead
           eyebrow="Trusted By"
           title="Companies that specify Payal Decor"
@@ -386,7 +386,7 @@ function Index() {
       </section>
 
       {/* Testimonials */}
-      <section className="surface-ink py-10 lg:py-12">
+      <section className="surface-ink py-7 lg:py-9">
         <div className="shell">
           <SectionHead tone="ink" eyebrow="Client Voices" title="What our clients say" lead="Testimonials from the corporates, campuses and studios whose spaces we've delivered." />
           <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">

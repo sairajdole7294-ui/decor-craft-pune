@@ -34,7 +34,7 @@ function Services() {
         image={media.about3}
       />
 
-      <section className="shell space-y-5 py-10 lg:py-12">
+      <section className="shell space-y-5 py-7 lg:py-9">
         {services.map((s, i) => (
           <Reveal key={s.id} delay={i * 60}>
             <article
@@ -63,7 +63,7 @@ function Services() {
         ))}
       </section>
 
-      <section className="bg-sand py-10 lg:py-12">
+      <section className="bg-sand py-7 lg:py-9">
         <div className="shell">
           <SectionHead eyebrow="Product Range" title="Everything we make in-house" lead="Modular systems and bespoke commissions, produced on our own CNC, edgebanding and press lines." />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -84,7 +84,7 @@ function Services() {
         </div>
       </section>
 
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <SectionHead eyebrow="Material Library" title="What we specify, and why" lead="Every board, laminate and fitting is chosen for commercial wear — not residential catalogue looks." />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {materialLibrary.map((m, i) => (
@@ -97,7 +97,7 @@ function Services() {
         </div>
       </section>
 
-      <section className="surface-ink py-10 lg:py-12">
+      <section className="surface-ink py-7 lg:py-9">
         <div className="shell">
           <SectionHead tone="ink" eyebrow="Design & Installation Process" title="Six stages, one point of contact" lead="You always know what is happening on your floor plate this week." />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -119,7 +119,7 @@ function Services() {
         </div>
       </section>
 
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <SectionHead eyebrow="Project Planner" title="Share your project brief" lead="Six quick steps — send the details on WhatsApp and our team returns a customised quotation." />
         <CostCalculator />
       </section>

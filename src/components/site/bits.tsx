@@ -32,7 +32,7 @@ export function SectionHead({
   return (
     <Reveal
       className={cn(
-        "mb-7 flex flex-col gap-3",
+        "mb-5 flex flex-col gap-3",
         align === "center" ? "items-center text-center" : "md:flex-row md:items-end md:justify-between",
       )}
     >
@@ -134,7 +134,7 @@ export function PageHero({
         aria-hidden="true"
         className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/40"
       />
-      <div className="shell relative py-14 sm:py-16 lg:py-20">
+      <div className="shell relative py-9 sm:py-11 lg:py-14">
         <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-1.5 text-xs text-ink-foreground/60">
           <Link to="/" className="transition-colors hover:text-primary">Home</Link>
           <ChevronRight className="size-3" />
@@ -192,7 +192,7 @@ export function CtaBand({
   lead?: string;
 }) {
   return (
-    <section className="shell py-10 lg:py-12">
+    <section className="shell py-7 lg:py-9">
       <Reveal className="relative isolate overflow-hidden rounded-3xl surface-ink px-6 py-10 sm:px-10 lg:px-14">
         <div
           aria-hidden="true"
@@ -231,7 +231,7 @@ export function LegalPage({
   return (
     <>
       <PageHero eyebrow="Legal" crumbs={crumbs} title={title} lead={lead} image={media.about1} />
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <div className="mx-auto grid max-w-3xl gap-4">
           {sections.map((s, i) => (
             <Reveal key={s.h} delay={i * 70} className="card-premium p-5 transition-all duration-300 hover:-translate-y-0.5">

@@ -44,7 +44,7 @@ function Gallery() {
         </Reveal>
       </section>
 
-      <section className="bg-sand py-10 lg:py-12">
+      <section className="bg-sand py-7 lg:py-9">
         <div className="shell">
           <SectionHead eyebrow="Photography" title="Browse the full archive" lead="Lazy-loaded, categorised and keyboard navigable." />
           <GalleryExplorer />

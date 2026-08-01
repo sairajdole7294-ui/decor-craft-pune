@@ -91,7 +91,7 @@ function About() {
         </Reveal>
       </section>
 
-      <section className="bg-sand py-10 lg:py-12">
+      <section className="bg-sand py-7 lg:py-9">
         <div className="shell">
           <SectionHead eyebrow="Milestones" title="How the company grew" lead="From a bespoke workshop to a certified manufacturing-led interiors business." />
           <ol className="relative space-y-4 border-l border-border pl-6">
@@ -109,7 +109,7 @@ function About() {
         </div>
       </section>
 
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <SectionHead eyebrow="Standards" title="Certifications & quality" lead="Documented quality control at every stage, with checks before handover and warranty on manufactured units." />
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
           {certifications.map((c, i) => (

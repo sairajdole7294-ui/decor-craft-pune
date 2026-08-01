@@ -34,7 +34,7 @@ function Insights() {
         image={media.workshop}
       />
 
-      <section className="shell py-10 lg:py-12">
+      <section className="shell py-7 lg:py-9">
         <Reveal>
           <article className="card-premium grid gap-0 overflow-hidden lg:grid-cols-2">
             <div className="hover-zoom">

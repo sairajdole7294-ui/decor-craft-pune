@@ -85,11 +85,11 @@ function About() {
                 aria-hidden="true"
                 className="pointer-events-none absolute -top-16 -right-12 size-52 rounded-full bg-brand-gradient opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-25"
               />
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-secondary/60">
+              <div className="relative w-full overflow-hidden bg-secondary/40">
                 <img
                   src={t.image}
                   alt={t.name}
-                  className="size-full object-contain object-bottom transition-transform duration-700 group-hover:scale-[1.03]"
+                  className="h-auto w-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
                   loading="lazy"
                 />
                 <span

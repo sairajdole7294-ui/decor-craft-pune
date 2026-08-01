@@ -36,11 +36,27 @@ function Gallery() {
       <section className="shell grid gap-6 py-7 lg:grid-cols-2 lg:py-9">
         <Reveal>
           <SectionHead eyebrow="Film" title="Our work in motion" lead="A short cut from the studio, the factory and the site." />
-          <VideoShowcase />
+          <VideoShowcase src={media.workVideo} poster={media.vb} />
         </Reveal>
         <Reveal delay={120}>
-          <SectionHead eyebrow="Compare" title="Before & after" lead="Drag the handle to see how a bare space is transformed." />
-          <BeforeAfter before={media.workshop} after={media.about1} />
+          <SectionHead eyebrow="Compare" title="Before & after" lead="Drag the handle to see the same floor plate before and after handover." />
+          <BeforeAfter
+            before={media.beforeImage}
+            after={media.afterImage}
+            labelBefore="During fit-out"
+            labelAfter="After handover"
+          />
+        </Reveal>
+      </section>
+
+      <section className="shell grid gap-6 pb-7 lg:grid-cols-2 lg:pb-9">
+        <Reveal>
+          <SectionHead eyebrow="Factory" title="Inside the production floor" lead="Our machines, our teams, our quality checks." />
+          <VideoShowcase src={media.factoryVideo} poster={media.workshop} />
+        </Reveal>
+        <Reveal delay={120}>
+          <SectionHead eyebrow="In Conversation" title="Meet the team behind the work" lead="A short interview with the people who run design, factory and site." />
+          <VideoShowcase src={media.interviewVideo} poster={media.about3} />
         </Reveal>
       </section>
 

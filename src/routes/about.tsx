@@ -33,8 +33,8 @@ function About() {
       >
         <div className="grid max-w-2xl grid-cols-3 gap-3">
           {[
-            { v: 33, s: "+", l: "Years" },
-            { v: 1000, s: "+", l: "Projects" },
+            { v: 30, s: "+", l: "Years" },
+            { v: 500, s: "+", l: "Projects" },
             { v: 100, s: "%", l: "In-house" },
           ].map((x) => (
             <div key={x.l} className="rounded-2xl border border-white/15 bg-white/5 p-3 backdrop-blur-md">
@@ -77,10 +77,28 @@ function About() {
         </div>
         <Reveal delay={120} className="self-start">
           {team.map((t) => (
-            <figure key={t.name} className="card-premium overflow-hidden">
-              <img src={t.image} alt={t.name} className="h-72 w-full object-cover object-top" loading="lazy" />
-              <figcaption className="p-4">
-                <p className="text-base font-semibold">{t.name}</p>
+            <figure
+              key={t.name}
+              className="card-premium group relative overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+            >
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -top-16 -right-12 size-52 rounded-full bg-brand-gradient opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-25"
+              />
+              <div className="relative aspect-[4/5] w-full overflow-hidden bg-secondary/60">
+                <img
+                  src={t.image}
+                  alt={t.name}
+                  className="size-full object-contain object-bottom transition-transform duration-700 group-hover:scale-[1.03]"
+                  loading="lazy"
+                />
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-card to-transparent"
+                />
+              </div>
+              <figcaption className="relative p-4">
+                <p className="text-lg font-semibold">{t.name}</p>
                 <p className="text-xs font-semibold text-primary">{t.role}</p>
                 <p className="mt-2 text-sm italic text-muted-foreground">
                   “Every material tells a story. Our role is to shape it with intent.”

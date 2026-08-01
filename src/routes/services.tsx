@@ -1,6 +1,17 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Check } from "lucide-react";
-import { media, services, products, materialLibrary, processSteps, industries } from "@/lib/site-data";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Check, Download, ArrowRight, FileText } from "lucide-react";
+import {
+  media,
+  services,
+  products,
+  materialLibrary,
+  processSteps,
+  industries,
+  productRange,
+  industrySolutions,
+  catalogueSheets,
+  company,
+} from "@/lib/site-data";
 import { PageHero, SectionHead, CtaBand } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
 import { CostCalculator } from "@/components/site/calculator";

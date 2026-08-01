@@ -1,16 +1,24 @@
-const CDN = "https://radiant-homes-studio.lovable.app/__l5e/assets-v1";
-export const asset = (p: string) => `${CDN}/${p}`;
+// All media is stored locally inside the repository (public/media, public/videos)
+// so the project is fully self-contained when cloned and run locally.
+export const asset = (p: string) => `/media/${p.split("/").pop()}`;
 
 export const media = {
-  logo: asset("21446598-c9b5-40c4-a93a-8d04071516dc/logo.png"),
-  heroVideo: asset("bf464ed4-ee9c-4803-854c-f3fa08e1fd23/hero.mp4"),
-  workVideo: asset("c9bc6ac2-ba0b-4c8e-9f52-2a12b2ab0cbf/work.mp4"),
+  logo: "/media/logo.png",
+  heroVideo: "/videos/hero.mp4",
+  workVideo: "/videos/work.mp4",
+  factoryVideo: "/videos/factory.mp4",
+  interviewVideo: "/videos/interview.mp4",
+  kitchen: "/media/modular-kitchen.jpg",
+  wardrobe: "/media/modular-wardrobe.jpg",
   about1: asset("1ee7d578-c29a-4f3c-b069-effbc0fd5bc8/about1.webp"),
   about3: asset("4fb63c99-0e7c-458e-bfda-977f9df889a3/about3.jpg"),
   banner: asset("15bff683-d5ac-4a0c-a339-47e202e5c43c/aboutbanner.jpg"),
   founder: asset("d5236da7-7c2c-4a02-badb-f6cb4916319a/founder.png"),
   workshop: asset("d1e6fcf5-2ee1-415d-bc38-6ed7e23371af/tab11.jpg"),
   vb: asset("4352fc35-b585-49e5-9a12-399f70ddc14a/vb.jpg"),
+  // Before / after frames from the SAME project (EKA Mobility HQ)
+  beforeImage: asset("x/eka1.jpg"),
+  afterImage: asset("x/eka.jpg"),
 };
 
 export const company = {

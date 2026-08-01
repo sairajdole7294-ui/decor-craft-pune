@@ -52,12 +52,12 @@ function Services() {
               className={`card-premium grid gap-0 overflow-hidden lg:grid-cols-2 ${i % 2 ? "lg:[&>figure]:order-2" : ""}`}
             >
               <figure className="hover-zoom relative">
-                <img src={s.image} alt={s.title} className="h-60 w-full object-cover lg:h-full" loading="lazy" />
+                <img src={s.image} alt={s.title} className="h-60 w-full object-cover lg:h-[20rem]" loading="lazy" />
                 <figcaption className="absolute top-3 left-3 rounded-lg bg-ink/70 px-2.5 py-1 font-[family-name:var(--font-display)] text-xs font-bold text-white backdrop-blur">
                   {s.n}
                 </figcaption>
               </figure>
-              <div className="p-5 lg:p-7">
+              <div className="flex flex-col justify-center p-5 lg:p-7">
                 <h2 className="text-xl font-semibold lg:text-2xl">{s.title}</h2>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.summary}</p>
                 <ul className="mt-4 grid gap-2 sm:grid-cols-2">

@@ -453,7 +453,7 @@ export const posts = [
   { slug: "occupied-fitouts", title: "Delivering a fit-out without stopping the business", date: "09 May 2026", tag: "Execution", excerpt: "Phasing, factory-finished modules and weekend installs — how we hand over floors while the client keeps working.", image: asset("8ccb363c-d0ff-4f00-a790-369dfabd201a/tabc1.webp") },
   { slug: "workstation-ergonomics", title: "Workstation ergonomics that survive an audit", date: "21 April 2026", tag: "Design", excerpt: "Clearances, cable management and privacy screens: the details that decide whether a workstation is comfortable three years in.", image: asset("7f087a03-d9c0-434f-80ef-c46388f6f644/mahale.jpg") },
   { slug: "reception-first-impression", title: "The reception desk is the brand statement", date: "03 April 2026", tag: "Projects", excerpt: "Veneer, solid surface and back-lit detailing — how the arrival experience gets engineered before it gets styled.", image: asset("3702b250-9057-4210-92f6-c6d2c0b8cf51/eka.jpg") },
-  { slug: "modular-kitchen-carcass", title: "Moisture-resistant carcasses are non-negotiable", date: "18 March 2026", tag: "Modular", excerpt: "The part of a modular kitchen nobody sees is the part that decides how long it lasts. A look inside our carcass specification.", image: asset("20f3cd0d-b936-45b7-86de-04529908a98a/tabt3.jpg") },
+  { slug: "modular-kitchen-carcass", title: "Moisture-resistant carcasses are non-negotiable", date: "18 March 2026", tag: "Modular", excerpt: "The part of a modular kitchen nobody sees is the part that decides how long it lasts. A look inside our carcass specification.", image: media.kitchen },
 ];
 
 export const openRoles = [
@@ -492,4 +492,107 @@ export const awards = [
 
 export const team = [
   { name: "Swaroop Suthar", role: "Founder & CEO", image: media.founder, note: "Three decades of shaping material with intent." },
+];
+// ---------------------------------------------------------------------------
+// Product range, categories, industry solutions & catalogue (Services page)
+// ---------------------------------------------------------------------------
+
+export type ProductCategory = {
+  slug: string;
+  name: string;
+  image: string;
+  desc: string;
+  features: string[];
+  applications: string[];
+  catalogue?: boolean;
+};
+
+export const productRange: ProductCategory[] = [
+  {
+    slug: "premium-office-tables",
+    name: "Premium Office Tables",
+    image: "/media/products/p28.jpg",
+    desc: "Executive and managerial desks built on engineered carcasses with cable-managed tops, storage pedestals and a finish schedule tuned to your brand.",
+    features: ["25 mm MR-grade engineered top", "PUR-sealed 2 mm edge banding", "Integrated cable trays & grommets", "Soft-close pedestal drawers"],
+    applications: ["Corporate cabins", "Managing director suites", "Consulting rooms", "Branch offices"],
+    catalogue: true,
+  },
+  {
+    slug: "reception-tables",
+    name: "Reception Tables",
+    image: "/media/products/p29.jpg",
+    desc: "Signature reception counters in veneer, solid surface and back-lit finishes — the first brand statement a visitor reads in your space.",
+    features: ["Curved solid-surface fascia", "Concealed LED cove lighting", "Dual-height transaction counter", "Lockable back storage"],
+    applications: ["Corporate lobbies", "Hotels & hospitality", "Hospitals & clinics", "Campus admin blocks"],
+    catalogue: true,
+  },
+  {
+    slug: "conference-tables",
+    name: "Conference & Meeting Tables",
+    image: "/media/products/p30.jpg",
+    desc: "Boardroom tables in wood, veneer and laminate with pop-up power modules, AV routing and seating layouts planned around the room.",
+    features: ["6 to 24-seat configurations", "Flip-top power & data modules", "Post-formed rolled edges", "Concealed cable spine"],
+    applications: ["Boardrooms", "Training rooms", "Faculty meeting halls", "Client presentation rooms"],
+    catalogue: true,
+  },
+  {
+    slug: "workstation-desks",
+    name: "Workstation Desks",
+    image: "/media/products/p32.jpg",
+    desc: "Linear, cluster and cubicle workstation systems with fabric privacy screens, shared spines and repeatable quality across every seat.",
+    features: ["Linear, L and cluster layouts", "Acoustic fabric tack screens", "Aluminium raceway spine", "Mobile pedestals with castors"],
+    applications: ["Open-plan offices", "IT & BPO floors", "Engineering design centres", "Co-working spaces"],
+    catalogue: true,
+  },
+  {
+    slug: "executive-office-tables",
+    name: "Executive Office Tables",
+    image: "/media/products/p33.jpg",
+    desc: "Statement executive desks with veneer detailing, credenza units and finishes selected for a decade of daily commercial use.",
+    features: ["Matched natural veneer", "Side credenza & return unit", "Leather / PU inlay options", "Concealed CPU housing"],
+    applications: ["CXO cabins", "Directors' offices", "Partner rooms", "Legal & finance chambers"],
+    catalogue: true,
+  },
+  {
+    slug: "modular-office-desks",
+    name: "Modular Office Desks",
+    image: "/media/products/p35.jpg",
+    desc: "Reconfigurable modular desking that grows with your headcount — every module engineered to your floor plate, never to a catalogue size.",
+    features: ["Add-on modular seats", "Tool-free reconfiguration", "Shared power spine", "Standard & height-adjustable frames"],
+    applications: ["Growing startups", "Project war rooms", "Shared service centres", "Satellite offices"],
+    catalogue: true,
+  },
+  {
+    slug: "modular-kitchens",
+    name: "Modular Kitchens",
+    image: media.kitchen,
+    desc: "Post-formed and laminated kitchen systems on moisture-resistant carcasses, with tall units, appliance housings and soft-close everything.",
+    features: ["MR / BWP ply carcass", "Post-formed shutters", "Quartz & granite counters", "Soft-close hinges and channels"],
+    applications: ["Residences", "Corporate pantries", "Cafeterias", "Hostel & campus kitchens"],
+    catalogue: true,
+  },
+  {
+    slug: "modular-wardrobes",
+    name: "Modular Wardrobes",
+    image: media.wardrobe,
+    desc: "Full-height wardrobe systems with engineered shutters, profile-lit interiors, mirror inserts and internal organisers built around what you store.",
+    features: ["Hinged, sliding & glass profiles", "Profile-lit internal shelving", "Pull-out shoe and accessory racks", "Aluminium framed shutters"],
+    applications: ["Residences", "Hotel rooms", "Hostels & guest houses", "Serviced apartments"],
+    catalogue: true,
+  },
+];
+
+export const industrySolutions = [
+  { name: "Corporate Offices", desc: "Reception units, workstations, cabins and collaboration zones delivered floor by floor without stopping operations.", points: ["Test fits & space planning", "Phased occupied-site installs", "Acoustic & ergonomic compliance"] },
+  { name: "Education & Campuses", desc: "Heavy-duty furniture and interiors for classrooms, labs, libraries and admin blocks — built for daily student footfall.", points: ["Impact-resistant finishes", "Lab & library joinery", "Auditorium & seminar fit-outs"] },
+  { name: "Healthcare & Hospitals", desc: "Hygienic, wipe-clean surfaces and nursing stations engineered for infection control and 24×7 use.", points: ["Seamless solid-surface counters", "Anti-bacterial laminates", "Reception & records storage"] },
+  { name: "Retail & Showrooms", desc: "Display systems, cash counters and back-lit brand walls that survive merchandising changes every season.", points: ["Modular display joinery", "Integrated lighting", "Fast turnaround installs"] },
+  { name: "Hospitality", desc: "Guest rooms, lobbies and F&B interiors combining premium finishes with commercial durability.", points: ["Room wardrobes & headboards", "Lobby & concierge counters", "Restaurant joinery"] },
+  { name: "Manufacturing & Industrial", desc: "Plant offices, canteens and QC rooms delivered inside live industrial environments with strict safety protocol.", points: ["Plant-floor site discipline", "Canteen & locker systems", "Shift-friendly scheduling"] },
+];
+
+export const catalogueSheets = [
+  { title: "Office Furniture Catalogue", desc: "Desks, workstations, conference and reception systems with sizes and finish options.", items: "38 products" },
+  { title: "Modular Kitchen & Wardrobe Catalogue", desc: "Carcass specification, shutter finishes, hardware and internal organiser options.", items: "24 systems" },
+  { title: "Manufacturing Capability Profile", desc: "Machine list, capacity, quality process and the seven-stage production flow.", items: "Company profile" },
 ];

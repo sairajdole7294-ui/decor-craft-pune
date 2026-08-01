@@ -41,7 +41,7 @@ const chips = [
 function Index() {
   return (
     <>
-      <section className="relative isolate min-h-[86dvh] overflow-hidden">
+      <section className="relative isolate -mt-16 min-h-[84dvh] overflow-hidden lg:-mt-[4.5rem]">
         <video
           className="absolute inset-0 size-full object-cover"
           src={media.heroVideo}
@@ -59,7 +59,7 @@ function Index() {
           className="absolute inset-0 bg-[radial-gradient(900px_400px_at_10%_10%,color-mix(in_oklab,var(--primary)_32%,transparent),transparent_65%)]"
         />
 
-        <div className="shell relative flex min-h-[86dvh] flex-col justify-center py-12 lg:py-14">
+        <div className="shell relative flex min-h-[84dvh] flex-col justify-center pt-24 pb-12 lg:pt-28 lg:pb-14">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[0.68rem] font-semibold tracking-[0.14em] text-white uppercase backdrop-blur-md">
               <span className="size-1.5 animate-pulse rounded-full bg-primary" />

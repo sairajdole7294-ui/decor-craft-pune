@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { media, awards, usps, team, coverage, certifications } from "@/lib/site-data";
 import { PageHero, SectionHead, CtaBand, BrandButton } from "@/components/site/bits";
+import { IntroVideoCard } from "@/components/site/product-media";
 import { Reveal, Counter } from "@/components/site/motion";
 
 const title = "About Payal Decor — Interiors & Manufacturing Since 1992";
@@ -79,7 +80,7 @@ function About() {
           {team.map((t) => (
             <figure
               key={t.name}
-              className="card-premium group relative overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+              className="card-premium group relative mx-auto max-w-[20rem] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
             >
               <span
                 aria-hidden="true"
@@ -89,7 +90,7 @@ function About() {
                 <img
                   src={t.image}
                   alt={t.name}
-                  className="h-auto w-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+                  className="mx-auto h-auto max-h-[19rem] w-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
                   loading="lazy"
                 />
                 <span
@@ -98,15 +99,29 @@ function About() {
                 />
               </div>
               <figcaption className="relative p-4">
-                <p className="text-lg font-semibold">{t.name}</p>
+                <p className="text-base font-semibold">{t.name}</p>
                 <p className="text-xs font-semibold text-primary">{t.role}</p>
-                <p className="mt-2 text-sm italic text-muted-foreground">
+                <p className="mt-1.5 text-xs italic text-muted-foreground">
                   “Every material tells a story. Our role is to shape it with intent.”
                 </p>
               </figcaption>
             </figure>
           ))}
         </Reveal>
+      </section>
+
+      <section className="bg-sand py-7 lg:py-9">
+        <div className="shell grid items-center gap-5 lg:grid-cols-[1fr_1.15fr]">
+          <div>
+            <SectionHead
+              eyebrow="Company Introduction"
+              title="Inside Payal Decor"
+              lead="Watch how Payal Decor delivers high-quality interior, manufacturing and commercial furniture solutions through innovation, precision, craftsmanship and decades of industry experience."
+            />
+            <BrandButton to="/manufacturing" variant="outline">See the factory</BrandButton>
+          </div>
+          <IntroVideoCard src="/videos/company-intro.mp4" poster={media.about3} />
+        </div>
       </section>
 
       <section className="bg-sand py-7 lg:py-9">

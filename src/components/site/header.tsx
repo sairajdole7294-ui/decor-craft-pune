@@ -8,11 +8,11 @@ export const navLinks = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/services", label: "Services" },
+  { to: "/products", label: "Products" },
   { to: "/manufacturing", label: "Manufacturing" },
   { to: "/projects", label: "Projects" },
   { to: "/gallery", label: "Gallery" },
   { to: "/clients", label: "Clients" },
-  { to: "/careers", label: "Careers" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -60,18 +60,12 @@ export function Header() {
         )}
       >
         <div className="shell flex h-16 items-center justify-between gap-3 lg:h-[4.5rem]">
-          <Link to="/" className="flex items-center gap-2.5" aria-label="Payal Decor home">
-            <img src={media.logo} alt="Payal Decor" className="size-9 object-contain lg:size-10" />
-            <span className="leading-none">
-              <span
-                className={cn(
-                  "block whitespace-nowrap font-[family-name:var(--font-display)] text-base font-bold tracking-tight lg:text-lg",
-                  transparent ? "text-white" : "text-foreground",
-                )}
-              >
-                Payal Decor
-              </span>
-            </span>
+          <Link to="/" className="flex items-center" aria-label="Payal Decor home">
+            <img
+              src={media.logo}
+              alt="Payal Decor"
+              className="h-11 w-auto max-w-[9.5rem] object-contain transition-transform duration-300 hover:scale-[1.03] sm:h-12 lg:h-14"
+            />
           </Link>
 
           <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">

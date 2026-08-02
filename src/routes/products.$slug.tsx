@@ -1,18 +1,18 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, Check } from "lucide-react";
-import { productBySlug, categoryBySlug, catalogProducts } from "@/lib/catalog-data";
+import { productBySlug, categoryBySlug, catalogProducts, type CatalogProduct } from "@/lib/catalog-data";
 import { SectionHead, CtaBand } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
 import { ProductGallery, CatalogDownload } from "@/components/site/product-media";
 import { RequestQuoteForm } from "@/components/site/quote-form";
 
 export const Route = createFileRoute("/products/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { product: CatalogProduct } => {
     const product = productBySlug(params.slug);
     if (!product) throw notFound();
     return { product };
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData }: { loaderData?: { product: CatalogProduct } }) => {
     if (!loaderData) {
       return { meta: [{ title: "Product not found — Payal Decor" }, { name: "robots", content: "noindex" }] };
     }
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/products/$slug")({
 });
 
 function ProductPage() {
-  const { product } = Route.useLoaderData();
+  const { product } = Route.useLoaderData() as { product: CatalogProduct };
   const category = categoryBySlug(product.category);
   const related = catalogProducts.filter((p) => p.category === product.category && p.slug !== product.slug).slice(0, 4);
 

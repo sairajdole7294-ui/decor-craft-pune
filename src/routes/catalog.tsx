@@ -53,7 +53,7 @@ function CatalogPage() {
           </div>
         </Reveal>
         <Reveal delay={90} className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-          {["/media/products/impact-2.jpg", "/media/products/premia-3.jpg", "/media/products/esd-workstation-4.jpg", "/media/products/lab-workstation-6.jpg", "/media/products/school-bench-5.jpg", "/media/products/spark-2.jpg"].map((src) => (
+          {["/media/products/impact-2.jpg", "/media/products/premia-3.jpg", "/media/products/esd-workstation-4.jpg", "/media/products/lab-workstation-6.jpg", "/media/products/school-bench-1.jpg", "/media/products/spark-2.jpg"].map((src) => (
             <div key={src} className="hover-zoom overflow-hidden rounded-xl border border-border">
               <img src={src} alt="Payal Decor catalog product" className="aspect-square w-full object-cover" loading="lazy" />
             </div>

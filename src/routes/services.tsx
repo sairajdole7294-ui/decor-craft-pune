@@ -12,11 +12,12 @@ import { PageHero, SectionHead, CtaBand } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
 import { CostCalculator } from "@/components/site/calculator";
 import { CatalogDownload } from "@/components/site/product-media";
+import { CatalogSearch } from "@/components/site/catalog-search";
 
 const hubs = [
   { to: "/products" as const, name: "Product Range", desc: "Thirteen commercial product families with full specifications, variants and dimensions.", image: "/media/products/impact-7.jpg" },
-  { to: "/product-categories" as const, name: "Product Categories", desc: "Office desking, technical and lab furniture, education furniture and modular interiors.", image: "/media/products/lab-workstation-7.jpg" },
-  { to: "/industries" as const, name: "Industry Solutions", desc: "Schools, colleges, offices, hospitals, laboratories and corporate offices.", image: "/media/products/school-bench-7.jpg" },
+  { to: "/product-categories" as const, name: "Product Categories", desc: "Office desking, technical and lab furniture, education furniture and modular interiors.", image: "/media/products/lab-workstation-2.jpg" },
+  { to: "/industries" as const, name: "Industry Solutions", desc: "Schools, colleges, offices, hospitals, laboratories and corporate offices.", image: "/media/products/school-bench-3.jpg" },
   { to: "/catalog" as const, name: "Product Catalog", desc: "Download the official Payal Decor Product Catalog 2026 as a PDF.", image: "/media/products/premia-5.jpg" },
 ];
 
@@ -48,6 +49,10 @@ function Services() {
         lead="Four disciplines, one delivery team — so nothing falls between design, factory and site."
         image={media.about3}
       />
+
+      <section className="shell pt-6 lg:pt-8">
+        <CatalogSearch />
+      </section>
 
       <section className="shell space-y-5 py-7 lg:py-9">
         {services.map((s, i) => (

@@ -31,7 +31,7 @@ function IndustriesIndex() {
         crumbs="Industries"
         title="Solutions tuned to your sector"
         lead="The same factory, different rulebooks — each sector gets the finishes, compliance and scheduling it actually needs."
-        image="/media/products/school-bench-7.jpg"
+        image="/media/products/school-bench-3.jpg"
       />
 
       <section className="shell py-7 lg:py-9">

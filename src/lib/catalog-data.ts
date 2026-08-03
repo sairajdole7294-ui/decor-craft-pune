@@ -275,7 +275,7 @@ export const catalogProducts: CatalogProduct[] = [
     tagline: "Anti-static assembly and testing benches",
     desc:
       "ESD-safe workstations for electronics assembly, testing and repair lines — grounded worktops, pegboard back panels, integrated power distribution and task lighting on every bay.",
-    images: imgs("esd-workstation", 17),
+    images: imgs("esd-workstation", 10),
     variants: [
       { name: "Single Bay", note: "One-operator bench with overhead light" },
       { name: "Double Bay", note: "Two-operator shared bench" },
@@ -319,7 +319,7 @@ export const catalogProducts: CatalogProduct[] = [
     tagline: "Chemical-resistant laboratory furniture systems",
     desc:
       "Island and wall-mounted laboratory benches with chemical-resistant tops, integrated sinks, service spines, overhead cabinets and under-bench storage — planned around the equipment your lab actually runs.",
-    images: imgs("lab-workstation", 19),
+    images: imgs("lab-workstation", 9),
     variants: [
       { name: "Island Bench", note: "Double-sided central island bench" },
       { name: "Wall Bench", note: "Single-sided bench with reagent shelf" },
@@ -363,7 +363,7 @@ export const catalogProducts: CatalogProduct[] = [
     tagline: "Classroom desk-bench systems built for daily footfall",
     desc:
       "Two and three-seater classroom desk-bench units with a powder-coated tubular frame and a hard-wearing wooden top. Available in single desks, twin benches and colour-coded frames for age-graded classrooms.",
-    images: imgs("school-bench", 19),
+    images: imgs("school-bench", 10),
     variants: [
       { name: "Two-Seater Bench", note: "Desk and bench with book shelf" },
       { name: "Three-Seater Bench", note: "Wider classroom unit" },
@@ -502,7 +502,7 @@ export const catalogCategories: CatalogCategory[] = [
     name: "Technical & Laboratory Furniture",
     desc:
       "ESD-safe assembly benches and chemical-resistant laboratory workstations engineered for production lines, QC rooms and research labs — with services, lighting and storage designed into the bench.",
-    banner: "/media/products/lab-workstation-7.jpg",
+    banner: "/media/products/lab-workstation-2.jpg",
     features: [
       "ESD-rated and chemical-resistant worktops",
       "Integrated power, gas and water service spines",
@@ -517,7 +517,7 @@ export const catalogCategories: CatalogCategory[] = [
     name: "Education Furniture",
     desc:
       "Classroom desk-bench systems, library and faculty furniture built to institutional standards — impact-resistant finishes, rounded edges and colour-coded frames for age-graded classrooms.",
-    banner: "/media/products/school-bench-7.jpg",
+    banner: "/media/products/school-bench-3.jpg",
     features: [
       "Two, three-seater and single desk formats",
       "Powder-coated tubular MS frames",
@@ -562,7 +562,7 @@ export const industryPages: IndustryPage[] = [
       "Classroom, staff room and admin furniture built for institutional footfall. Our school range uses powder-coated tubular frames, rounded edges and hard-wearing tops so a classroom still looks disciplined years after handover.",
     points: ["Two and three-seater classroom benches", "Colour-coded frames per grade", "Staff room and admin joinery", "Vacation-window installation schedules"],
     products: ["school-bench", "impress-series", "premia-series"],
-    gallery: ["/media/products/school-bench-3.jpg", "/media/products/school-bench-7.jpg", "/media/products/school-bench-11.jpg", "/media/products/school-bench-15.jpg"],
+    gallery: ["/media/products/school-bench-1.jpg", "/media/products/school-bench-2.jpg", "/media/products/school-bench-3.jpg", "/media/products/school-bench-6.jpg"],
     projects: ["vishwakarma-institutes"],
   },
   {
@@ -572,7 +572,7 @@ export const industryPages: IndustryPage[] = [
       "Campus-wide interiors across lecture halls, libraries, laboratories and administration blocks — durable finishes, branded colour blocking and heavy-duty modular furniture built for daily student footfall.",
     points: ["Lecture hall and seminar seating", "Library and reading room joinery", "Laboratory workstations", "Faculty cabins and admin counters"],
     products: ["school-bench", "lab-workstation", "magna-series", "premia-series"],
-    gallery: ["/media/products/school-bench-1.jpg", "/media/products/lab-workstation-4.jpg", "/media/products/magna-3.jpg", "/media/products/premia-5.jpg"],
+    gallery: ["/media/industries/college-lecture-hall.jpg", "/media/industries/college-library.jpg", "/media/industries/college-seminar-room.jpg", "/media/products/lab-workstation-3.jpg"],
     projects: ["vishwakarma-institutes"],
   },
   {
@@ -592,7 +592,7 @@ export const industryPages: IndustryPage[] = [
       "Hygienic, wipe-clean furniture for reception, nursing stations, records and pathology areas — specified for infection control and continuous 24×7 use.",
     points: ["Seamless solid-surface counters", "Anti-bacterial laminate finishes", "Records and pharmacy storage", "Pathology and sample lab benches"],
     products: ["lab-workstation", "premia-series", "curve-series"],
-    gallery: ["/media/products/lab-workstation-9.jpg", "/media/products/curve-4.jpg", "/media/products/premia-3.jpg", "/media/products/lab-workstation-13.jpg"],
+    gallery: ["/media/industries/hospital-reception.jpg", "/media/industries/hospital-nursing-station.jpg", "/media/industries/hospital-records.jpg", "/media/products/lab-workstation-6.jpg"],
     projects: [],
   },
   {
@@ -602,7 +602,7 @@ export const industryPages: IndustryPage[] = [
       "Chemical-resistant island and wall benches, service spines, sinks, fume-safe layouts and ESD-rated assembly stations — engineered around the equipment and workflow of your lab.",
     points: ["Chemical-resistant worktops", "Gas, water and power service spines", "Integrated sinks and drainboards", "ESD-safe electronics benches"],
     products: ["lab-workstation", "esd-workstation"],
-    gallery: ["/media/products/lab-workstation-2.jpg", "/media/products/lab-workstation-8.jpg", "/media/products/esd-workstation-5.jpg", "/media/products/esd-workstation-11.jpg"],
+    gallery: ["/media/products/lab-workstation-1.jpg", "/media/products/lab-workstation-2.jpg", "/media/products/esd-workstation-1.jpg", "/media/products/esd-workstation-4.jpg"],
     projects: [],
   },
   {
@@ -612,7 +612,7 @@ export const industryPages: IndustryPage[] = [
       "Headquarters-grade interiors: signature reception, executive cabins, boardrooms and client-facing floors, finished to a brand schedule and delivered against published programme dates.",
     points: ["Signature reception and lobby joinery", "Executive cabins and boardrooms", "Brand-matched finish schedules", "Single-point turnkey accountability"],
     products: ["impact-series", "premia-series", "magna-series", "curve-series"],
-    gallery: ["/media/products/impact-1.jpg", "/media/products/premia-7.jpg", "/media/products/impact-9.jpg", "/media/products/curve-8.jpg"],
+    gallery: ["/media/industries/corporate-reception.jpg", "/media/industries/corporate-boardroom.jpg", "/media/products/impact-1.jpg", "/media/products/curve-8.jpg"],
     projects: ["eka-mobility", "kirloskar-pneumatics"],
   },
 ];

@@ -31,7 +31,7 @@ function CategoriesIndex() {
         crumbs="Product Categories"
         title="Categories built around how you work"
         lead="Each category groups the product families that share a construction standard, a compliance rulebook and a finish schedule."
-        image="/media/products/lab-workstation-7.jpg"
+        image="/media/products/lab-workstation-2.jpg"
       />
 
       <section className="shell py-7 lg:py-9">

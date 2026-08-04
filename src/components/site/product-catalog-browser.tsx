@@ -273,7 +273,7 @@ export function ProductCatalogBrowser() {
                           Request Quote
                         </Link>
                         <a
-                          href={p.catalogUrl ?? catalogPdf}
+                          href={catalogPdf}
                           target="_blank"
                           rel="noreferrer"
                           download

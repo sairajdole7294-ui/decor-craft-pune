@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { catalogProducts, catalogCategories } from "@/lib/catalog-data";
+import { catalogCategories } from "@/lib/catalog-data";
+import { ProductCatalogBrowser } from "@/components/site/product-catalog-browser";
 import { PageHero, SectionHead, CtaBand } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
 import { CatalogDownload } from "@/components/site/product-media";
@@ -34,40 +35,9 @@ function ProductsIndex() {
         image="/media/products/impact-7.jpg"
       />
 
-      <section className="shell py-7 lg:py-9">
-        <SectionHead
-          eyebrow="Browse"
-          title="Product range"
-          lead="Open any product for images, variants, features, specifications, materials, dimensions and a request-quote form."
-          action={<CatalogDownload variant="outline" />}
-        />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {catalogProducts.map((p, i) => (
-            <Reveal key={p.slug} delay={(i % 3) * 70}>
-              <Link
-                to="/products/$slug"
-                params={{ slug: p.slug }}
-                className="card-premium group flex h-full flex-col overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[var(--shadow-lift)]"
-              >
-                <div className="hover-zoom">
-                  <img src={p.images[0]} alt={p.name} className="aspect-[4/3] w-full object-cover" loading="lazy" />
-                </div>
-                <div className="flex flex-1 flex-col p-4">
-                  <h2 className="text-base font-semibold">{p.name}</h2>
-                  <p className="mt-1 text-xs font-semibold text-primary">{p.tagline}</p>
-                  <p className="mt-2 flex-1 text-xs leading-relaxed text-muted-foreground">{p.desc.slice(0, 130)}…</p>
-                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
-                    View product
-                    <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      <ProductCatalogBrowser />
 
-      <section className="bg-sand py-7 lg:py-9">
+      <section className="bg-sand py-8">
         <div className="shell">
           <SectionHead eyebrow="Categories" title="Or browse by category" />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

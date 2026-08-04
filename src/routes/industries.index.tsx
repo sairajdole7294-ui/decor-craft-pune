@@ -34,7 +34,7 @@ function IndustriesIndex() {
         image="/media/products/school-bench-3.jpg"
       />
 
-      <section className="shell py-7 lg:py-9">
+      <section className="shell py-8">
         <SectionHead eyebrow="Sectors" title="Choose your industry" action={<CatalogDownload variant="outline" />} />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {industryPages.map((s, i) => (

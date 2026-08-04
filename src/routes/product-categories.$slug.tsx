@@ -48,7 +48,7 @@ function CategoryPage() {
       <section className="relative isolate overflow-hidden">
         <img src={category.banner} alt="" aria-hidden="true" className="absolute inset-0 size-full object-cover" />
         <div aria-hidden="true" className="absolute inset-0 bg-ink/75" />
-        <div className="shell relative py-10 lg:py-14">
+        <div className="shell relative py-9 lg:py-12">
           <p className="text-[0.62rem] font-bold tracking-[0.16em] text-white/60 uppercase">
             <Link to="/product-categories" className="hover:text-primary">Product Categories</Link>
           </p>
@@ -90,7 +90,7 @@ function CategoryPage() {
         </Reveal>
       </section>
 
-      <section className="bg-sand py-7 lg:py-9">
+      <section className="bg-sand py-8">
         <div className="shell">
           <SectionHead eyebrow="Product Variants" title="Products in this category" />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -132,7 +132,7 @@ function CategoryPage() {
         </Reveal>
       </section>
 
-      <section className="bg-sand py-7 lg:py-9">
+      <section className="bg-sand py-8">
         <div className="shell">
           <SectionHead eyebrow="Related" title="Other categories" />
           <div className="grid gap-3 sm:grid-cols-3">

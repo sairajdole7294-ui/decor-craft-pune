@@ -621,3 +621,154 @@ export const productBySlug = (slug: string) => catalogProducts.find((p) => p.slu
 export const categoryBySlug = (slug: string) => catalogCategories.find((c) => c.slug === slug);
 export const industryBySlug = (slug: string) => industryPages.find((i) => i.slug === slug);
 export const productsInCategory = (slug: string) => catalogProducts.filter((p) => p.category === slug);
+/* ---------------------------------------------------------------------------
+ * Collections (series grouping used by the Product Range filter sidebar)
+ * ------------------------------------------------------------------------ */
+export const catalogCollections = [
+  { id: "premium", name: "Premium Series" },
+  { id: "commercial", name: "Commercial Series" },
+  { id: "custom", name: "Custom Manufacturing" },
+] as const;
+
+export type CollectionId = (typeof catalogCollections)[number]["id"];
+
+const collectionMap: Record<string, CollectionId> = {
+  "eco-series": "commercial",
+  "spark-series": "commercial",
+  "curve-series": "commercial",
+  "element-series": "commercial",
+  "school-bench": "commercial",
+  "impress-series": "premium",
+  "impact-series": "premium",
+  "magna-series": "premium",
+  "premia-series": "premium",
+  "esd-workstation": "custom",
+  "lab-workstation": "custom",
+  "modular-kitchen": "custom",
+  "modular-wardrobe": "custom",
+};
+
+export const productCollection = (slug: string): CollectionId => collectionMap[slug] ?? "commercial";
+export const collectionName = (id: string) =>
+  catalogCollections.find((c) => c.id === id)?.name ?? "Commercial Series";
+
+/* ---------------------------------------------------------------------------
+ * Per-industry page sections — each industry gets its own structure
+ * ------------------------------------------------------------------------ */
+export type IndustrySection = {
+  title: string;
+  body: string;
+  images: string[];
+};
+
+export const industrySections: Record<string, IndustrySection[]> = {
+  schools: [
+    {
+      title: "Classroom gallery",
+      body:
+        "Two and three-seater desk-bench systems on powder-coated tubular frames, with rounded pinch-free edges and under-desk book storage sized for daily institutional footfall.",
+      images: ["/media/products/school-bench-1.jpg", "/media/products/school-bench-2.jpg", "/media/products/school-bench-4.jpg"],
+    },
+    {
+      title: "School furniture programme",
+      body:
+        "Beyond the classroom: staff rooms, principal cabins, admin counters and library joinery, colour-coded by grade and installed inside vacation windows.",
+      images: ["/media/products/school-bench-3.jpg", "/media/products/school-bench-6.jpg", "/media/products/school-bench-8.jpg"],
+    },
+  ],
+  colleges: [
+    {
+      title: "Library & reading rooms",
+      body: "Reading tables, carrels, issue counters and stack shelving finished to withstand continuous student use.",
+      images: ["/media/industries/college-library.jpg"],
+    },
+    {
+      title: "Laboratories",
+      body: "Chemical-resistant island and wall benches with service spines, sinks and lockable base storage for campus labs.",
+      images: ["/media/products/lab-workstation-3.jpg", "/media/products/lab-workstation-5.jpg"],
+    },
+    {
+      title: "Lecture halls & seminar rooms",
+      body: "Tiered lecture seating, seminar tables and faculty podiums with cable-managed tops for AV-equipped rooms.",
+      images: ["/media/industries/college-lecture-hall.jpg", "/media/industries/college-seminar-room.jpg"],
+    },
+    {
+      title: "Classroom furniture",
+      body: "Modular desk-bench runs and single-seat writing desks scaled to lecture room capacities.",
+      images: ["/media/products/school-bench-5.jpg", "/media/products/school-bench-7.jpg"],
+    },
+  ],
+  offices: [
+    {
+      title: "Reception",
+      body: "Signature reception counters and waiting joinery that carry your brand finish schedule from the lift lobby in.",
+      images: ["/media/industries/corporate-reception.jpg"],
+    },
+    {
+      title: "Open-plan workstations",
+      body: "ECO, SPARK and ELEMENT desking at any density, with acoustic screens, cable spines and matching pedestals.",
+      images: ["/media/products/eco-3.jpg", "/media/products/spark-4.jpg", "/media/products/element-6.jpg"],
+    },
+    {
+      title: "Executive cabins",
+      body: "Executive desks, side returns, credenzas and storage walls in veneer, laminate and matt PU finishes.",
+      images: ["/media/products/impact-2.jpg", "/media/products/magna-4.jpg"],
+    },
+    {
+      title: "Conference & meeting rooms",
+      body: "Boardroom and discussion tables with integrated power-data boxes, sized to your room and AV layout.",
+      images: ["/media/industries/corporate-boardroom.jpg", "/media/products/premia-6.jpg"],
+    },
+  ],
+  hospitals: [
+    {
+      title: "Reception & front desk",
+      body: "Seamless solid-surface counters with anti-bacterial laminate fronts, planned for wheelchair access and 24×7 use.",
+      images: ["/media/industries/hospital-reception.jpg"],
+    },
+    {
+      title: "Waiting areas & nursing stations",
+      body: "Nursing stations, wipe-clean waiting joinery and ward storage laid out for infection-control protocols.",
+      images: ["/media/industries/hospital-nursing-station.jpg", "/media/industries/hospital-records.jpg"],
+    },
+    {
+      title: "Healthcare & pathology furniture",
+      body: "Pathology and sample lab benches with chemical-resistant tops, sinks and lockable base cabinets.",
+      images: ["/media/products/lab-workstation-6.jpg", "/media/products/lab-workstation-8.jpg"],
+    },
+  ],
+  laboratories: [
+    {
+      title: "Lab workstations",
+      body: "Island and wall benches with gas, water and power service spines, chemical-resistant tops and fume-safe layouts.",
+      images: ["/media/products/lab-workstation-1.jpg", "/media/products/lab-workstation-2.jpg", "/media/products/lab-workstation-4.jpg"],
+    },
+    {
+      title: "ESD-safe assembly benches",
+      body: "ESD-rated worktops, earthing points, overhead task lighting and pegboard panels for electronics production lines.",
+      images: ["/media/products/esd-workstation-1.jpg", "/media/products/esd-workstation-4.jpg"],
+    },
+    {
+      title: "Laboratory storage",
+      body: "Reagent shelving, lockable under-bench cabinets and tall storage tiers built into the bench line.",
+      images: ["/media/products/lab-workstation-7.jpg", "/media/products/lab-workstation-9.jpg"],
+    },
+  ],
+  "corporate-offices": [
+    {
+      title: "Signature reception",
+      body: "Headquarters-grade lobby joinery, feature walls and reception counters finished to a brand schedule.",
+      images: ["/media/industries/corporate-reception.jpg"],
+    },
+    {
+      title: "Boardrooms",
+      body: "Large-format boardroom tables with veneer tops, integrated AV boxes and matching credenzas.",
+      images: ["/media/industries/corporate-boardroom.jpg", "/media/products/premia-2.jpg"],
+    },
+    {
+      title: "Executive floors",
+      body: "IMPACT, MAGNA and PREMIA cabins with storage walls, side tables and client-facing meeting settings.",
+      images: ["/media/products/impact-1.jpg", "/media/products/magna-6.jpg", "/media/products/curve-8.jpg"],
+    },
+  ],
+};

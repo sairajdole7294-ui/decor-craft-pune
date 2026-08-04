@@ -34,7 +34,7 @@ function CategoriesIndex() {
         image="/media/products/lab-workstation-2.jpg"
       />
 
-      <section className="shell py-7 lg:py-9">
+      <section className="shell py-8">
         <SectionHead eyebrow="Browse" title="All categories" action={<CatalogDownload variant="outline" />} />
         <div className="grid gap-4 md:grid-cols-2">
           {catalogCategories.map((c, i) => (

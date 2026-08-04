@@ -61,7 +61,7 @@ function CatalogPage() {
         </Reveal>
       </section>
 
-      <section className="bg-sand py-7 lg:py-9">
+      <section className="bg-sand py-8">
         <div className="shell">
           <SectionHead eyebrow="Inside the catalog" title="Sections & product families" />
           <div className="grid gap-3 sm:grid-cols-2">

@@ -10,7 +10,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
   return (
     <div className="grid gap-3">
       <div className="hover-zoom overflow-hidden rounded-3xl border border-border bg-secondary/30">
-        <img src={main} alt={`${name} — view ${active + 1}`} className="aspect-[4/3] w-full object-cover" loading="lazy" />
+        <img src={main} alt={`${name} — view ${active + 1}`} className="aspect-[16/9] max-h-[32rem] w-full object-cover" loading="lazy" />
       </div>
       {images.length > 1 ? (
         <div className="grid grid-cols-4 gap-2 sm:grid-cols-6">

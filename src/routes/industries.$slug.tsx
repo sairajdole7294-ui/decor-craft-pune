@@ -69,7 +69,7 @@ function IndustryDetail() {
           </ul>
         </Reveal>
         <Reveal delay={90} className="hover-zoom overflow-hidden rounded-3xl border border-border">
-          <img src={industry.gallery[1] ?? industry.gallery[0]} alt={industry.name} className="aspect-[16/10] w-full object-cover" loading="lazy" />
+          <img src={industry.gallery[industry.gallery.length - 1] ?? industry.gallery[0]} alt={industry.name} className="aspect-[16/10] w-full object-cover lg:max-h-[20rem]" loading="lazy" />
         </Reveal>
       </section>
 
@@ -89,7 +89,7 @@ function IndustryDetail() {
                   <img
                     src={src}
                     alt={`${industry.name} — ${sec.title}`}
-                    className={`w-full object-cover ${sec.images.length > 1 ? "aspect-[4/3]" : "aspect-[16/9]"}`}
+                    className={`w-full object-cover ${sec.images.length > 1 ? "aspect-[4/3]" : "aspect-[16/9] lg:max-h-[20rem]"}`}
                     loading="lazy"
                   />
                 </div>
@@ -133,7 +133,7 @@ function IndustryDetail() {
             {related.map((p, i) => (
               <Reveal key={p.slug} delay={(i % 3) * 70} className="card-premium overflow-hidden">
                 <div className="hover-zoom">
-                  <img src={p.images[0]} alt={p.name} className="aspect-[16/10] w-full object-cover" loading="lazy" />
+                  <img src={p.images[0]} alt={p.name} className="aspect-[16/10] w-full object-cover lg:max-h-[20rem]" loading="lazy" />
                 </div>
                 <div className="p-4">
                   <h3 className="text-sm font-semibold">{p.name}</h3>

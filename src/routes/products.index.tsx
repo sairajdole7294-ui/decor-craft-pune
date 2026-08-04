@@ -4,7 +4,7 @@ import { catalogCategories } from "@/lib/catalog-data";
 import { ProductCatalogBrowser } from "@/components/site/product-catalog-browser";
 import { PageHero, SectionHead, CtaBand } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
-import { CatalogDownload } from "@/components/site/product-media";
+
 
 const title = "Product Range — Office, Lab & Education Furniture | Payal Decor";
 const description =

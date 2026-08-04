@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, Check } from "lucide-react";
-import { industryBySlug, productBySlug, type IndustryPage } from "@/lib/catalog-data";
+import { industryBySlug, productBySlug, industrySections, type IndustryPage } from "@/lib/catalog-data";
 import { projects } from "@/lib/site-data";
 import { SectionHead, CtaBand } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
@@ -37,13 +37,14 @@ function IndustryDetail() {
   const { industry } = Route.useLoaderData() as { industry: IndustryPage };
   const recommended = industry.products.map(productBySlug).filter(Boolean);
   const related = projects.filter((p) => industry.projects.includes(p.slug));
+  const sections = industrySections[industry.slug] ?? [];
 
   return (
     <>
       <section className="relative isolate overflow-hidden">
         <img src={industry.gallery[0]} alt="" aria-hidden="true" className="absolute inset-0 size-full object-cover" />
         <div aria-hidden="true" className="absolute inset-0 bg-ink/75" />
-        <div className="shell relative py-10 lg:py-14">
+        <div className="shell relative py-9 lg:py-12">
           <p className="text-[0.62rem] font-bold tracking-[0.16em] text-white/60 uppercase">
             <Link to="/industries" className="hover:text-primary">Industry Solutions</Link>
           </p>
@@ -55,7 +56,7 @@ function IndustryDetail() {
         </div>
       </section>
 
-      <section className="shell grid gap-6 py-7 lg:grid-cols-[1fr_1.3fr] lg:py-9">
+      <section className="shell grid gap-6 py-8 lg:grid-cols-[1fr_1.2fr]">
         <Reveal>
           <h2 className="text-xl font-semibold lg:text-2xl">Industry overview</h2>
           <ul className="mt-3 space-y-2">
@@ -67,19 +68,38 @@ function IndustryDetail() {
             ))}
           </ul>
         </Reveal>
-        <Reveal delay={90}>
-          <h2 className="text-xl font-semibold lg:text-2xl">Product gallery</h2>
-          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-            {industry.gallery.map((src) => (
-              <div key={src} className="hover-zoom overflow-hidden rounded-xl border border-border">
-                <img src={src} alt={industry.name} className="aspect-square w-full object-cover" loading="lazy" />
-              </div>
-            ))}
-          </div>
+        <Reveal delay={90} className="hover-zoom overflow-hidden rounded-3xl border border-border">
+          <img src={industry.gallery[1] ?? industry.gallery[0]} alt={industry.name} className="aspect-[16/10] w-full object-cover" loading="lazy" />
         </Reveal>
       </section>
 
-      <section className="bg-sand py-7 lg:py-9">
+      {sections.map((sec, si) => (
+        <section key={sec.title} className={si % 2 === 0 ? "bg-sand py-8" : "py-8"}>
+          <div className={`shell grid gap-5 lg:items-center ${si % 2 === 0 ? "lg:grid-cols-[1fr_1.2fr]" : "lg:grid-cols-[1.2fr_1fr]"}`}>
+            <Reveal className={si % 2 === 0 ? "" : "lg:order-2"}>
+              <h2 className="text-xl font-semibold lg:text-2xl">{sec.title}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{sec.body}</p>
+            </Reveal>
+            <Reveal
+              delay={80}
+              className={`grid gap-2 ${sec.images.length > 1 ? "grid-cols-2" : "grid-cols-1"} ${si % 2 === 0 ? "" : "lg:order-1"}`}
+            >
+              {sec.images.map((src) => (
+                <div key={src} className="hover-zoom overflow-hidden rounded-2xl border border-border">
+                  <img
+                    src={src}
+                    alt={`${industry.name} — ${sec.title}`}
+                    className={`w-full object-cover ${sec.images.length > 1 ? "aspect-[4/3]" : "aspect-[16/9]"}`}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </Reveal>
+          </div>
+        </section>
+      ))}
+
+      <section className={sections.length % 2 === 0 ? "bg-sand py-8" : "py-8"}>
         <div className="shell">
           <SectionHead eyebrow="Recommended" title="Recommended products" />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -107,7 +127,7 @@ function IndustryDetail() {
       </section>
 
       {related.length ? (
-        <section className="shell py-7 lg:py-9">
+        <section className="shell py-8">
           <SectionHead eyebrow="Related Projects" title="Delivered in this sector" />
           <div className="grid gap-3 sm:grid-cols-3">
             {related.map((p, i) => (

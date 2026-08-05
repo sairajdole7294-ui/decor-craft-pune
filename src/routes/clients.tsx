@@ -33,12 +33,12 @@ function Clients() {
         image={media.about3}
       />
 
-      <section className="shell space-y-3 py-7 lg:py-9">
+      <section className="shell space-y-3 py-6 lg:py-8">
         <LogoMarquee />
         <LogoMarquee reverse />
       </section>
 
-      <section className="bg-sand py-7 lg:py-9">
+      <section className="bg-sand py-6 lg:py-8">
         <div className="shell">
           <SectionHead eyebrow="Client List" title="A few names on the roster" lead="Across automotive, engineering, education, healthcare and hospitality." />
           <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
@@ -58,7 +58,7 @@ function Clients() {
         </div>
       </section>
 
-      <section className="surface-ink py-7 lg:py-9">
+      <section className="surface-ink py-6 lg:py-8">
         <div className="shell">
           <SectionHead tone="ink" eyebrow="Client Voices" title="Reviews from delivered spaces" lead="Testimonials from the corporates, campuses and studios whose spaces we've delivered." />
           <div className="grid gap-4 sm:grid-cols-2">

@@ -772,3 +772,50 @@ export const industrySections: Record<string, IndustrySection[]> = {
     },
   ],
 };
+
+/* ---------------------------------------------------------------------------
+ * Image de-duplication — no image repeats twice inside the same gallery
+ * ------------------------------------------------------------------------ */
+const dedupe = (list: string[]) => Array.from(new Set(list));
+
+for (const p of catalogProducts) p.images = dedupe(p.images);
+for (const i of industryPages) i.gallery = dedupe(i.gallery);
+for (const list of Object.values(industrySections)) for (const s of list) s.images = dedupe(s.images);
+
+/* ---------------------------------------------------------------------------
+ * Shared browser datasets (Product Series + Product Type sidebar)
+ * ------------------------------------------------------------------------ */
+export const seriesFilterOptions = catalogCollections.map((c) => ({ id: c.id, name: c.name }));
+export const typeFilterOptions = catalogCategories.map((c) => ({ id: c.slug, name: c.name }));
+
+export const productBrowserItems = catalogProducts.map((p) => ({
+  slug: p.slug,
+  name: p.name,
+  desc: p.tagline,
+  image: p.images[0] ?? "",
+  badge: categoryBySlug(p.category)?.name ?? "Product",
+  series: [productCollection(p.slug)],
+  types: [p.category],
+}));
+
+export const categoryBrowserItems = catalogCategories.map((c) => ({
+  slug: c.slug,
+  name: c.name,
+  desc: c.desc.slice(0, 140).trim() + "…",
+  image: c.banner,
+  badge: `${c.products.length} products`,
+  series: Array.from(new Set(c.products.map((s) => productCollection(s) as string))),
+  types: [c.slug],
+}));
+
+export const industryBrowserItems = industryPages.map((i) => ({
+  slug: i.slug,
+  name: i.name,
+  desc: i.overview.slice(0, 140).trim() + "…",
+  image: i.gallery[0] ?? "",
+  badge: "Industry Solution",
+  series: Array.from(new Set(i.products.map((s) => productCollection(s) as string))),
+  types: Array.from(
+    new Set(i.products.map((s) => productBySlug(s)?.category).filter((c): c is string => Boolean(c))),
+  ),
+}));

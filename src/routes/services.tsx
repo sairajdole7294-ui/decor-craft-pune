@@ -18,7 +18,6 @@ const hubs = [
   { to: "/products" as const, name: "Product Range", desc: "Thirteen commercial product families with full specifications, variants and dimensions.", image: "/media/products/impact-7.jpg" },
   { to: "/product-categories" as const, name: "Product Categories", desc: "Office desking, technical and lab furniture, education furniture and modular interiors.", image: "/media/products/lab-workstation-2.jpg" },
   { to: "/industries" as const, name: "Industry Solutions", desc: "Schools, colleges, offices, hospitals, laboratories and corporate offices.", image: "/media/products/school-bench-3.jpg" },
-  { to: "/catalog" as const, name: "Product Catalog", desc: "Download the official Payal Decor Product Catalog 2026 as a PDF.", image: "/media/products/premia-5.jpg" },
 ];
 
 const title = "Services — Turnkey Interiors, Fit-outs & Manufacturing | Payal Decor";
@@ -50,11 +49,11 @@ function Services() {
         image={media.about3}
       />
 
-      <section className="shell pt-6 lg:pt-8">
+      <section className="shell pt-5 lg:pt-6">
         <CatalogSearch />
       </section>
 
-      <section className="shell space-y-5 py-7 lg:py-9">
+      <section className="shell space-y-4 py-6 lg:py-8">
         {services.map((s, i) => (
           <Reveal key={s.id} delay={i * 60}>
             <article
@@ -83,7 +82,7 @@ function Services() {
         ))}
       </section>
 
-      <section id="product-range" className="bg-sand py-7 lg:py-9">
+      <section id="product-range" className="bg-sand py-6 lg:py-8">
         <div className="shell">
           <SectionHead eyebrow="Product Range" title="Everything we make in-house" lead="Modular systems and bespoke commissions, produced on our own CNC, edgebanding and press lines." />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -105,14 +104,14 @@ function Services() {
       </section>
 
       {/* Explore hub */}
-      <section id="explore" className="shell py-7 lg:py-9">
+      <section id="explore" className="shell py-6 lg:py-8">
         <SectionHead
           eyebrow="Explore"
-          title="Products, categories, industries & catalog"
-          lead="Each area opens its own detailed pages with images, variants, specifications and a request-quote form."
+          title="Product Range, Categories & Industry Solutions"
+          lead="Each opens its own dedicated browsing page with a Product Series and Product Type sidebar, live filtering and request-quote forms."
           action={<CatalogDownload variant="outline" />}
         />
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {hubs.map((h, i) => (
             <Reveal key={h.name} delay={(i % 4) * 70}>
               <Link
@@ -136,7 +135,7 @@ function Services() {
         </div>
       </section>
 
-      <section className="shell py-7 lg:py-9">
+      <section className="shell py-6 lg:py-8">
         <SectionHead eyebrow="Material Library" title="What we specify, and why" lead="Every board, laminate and fitting is chosen for commercial wear — not residential catalogue looks." />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {materialLibrary.map((m, i) => (
@@ -149,7 +148,7 @@ function Services() {
         </div>
       </section>
 
-      <section className="surface-ink py-7 lg:py-9">
+      <section className="surface-ink py-6 lg:py-8">
         <div className="shell">
           <SectionHead tone="ink" eyebrow="Design & Installation Process" title="Six stages, one point of contact" lead="You always know what is happening on your floor plate this week." />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -171,7 +170,7 @@ function Services() {
         </div>
       </section>
 
-      <section className="shell py-7 lg:py-9">
+      <section className="shell py-6 lg:py-8">
         <SectionHead eyebrow="Project Planner" title="Share your project brief" lead="Six quick steps — send the details on WhatsApp and our team returns a customised quotation." />
         <CostCalculator />
       </section>

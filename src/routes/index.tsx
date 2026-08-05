@@ -181,7 +181,7 @@ function Index() {
       </section>
 
       {/* Services */}
-      <section className="bg-sand py-7 lg:py-9">
+      <section className="bg-sand py-6 lg:py-8">
         <div className="shell">
           <SectionHead
             eyebrow="What We Do"
@@ -219,7 +219,7 @@ function Index() {
       </section>
 
       {/* USPs */}
-      <section className="shell py-7 lg:py-9">
+      <section className="shell py-6 lg:py-8">
         <SectionHead
           eyebrow="Why Payal Decor"
           title={<>Eight reasons clients keep <span className="text-gradient-brand">coming back</span></>}
@@ -246,7 +246,7 @@ function Index() {
       </section>
 
       {/* Products */}
-      <section className="surface-ink py-7 lg:py-9">
+      <section className="surface-ink py-6 lg:py-8">
         <div className="shell">
           <SectionHead
             tone="ink"
@@ -275,7 +275,7 @@ function Index() {
       </section>
 
       {/* Projects preview */}
-      <section className="shell py-7 lg:py-9">
+      <section className="shell py-6 lg:py-8">
         <SectionHead
           eyebrow="Selected Work"
           title="Projects delivered across Pune"
@@ -305,7 +305,7 @@ function Index() {
       </section>
 
       {/* Factory capability */}
-      <section className="bg-sand py-7 lg:py-9">
+      <section className="bg-sand py-6 lg:py-8">
         <div className="shell grid gap-8 lg:grid-cols-2 lg:items-center">
           <div>
             <SectionHead
@@ -377,7 +377,7 @@ function Index() {
       </section>
 
       {/* Calculator */}
-      <section className="bg-sand py-7 lg:py-9">
+      <section className="bg-sand py-6 lg:py-8">
         <div className="shell">
           <SectionHead
             eyebrow="Budget Planner"
@@ -389,7 +389,7 @@ function Index() {
       </section>
 
       {/* Clients */}
-      <section className="shell py-7 lg:py-9">
+      <section className="shell py-6 lg:py-8">
         <SectionHead
           eyebrow="Trusted By"
           title="Companies that specify Payal Decor"
@@ -410,7 +410,7 @@ function Index() {
       </section>
 
       {/* Testimonials */}
-      <section className="surface-ink py-7 lg:py-9">
+      <section className="surface-ink py-6 lg:py-8">
         <div className="shell">
           <SectionHead tone="ink" eyebrow="Client Voices" title="What our clients say" lead="Testimonials from the corporates, campuses and studios whose spaces we've delivered." />
           <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">

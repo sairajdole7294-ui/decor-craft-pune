@@ -135,7 +135,7 @@ function Services() {
         </div>
       </section>
 
-      <section className="shell py-7 lg:py-9">
+      <section className="shell py-6 lg:py-8">
         <SectionHead eyebrow="Material Library" title="What we specify, and why" lead="Every board, laminate and fitting is chosen for commercial wear — not residential catalogue looks." />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {materialLibrary.map((m, i) => (
@@ -148,7 +148,7 @@ function Services() {
         </div>
       </section>
 
-      <section className="surface-ink py-7 lg:py-9">
+      <section className="surface-ink py-6 lg:py-8">
         <div className="shell">
           <SectionHead tone="ink" eyebrow="Design & Installation Process" title="Six stages, one point of contact" lead="You always know what is happening on your floor plate this week." />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -170,7 +170,7 @@ function Services() {
         </div>
       </section>
 
-      <section className="shell py-7 lg:py-9">
+      <section className="shell py-6 lg:py-8">
         <SectionHead eyebrow="Project Planner" title="Share your project brief" lead="Six quick steps — send the details on WhatsApp and our team returns a customised quotation." />
         <CostCalculator />
       </section>

@@ -332,26 +332,39 @@ function Index() {
       </section>
 
       {/* Process */}
-      <section className="shell py-7 lg:py-9">
+      <section className="shell py-6 lg:py-8">
         <SectionHead
           eyebrow="How We Work"
           title="A process built on published dates"
           lead="Six stages, one point of contact. You always know what is happening on your floor plate this week."
         />
-        <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {processSteps.map((s, i) => (
-            <Reveal key={s.n} delay={(i % 3) * 90} as="li">
-              <div className="card-premium group relative h-full overflow-hidden p-4 pl-5">
-                <span className="absolute top-0 bottom-0 left-0 w-1 bg-brand-gradient opacity-30 transition-opacity duration-500 group-hover:opacity-100" />
-                <span className="font-[family-name:var(--font-display)] text-3xl font-bold text-border transition-colors duration-500 group-hover:text-primary/30">
-                  {s.n}
-                </span>
-                <h3 className="mt-1 text-sm font-semibold">{s.t}</h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{s.d}</p>
-              </div>
-            </Reveal>
-          ))}
-        </ol>
+        <div className="relative">
+          {/* timeline spine */}
+          <span
+            aria-hidden
+            className="absolute top-6 left-[1.15rem] bottom-6 w-px bg-gradient-to-b from-primary/60 via-border to-transparent md:top-[1.6rem] md:right-6 md:bottom-auto md:left-6 md:h-px md:w-auto md:bg-gradient-to-r"
+          />
+          <ol className="relative grid gap-3 md:grid-cols-3">
+            {processSteps.map((s, i) => {
+              const Icon = processIcons[i % processIcons.length];
+              return (
+                <Reveal key={s.n} delay={(i % 3) * 90} as="li">
+                  <div className="card-premium group relative h-full overflow-hidden p-4 pl-14 transition-all duration-500 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[var(--shadow-lift)] md:pt-12 md:pl-4">
+                    <span className="absolute top-4 left-4 grid size-9 place-items-center rounded-full border border-border bg-card text-primary shadow-[var(--shadow-card)] transition-all duration-500 group-hover:scale-110 group-hover:border-primary/60 group-hover:bg-brand-gradient group-hover:text-primary-foreground">
+                      <Icon className="size-4" />
+                    </span>
+                    <span className="absolute top-4 right-4 font-[family-name:var(--font-display)] text-2xl font-bold text-border transition-colors duration-500 group-hover:text-primary/40">
+                      {s.n}
+                    </span>
+                    <h3 className="text-sm font-semibold">{s.t}</h3>
+                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{s.d}</p>
+                    <span className="mt-3 block h-0.5 w-8 rounded-full bg-brand-gradient opacity-40 transition-all duration-500 group-hover:w-16 group-hover:opacity-100" />
+                  </div>
+                </Reveal>
+              );
+            })}
+          </ol>
+        </div>
       </section>
 
       {/* Calculator */}

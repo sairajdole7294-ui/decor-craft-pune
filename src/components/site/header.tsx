@@ -8,7 +8,6 @@ export const navLinks = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/services", label: "Services" },
-  { to: "/products", label: "Products" },
   { to: "/manufacturing", label: "Manufacturing" },
   { to: "/projects", label: "Projects" },
   { to: "/gallery", label: "Gallery" },

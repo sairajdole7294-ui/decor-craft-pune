@@ -1,5 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import * as Icons from "lucide-react";
+
+const processIcons = [
+  Icons.MessagesSquare,
+  Icons.Ruler,
+  Icons.PenTool,
+  Icons.Factory,
+  Icons.Truck,
+  Icons.BadgeCheck,
+];
 import {
   media, company, stats, services, products, usps, projects, capabilities,
   processSteps, testimonials, faqs, certifications, industries,

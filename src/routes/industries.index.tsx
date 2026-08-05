@@ -38,7 +38,7 @@ function IndustriesIndex() {
         seriesOptions={seriesFilterOptions}
         typeOptions={typeFilterOptions}
         searchPlaceholder="Search industries…"
-        noun="industry"
+        noun="industry solution"
       />
 
       <CtaBand />

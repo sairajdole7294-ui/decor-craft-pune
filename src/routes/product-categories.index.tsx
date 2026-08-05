@@ -38,7 +38,7 @@ function CategoriesIndex() {
         seriesOptions={seriesFilterOptions}
         typeOptions={typeFilterOptions}
         searchPlaceholder="Search categories…"
-        noun="category"
+        noun="categorie"
       />
 
       <CtaBand />

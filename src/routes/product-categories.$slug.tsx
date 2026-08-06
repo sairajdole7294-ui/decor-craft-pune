@@ -116,21 +116,21 @@ function CategoryPage() {
         </div>
       </section>
 
-      <section id="category-quote" className="shell grid gap-5 py-6 lg:grid-cols-[1fr_1.1fr] lg:py-8">
-        <div>
-          <SectionHead
-            eyebrow="Request Quote"
-            title={`Enquire about ${category.name}`}
-            lead="Tell us the scope and our team returns a customised quotation with drawings and finish options."
-          />
-          <CatalogDownload />
+      <section id="category-quote" className="shell py-6 lg:py-8">
+        <SectionHead
+          eyebrow="Request Quote"
+          title={`Enquire about ${category.name}`}
+          lead="Tell us the scope and our team returns a customised quotation with drawings and finish options."
+        />
+        <div className="grid items-start gap-4 lg:grid-cols-[1.15fr_1fr]">
+          <Reveal>
+            <RequestQuoteForm
+              productName={category.name}
+              variants={items.map((p) => ({ name: p.name, note: p.tagline }))}
+            />
+          </Reveal>
+          <QuotePanel />
         </div>
-        <Reveal delay={80}>
-          <RequestQuoteForm
-            productName={category.name}
-            variants={items.map((p) => ({ name: p.name, note: p.tagline }))}
-          />
-        </Reveal>
       </section>
 
       <section className="bg-sand py-8">

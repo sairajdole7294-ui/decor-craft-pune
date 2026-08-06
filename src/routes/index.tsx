@@ -460,6 +460,11 @@ function Index() {
             </details>
           ))}
         </div>
+          <div className="grid gap-3">
+            <SupportPanel />
+          </div>
+        </div>
+      </section>
           <SupportPanel />
         </div>
       </section>

@@ -44,7 +44,7 @@ function ProductPage() {
       <section className="relative isolate overflow-hidden">
         <img src={product.images[0]} alt="" aria-hidden="true" className="absolute inset-0 size-full object-cover" />
         <div aria-hidden="true" className="absolute inset-0 bg-ink/75" />
-        <div className="shell relative py-9 lg:py-12">
+        <div className="shell relative py-6 lg:py-8">
           <p className="text-[0.62rem] font-bold tracking-[0.16em] text-white/60 uppercase">
             <Link to="/products" className="hover:text-primary">Products</Link>
             {category ? (

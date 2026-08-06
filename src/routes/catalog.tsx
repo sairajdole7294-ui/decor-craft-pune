@@ -34,7 +34,7 @@ function CatalogPage() {
         image="/media/products/premia-5.jpg"
       />
 
-      <section className="shell grid gap-5 py-7 lg:grid-cols-[1fr_1.2fr] lg:py-9">
+      <section className="shell grid gap-5 py-6 lg:grid-cols-[1fr_1.2fr] lg:py-8">
         <Reveal className="card-premium flex flex-col justify-center p-6">
           <FileText className="size-6 text-primary" />
           <h2 className="mt-3 text-xl font-semibold">{catalogTitle}</h2>

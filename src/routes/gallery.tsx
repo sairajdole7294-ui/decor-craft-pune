@@ -33,7 +33,7 @@ function Gallery() {
         image={media.vb}
       />
 
-      <section className="shell grid gap-6 py-7 lg:grid-cols-2 lg:py-9">
+      <section className="shell grid gap-6 py-6 lg:grid-cols-2 lg:py-8">
         <Reveal>
           <SectionHead eyebrow="Film" title="Our work in motion" lead="A short cut from the studio, the factory and the site." />
           <VideoShowcase src={media.workVideo} poster={media.vb} />
@@ -41,9 +41,8 @@ function Gallery() {
         <Reveal delay={120}>
           <SectionHead eyebrow="Compare" title="Before & after" lead="Drag the handle to see the same floor plate before and after handover." />
           <BeforeAfter
-            before={media.beforeImage}
-            after={media.afterImage}
-            labelBefore="During fit-out"
+            composite={media.transformation}
+            labelBefore="Before"
             labelAfter="After handover"
           />
         </Reveal>

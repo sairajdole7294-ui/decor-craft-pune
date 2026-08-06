@@ -57,7 +57,7 @@ function Manufacturing() {
       </section>
 
       <section className="bg-sand py-6 lg:py-8">
-        <div className="shell grid gap-8 lg:grid-cols-2 lg:items-center">
+        <div className="shell grid gap-6 lg:grid-cols-2 lg:items-center">
           <div>
             <SectionHead eyebrow="Capability" title="What the floor can absorb" lead="Capacity utilisation across the disciplines we run in-house." />
             <div className="space-y-3">

@@ -44,7 +44,7 @@ function IndustryDetail() {
       <section className="relative isolate overflow-hidden">
         <img src={industry.gallery[0]} alt="" aria-hidden="true" className="absolute inset-0 size-full object-cover" />
         <div aria-hidden="true" className="absolute inset-0 bg-ink/75" />
-        <div className="shell relative py-9 lg:py-12">
+        <div className="shell relative py-6 lg:py-8">
           <p className="text-[0.62rem] font-bold tracking-[0.16em] text-white/60 uppercase">
             <Link to="/industries" className="hover:text-primary">Industry Solutions</Link>
           </p>
@@ -150,7 +150,7 @@ function IndustryDetail() {
         </section>
       ) : null}
 
-      <section className="shell grid gap-5 py-7 lg:grid-cols-[1fr_1.1fr] lg:py-9">
+      <section className="shell grid gap-5 py-6 lg:grid-cols-[1fr_1.1fr] lg:py-8">
         <div>
           <SectionHead
             eyebrow="Request Quote"

@@ -35,7 +35,7 @@ const columns = [
 export function Footer() {
   return (
     <footer className="surface-ink">
-      <div className="shell grid gap-6 py-7 lg:grid-cols-[1.5fr_2fr_1.4fr] lg:py-9">
+      <div className="shell grid gap-6 py-6 lg:grid-cols-[1.5fr_2fr_1.4fr] lg:py-8">
         <div>
           <div className="flex items-center gap-2.5">
             <img src={media.logo} alt="Payal Decor" className="size-10 object-contain" />

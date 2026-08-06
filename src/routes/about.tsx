@@ -48,7 +48,7 @@ function About() {
         </div>
       </PageHero>
 
-      <section className="shell grid gap-6 py-7 lg:grid-cols-[1.2fr_1fr] lg:py-9">
+      <section className="shell grid gap-6 py-6 lg:grid-cols-[1.2fr_1fr] lg:py-8">
         <div>
           <SectionHead
             eyebrow="Vision & Mission"

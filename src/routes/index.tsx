@@ -122,7 +122,7 @@ function Index() {
       </section>
 
       {/* Story */}
-      <section className="shell grid gap-6 py-7 lg:grid-cols-2 lg:items-center lg:py-9">
+      <section className="shell grid gap-6 py-6 lg:grid-cols-2 lg:items-center lg:py-8">
         <Reveal className="hover-zoom relative overflow-hidden rounded-3xl border border-border">
           <img src={media.about1} alt="Payal Decor commercial interior project in Pune" className="h-[22rem] w-full object-cover lg:h-[28rem]" loading="lazy" />
           <div className="absolute bottom-4 left-4 rounded-2xl bg-card/95 px-4 py-3 shadow-[var(--shadow-card)] backdrop-blur">
@@ -306,7 +306,7 @@ function Index() {
 
       {/* Factory capability */}
       <section className="bg-sand py-6 lg:py-8">
-        <div className="shell grid gap-8 lg:grid-cols-2 lg:items-center">
+        <div className="shell grid gap-6 lg:grid-cols-2 lg:items-center">
           <div>
             <SectionHead
               eyebrow="Our Factory"
@@ -439,7 +439,7 @@ function Index() {
       </section>
 
       {/* FAQ */}
-      <section className="shell grid gap-6 py-7 lg:grid-cols-[1fr_1.3fr] lg:py-9">
+      <section className="shell grid gap-6 py-6 lg:grid-cols-[1fr_1.3fr] lg:py-8">
         <div>
           <Eyebrow>Questions</Eyebrow>
           <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">Everything clients ask before award</h2>

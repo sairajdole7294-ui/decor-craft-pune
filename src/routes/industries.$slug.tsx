@@ -6,6 +6,7 @@ import { SectionHead, CtaBand } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
 import { CatalogDownload } from "@/components/site/product-media";
 import { RequestQuoteForm } from "@/components/site/quote-form";
+import { QuotePanel } from "@/components/site/panels";
 
 export const Route = createFileRoute("/industries/$slug")({
   loader: ({ params }): { industry: IndustryPage } => {

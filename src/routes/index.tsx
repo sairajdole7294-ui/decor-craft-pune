@@ -16,6 +16,7 @@ import {
 import { Reveal, Counter } from "@/components/site/motion";
 import { SectionHead, BrandButton, LogoMarquee, CtaBand, Eyebrow } from "@/components/site/bits";
 import { CostCalculator } from "@/components/site/calculator";
+import { SupportPanel } from "@/components/site/panels";
 import { BeforeAfter } from "@/components/site/gallery-explorer";
 
 const title = "Payal Decor — Commercial Interiors & Manufacturing in Pune";
@@ -439,14 +440,15 @@ function Index() {
       </section>
 
       {/* FAQ */}
-      <section className="shell grid gap-6 py-6 lg:grid-cols-[1fr_1.3fr] lg:py-8">
-        <div>
+      <section className="shell py-6 lg:py-8">
+        <div className="max-w-3xl">
           <Eyebrow>Questions</Eyebrow>
           <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">Everything clients ask before award</h2>
           <p className="mt-3 text-sm text-muted-foreground">
             Still unsure? Call {company.phone} and speak to the team that will actually run your project.
           </p>
         </div>
+        <div className="mt-5 grid items-start gap-4 lg:grid-cols-[1.35fr_1fr]">
         <div className="divide-y divide-border rounded-2xl border border-border bg-card">
           {faqs.map((f, i) => (
             <details key={f.q} className="group p-4" open={i === 0}>
@@ -457,6 +459,8 @@ function Index() {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
             </details>
           ))}
+        </div>
+          <SupportPanel />
         </div>
       </section>
 

@@ -85,6 +85,34 @@ export function SupportPanel() {
   );
 }
 
+/** Compact steps card shown under a quote form so the column never ends short. */
+export function EnquiryProcess() {
+  const steps = [
+    { t: "You send the brief", d: "Product, quantity, finish and site details reach our team on WhatsApp instantly." },
+    { t: "We review & call back", d: "A project engineer confirms sizes, materials and timelines — usually within 2 working hours." },
+    { t: "Customised quotation", d: "Itemised pricing with drawings, finish options and delivery schedule. No online pricing guesswork." },
+    { t: "Production & installation", d: "Manufactured in our Katraj facility and installed by our own supervisors." },
+  ];
+  return (
+    <Reveal delay={60} className="card-premium p-5">
+      <h3 className="text-sm font-bold text-primary">What happens after you enquire</h3>
+      <ol className="mt-3 grid gap-3">
+        {steps.map((s, i) => (
+          <li key={s.t} className="flex gap-3">
+            <span className="grid size-6 shrink-0 place-items-center rounded-full bg-brand-gradient text-[0.65rem] font-bold text-primary-foreground">
+              {i + 1}
+            </span>
+            <div className="min-w-0">
+              <p className="text-xs font-semibold">{s.t}</p>
+              <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{s.d}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </Reveal>
+  );
+}
+
 /** Rich supporting column shown beside every Request Quote form. */
 export function QuotePanel({ industriesServed = industries.slice(0, 8) }: { industriesServed?: string[] }) {
   const shots = galleryItems.slice(0, 4);

@@ -10,7 +10,7 @@ import { SectionHead, CtaBand } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
 import { CatalogDownload } from "@/components/site/product-media";
 import { RequestQuoteForm } from "@/components/site/quote-form";
-import { QuotePanel } from "@/components/site/panels";
+import { QuotePanel, EnquiryProcess } from "@/components/site/panels";
 
 export const Route = createFileRoute("/product-categories/$slug")({
   loader: ({ params }): { category: CatalogCategory } => {
@@ -129,6 +129,8 @@ function CategoryPage() {
               variants={items.map((p) => ({ name: p.name, note: p.tagline }))}
             />
           </Reveal>
+            <EnquiryProcess />
+          </div>
           <QuotePanel />
         </div>
       </section>

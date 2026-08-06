@@ -5,7 +5,7 @@ import { SectionHead, CtaBand } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
 import { ProductGallery, CatalogDownload } from "@/components/site/product-media";
 import { RequestQuoteForm } from "@/components/site/quote-form";
-import { QuotePanel } from "@/components/site/panels";
+import { QuotePanel, EnquiryProcess } from "@/components/site/panels";
 
 export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }): { product: CatalogProduct } => {
@@ -239,6 +239,8 @@ function ProductPage() {
             <Reveal>
               <RequestQuoteForm productName={product.name} variants={product.variants} materials={product.materials} />
             </Reveal>
+              <EnquiryProcess />
+            </div>
             <QuotePanel />
           </div>
         </div>

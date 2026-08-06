@@ -113,6 +113,27 @@ export function EnquiryProcess() {
   );
 }
 
+/** Factory / studio visit card with map — balances the quote column. */
+export function VisitCard() {
+  return (
+    <Reveal delay={100} className="card-premium overflow-hidden">
+      <div className="p-5">
+        <h3 className="text-sm font-bold text-primary">Visit the factory & studio</h3>
+        <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+          See material samples, hardware options and live production before you award — walk-ins welcome Mon–Sat, 9:30 am – 7:00 pm.
+        </p>
+      </div>
+      <iframe
+        title="Payal Decor factory location"
+        src="https://www.google.com/maps?q=Katraj%20Pune&output=embed"
+        className="h-44 w-full border-0"
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      />
+    </Reveal>
+  );
+}
+
 /** Rich supporting column shown beside every Request Quote form. */
 export function QuotePanel({ industriesServed = industries.slice(0, 8) }: { industriesServed?: string[] }) {
   const shots = galleryItems.slice(0, 4);

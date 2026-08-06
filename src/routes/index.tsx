@@ -334,7 +334,7 @@ function Index() {
             </div>
           </div>
           <Reveal delay={120}>
-            <BeforeAfter before={media.workshop} after={media.about3} labelBefore="On the factory floor" labelAfter="Installed & handed over" />
+            <BeforeAfter composite={media.transformation} labelBefore="Before" labelAfter="Installed & handed over" />
             <p className="mt-2 text-center text-[0.7rem] text-muted-foreground">Drag to compare factory output with the finished space.</p>
           </Reveal>
         </div>

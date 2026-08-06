@@ -41,9 +41,8 @@ function Gallery() {
         <Reveal delay={120}>
           <SectionHead eyebrow="Compare" title="Before & after" lead="Drag the handle to see the same floor plate before and after handover." />
           <BeforeAfter
-            before={media.beforeImage}
-            after={media.afterImage}
-            labelBefore="During fit-out"
+            composite={media.transformation}
+            labelBefore="Before"
             labelAfter="After handover"
           />
         </Reveal>

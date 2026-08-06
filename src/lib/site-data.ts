@@ -18,6 +18,7 @@ export const media = {
   vb: asset("4352fc35-b585-49e5-9a12-399f70ddc14a/vb.jpg"),
   // Before / after frames from the SAME project (EKA Mobility HQ)
   beforeImage: asset("x/eka1.jpg"),
+  transformation: "/media/before-after-transformation.png",
   afterImage: asset("x/eka.jpg"),
 };
 

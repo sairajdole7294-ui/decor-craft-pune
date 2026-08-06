@@ -228,18 +228,18 @@ function ProductPage() {
 
       {/* Request quote */}
       <section id="request-quote" className="bg-sand py-8">
-        <div className="shell grid gap-5 lg:grid-cols-[1fr_1.1fr]">
-          <div>
-            <SectionHead
-              eyebrow="Request Quote"
-              title={`Enquire about ${product.name}`}
-              lead="Share your requirement and our team returns a customised quotation — no pricing is calculated online."
-            />
-            <CatalogDownload />
+        <div className="shell">
+          <SectionHead
+            eyebrow="Request Quote"
+            title={`Enquire about ${product.name}`}
+            lead="Share your requirement and our team returns a customised quotation — no pricing is calculated online."
+          />
+          <div className="grid items-start gap-4 lg:grid-cols-[1.15fr_1fr]">
+            <Reveal>
+              <RequestQuoteForm productName={product.name} variants={product.variants} materials={product.materials} />
+            </Reveal>
+            <QuotePanel />
           </div>
-          <Reveal delay={80}>
-            <RequestQuoteForm productName={product.name} variants={product.variants} materials={product.materials} />
-          </Reveal>
         </div>
       </section>
 

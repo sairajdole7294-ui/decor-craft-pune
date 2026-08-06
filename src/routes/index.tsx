@@ -449,7 +449,8 @@ function Index() {
           </p>
         </div>
         <div className="mt-5 grid items-start gap-4 lg:grid-cols-[1.35fr_1fr]">
-        <div className="divide-y divide-border rounded-2xl border border-border bg-card">
+          <div className="grid gap-3">
+            <div className="divide-y divide-border rounded-2xl border border-border bg-card">
           {faqs.map((f, i) => (
             <details key={f.q} className="group p-4" open={i === 0}>
               <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold">
@@ -459,12 +460,17 @@ function Index() {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
             </details>
           ))}
-        </div>
-          <div className="grid gap-3">
-            <SupportPanel />
+            </div>
+            <Reveal className="card-premium flex flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h3 className="text-sm font-semibold">Didn't find your answer?</h3>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Send us your drawing or requirement — we reply with scope, budget range and a schedule.
+                </p>
+              </div>
+              <BrandButton to="/contact">Talk to our team</BrandButton>
+            </Reveal>
           </div>
-        </div>
-      </section>
           <SupportPanel />
         </div>
       </section>

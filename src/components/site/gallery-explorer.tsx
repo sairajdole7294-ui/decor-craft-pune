@@ -78,15 +78,65 @@ export function GalleryExplorer() {
 export function BeforeAfter({
   before,
   after,
+  composite,
   labelBefore = "Bare shell",
   labelAfter = "After handover",
 }: {
-  before: string;
-  after: string;
+  before?: string;
+  after?: string;
+  composite?: string;
   labelBefore?: string;
   labelAfter?: string;
 }) {
   const [pos, setPos] = useState(50);
+
+  if (composite) {
+    return (
+      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
+        <div className="relative aspect-[690/768] select-none sm:aspect-[4/3] lg:aspect-[690/620]">
+          <img
+            src={composite}
+            alt={labelAfter}
+            className="absolute top-0 -left-full h-full w-[200%] max-w-none object-cover"
+            loading="lazy"
+          />
+          <div className="absolute inset-y-0 left-0 overflow-hidden" style={{ width: `${pos}%` }}>
+            <img
+              src={composite}
+              alt={labelBefore}
+              className="absolute top-0 left-0 h-full max-w-none object-cover"
+              style={{ width: `${(200 / pos) * 100}%` }}
+              loading="lazy"
+            />
+          </div>
+          <div
+            className="pointer-events-none absolute inset-y-0 w-0.5 bg-white shadow-[0_0_0_1px_oklch(0_0_0/0.2)]"
+            style={{ left: `${pos}%` }}
+          >
+            <span className="absolute top-1/2 left-1/2 inline-flex size-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand-gradient text-primary-foreground">
+              <Play className="size-3 rotate-180" />
+            </span>
+          </div>
+          <span className="absolute bottom-3 left-3 rounded-full bg-ink/70 px-2.5 py-1 text-[0.65rem] font-semibold text-white backdrop-blur">
+            {labelBefore}
+          </span>
+          <span className="absolute right-3 bottom-3 rounded-full bg-ink/70 px-2.5 py-1 text-[0.65rem] font-semibold text-white backdrop-blur">
+            {labelAfter}
+          </span>
+          <input
+            type="range"
+            min={2}
+            max={98}
+            value={pos}
+            onChange={(e) => setPos(Number(e.target.value))}
+            aria-label="Compare before and after"
+            className="absolute inset-0 size-full cursor-ew-resize opacity-0"
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
       <div className="relative aspect-[16/9] select-none">

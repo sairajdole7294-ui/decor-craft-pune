@@ -236,6 +236,7 @@ function ProductPage() {
             lead="Share your requirement and our team returns a customised quotation — no pricing is calculated online."
           />
           <div className="grid items-start gap-4 lg:grid-cols-[1.15fr_1fr]">
+            <div className="grid gap-3">
             <Reveal>
               <RequestQuoteForm productName={product.name} variants={product.variants} materials={product.materials} />
             </Reveal>

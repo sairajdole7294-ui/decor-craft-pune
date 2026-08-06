@@ -123,6 +123,7 @@ function CategoryPage() {
           lead="Tell us the scope and our team returns a customised quotation with drawings and finish options."
         />
         <div className="grid items-start gap-4 lg:grid-cols-[1.15fr_1fr]">
+          <div className="grid gap-3">
           <Reveal>
             <RequestQuoteForm
               productName={category.name}

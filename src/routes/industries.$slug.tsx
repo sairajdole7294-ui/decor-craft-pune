@@ -158,6 +158,7 @@ function IndustryDetail() {
           lead="Share the scope and our team returns a customised quotation — no pricing is calculated online."
         />
         <div className="grid items-start gap-4 lg:grid-cols-[1.15fr_1fr]">
+          <div className="grid gap-3">
           <Reveal>
             <RequestQuoteForm
               productName={`${industry.name} — Industry Solution`}

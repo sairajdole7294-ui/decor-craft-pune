@@ -5,6 +5,7 @@ import { SectionHead, CtaBand } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
 import { ProductGallery, CatalogDownload } from "@/components/site/product-media";
 import { RequestQuoteForm } from "@/components/site/quote-form";
+import { QuotePanel, EnquiryProcess, VisitCard } from "@/components/site/panels";
 
 export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }): { product: CatalogProduct } => {
@@ -228,18 +229,22 @@ function ProductPage() {
 
       {/* Request quote */}
       <section id="request-quote" className="bg-sand py-8">
-        <div className="shell grid gap-5 lg:grid-cols-[1fr_1.1fr]">
-          <div>
-            <SectionHead
-              eyebrow="Request Quote"
-              title={`Enquire about ${product.name}`}
-              lead="Share your requirement and our team returns a customised quotation — no pricing is calculated online."
-            />
-            <CatalogDownload />
+        <div className="shell">
+          <SectionHead
+            eyebrow="Request Quote"
+            title={`Enquire about ${product.name}`}
+            lead="Share your requirement and our team returns a customised quotation — no pricing is calculated online."
+          />
+          <div className="grid items-start gap-4 lg:grid-cols-[1.15fr_1fr]">
+            <div className="grid gap-3">
+            <Reveal>
+              <RequestQuoteForm productName={product.name} variants={product.variants} materials={product.materials} />
+            </Reveal>
+              <EnquiryProcess />
+            <VisitCard />
+            </div>
+            <QuotePanel />
           </div>
-          <Reveal delay={80}>
-            <RequestQuoteForm productName={product.name} variants={product.variants} materials={product.materials} />
-          </Reveal>
         </div>
       </section>
 

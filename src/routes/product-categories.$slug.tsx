@@ -10,6 +10,7 @@ import { SectionHead, CtaBand } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
 import { CatalogDownload } from "@/components/site/product-media";
 import { RequestQuoteForm } from "@/components/site/quote-form";
+import { QuotePanel, EnquiryProcess, VisitCard } from "@/components/site/panels";
 
 export const Route = createFileRoute("/product-categories/$slug")({
   loader: ({ params }): { category: CatalogCategory } => {
@@ -115,21 +116,25 @@ function CategoryPage() {
         </div>
       </section>
 
-      <section id="category-quote" className="shell grid gap-5 py-6 lg:grid-cols-[1fr_1.1fr] lg:py-8">
-        <div>
-          <SectionHead
-            eyebrow="Request Quote"
-            title={`Enquire about ${category.name}`}
-            lead="Tell us the scope and our team returns a customised quotation with drawings and finish options."
-          />
-          <CatalogDownload />
+      <section id="category-quote" className="shell py-6 lg:py-8">
+        <SectionHead
+          eyebrow="Request Quote"
+          title={`Enquire about ${category.name}`}
+          lead="Tell us the scope and our team returns a customised quotation with drawings and finish options."
+        />
+        <div className="grid items-start gap-4 lg:grid-cols-[1.15fr_1fr]">
+          <div className="grid gap-3">
+          <Reveal>
+            <RequestQuoteForm
+              productName={category.name}
+              variants={items.map((p) => ({ name: p.name, note: p.tagline }))}
+            />
+          </Reveal>
+            <EnquiryProcess />
+            <VisitCard />
+          </div>
+          <QuotePanel />
         </div>
-        <Reveal delay={80}>
-          <RequestQuoteForm
-            productName={category.name}
-            variants={items.map((p) => ({ name: p.name, note: p.tagline }))}
-          />
-        </Reveal>
       </section>
 
       <section className="bg-sand py-8">

@@ -151,21 +151,21 @@ function IndustryDetail() {
         </section>
       ) : null}
 
-      <section className="shell grid gap-5 py-6 lg:grid-cols-[1fr_1.1fr] lg:py-8">
-        <div>
-          <SectionHead
-            eyebrow="Request Quote"
-            title={`Planning a ${industry.name.toLowerCase()} project?`}
-            lead="Share the scope and our team returns a customised quotation — no pricing is calculated online."
-          />
-          <CatalogDownload />
+      <section className="shell py-6 lg:py-8">
+        <SectionHead
+          eyebrow="Request Quote"
+          title={`Planning a ${industry.name.toLowerCase()} project?`}
+          lead="Share the scope and our team returns a customised quotation — no pricing is calculated online."
+        />
+        <div className="grid items-start gap-4 lg:grid-cols-[1.15fr_1fr]">
+          <Reveal>
+            <RequestQuoteForm
+              productName={`${industry.name} — Industry Solution`}
+              variants={recommended.filter(Boolean).map((p) => ({ name: p!.name, note: p!.tagline }))}
+            />
+          </Reveal>
+          <QuotePanel />
         </div>
-        <Reveal delay={80}>
-          <RequestQuoteForm
-            productName={`${industry.name} — Industry Solution`}
-            variants={recommended.filter(Boolean).map((p) => ({ name: p!.name, note: p!.tagline }))}
-          />
-        </Reveal>
       </section>
 
       <CtaBand />

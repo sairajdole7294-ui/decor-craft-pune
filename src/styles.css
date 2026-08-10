@@ -79,6 +79,7 @@
   --animate-marquee-slow: marquee 70s linear infinite;
   --animate-float: float 7s ease-in-out infinite;
   --animate-shine: shine 2.4s linear infinite;
+  --animate-slide-in-left: slide-in-left 0.3s ease-out;
 }
 
 :root {
@@ -229,6 +230,15 @@
   }
   to {
     background-position: 200% 0;
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
   }
 }
 

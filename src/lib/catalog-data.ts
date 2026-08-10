@@ -2,7 +2,7 @@
 // and payal-decor-pune.netlify.app. All imagery is extracted from the catalog
 // and stored locally in /public/media/products so the repo is self-contained.
 import catalogAsset from "@/assets/product-catalog.pdf.asset.json";
-import { media } from "@/lib/site-data";
+import { media, materialLibrary } from "@/lib/site-data";
 
 export const catalogPdf = catalogAsset.url;
 export const catalogTitle = "Payal Decor — Product Catalog 2026";
@@ -23,6 +23,8 @@ export type CatalogProduct = {
   materials: string[];
   dimensions: { label: string; value: string }[];
   applications: string[];
+  series: string;
+  type: string;
   /** Individual catalog PDFs can be assigned here later without any redesign. */
   catalogUrl?: string;
 };
@@ -81,6 +83,8 @@ export const catalogProducts: CatalogProduct[] = [
     materials: workstationMaterials,
     dimensions: workstationDims,
     applications: ["Open-plan offices", "IT & BPO floors", "Back-office operations", "Startup workspaces"],
+    series: "ECO SERIES",
+    type: "WORKSTATIONS",
   },
   {
     slug: "spark-series",
@@ -102,6 +106,8 @@ export const catalogProducts: CatalogProduct[] = [
     materials: workstationMaterials,
     dimensions: workstationDims,
     applications: ["Corporate offices", "Design studios", "Shared service centres", "Co-working spaces"],
+    series: "SPARK SERIES",
+    type: "WORKSTATIONS",
   },
   {
     slug: "curve-series",
@@ -128,6 +134,8 @@ export const catalogProducts: CatalogProduct[] = [
     materials: workstationMaterials,
     dimensions: workstationDims,
     applications: ["Corporate offices", "Engineering design centres", "Consulting floors", "Government offices"],
+    series: "CURVE SERIES",
+    type: "WORKSTATIONS",
   },
   {
     slug: "impress-series",
@@ -149,6 +157,8 @@ export const catalogProducts: CatalogProduct[] = [
     materials: workstationMaterials,
     dimensions: workstationDims,
     applications: ["IT floors", "Training rooms", "Campus admin offices", "Customer support centres"],
+    series: "IMPRESS SERIES",
+    type: "WORKSTATIONS",
   },
   {
     slug: "impact-series",
@@ -170,6 +180,8 @@ export const catalogProducts: CatalogProduct[] = [
     materials: workstationMaterials,
     dimensions: workstationDims,
     applications: ["Corporate headquarters", "Client-facing floors", "Automotive & mobility offices", "Technology campuses"],
+    series: "IMPACT SERIES",
+    type: "WORKSTATIONS",
   },
   {
     slug: "element-series",
@@ -196,6 +208,8 @@ export const catalogProducts: CatalogProduct[] = [
     materials: workstationMaterials,
     dimensions: workstationDims,
     applications: ["Growing startups", "Project war rooms", "Satellite offices", "Institutional admin blocks"],
+    series: "ELEMENT SERIES",
+    type: "WORKSTATIONS",
   },
   {
     slug: "magna-series",
@@ -223,6 +237,8 @@ export const catalogProducts: CatalogProduct[] = [
       { label: "Pedestal", value: "400 W × 500 D × 600 H mm (3-drawer)" },
     ],
     applications: ["Engineering design centres", "CAD & CAE floors", "Architecture studios", "R&D departments"],
+    series: "MAGNA SERIES",
+    type: "WORKSTATIONS",
   },
   {
     slug: "premia-series",
@@ -267,6 +283,8 @@ export const catalogProducts: CatalogProduct[] = [
       { label: "Worktop height", value: "750 mm" },
     ],
     applications: ["CXO cabins", "Directors' offices", "Partner rooms", "Legal & finance chambers"],
+    series: "PREMIA SERIES",
+    type: "WORKSTATIONS",
   },
   {
     slug: "esd-workstation",
@@ -311,6 +329,8 @@ export const catalogProducts: CatalogProduct[] = [
       { label: "Shelf tiers", value: "300 / 400 mm deep, height adjustable" },
     ],
     applications: ["Electronics assembly", "Testing & QC labs", "Repair centres", "Industrial production lines"],
+    series: "ESD WORKSTATION",
+    type: "WORKSTATIONS",
   },
   {
     slug: "lab-workstation",
@@ -355,6 +375,8 @@ export const catalogProducts: CatalogProduct[] = [
       { label: "Overhead cabinet", value: "900 mm W × 350 mm D × 600 mm H" },
     ],
     applications: ["Research laboratories", "College & university labs", "Hospital pathology labs", "QC and testing labs"],
+    series: "LAB WORKSTATION",
+    type: "WORKSTATIONS",
   },
   {
     slug: "school-bench",
@@ -398,6 +420,8 @@ export const catalogProducts: CatalogProduct[] = [
       { label: "Seat height", value: "450 mm" },
     ],
     applications: ["Schools", "Colleges", "Coaching institutes", "Training centres", "Hostels & campuses"],
+    series: "SCHOOL BENCH",
+    type: "SEATING",
   },
   {
     slug: "modular-kitchen",
@@ -434,6 +458,8 @@ export const catalogProducts: CatalogProduct[] = [
       { label: "Tall unit", value: "600 mm D × 2100 mm H" },
     ],
     applications: ["Residences", "Corporate pantries", "Cafeterias", "Hostel & campus kitchens"],
+    series: "MODULAR KITCHENS",
+    type: "STORAGE",
   },
   {
     slug: "modular-wardrobe",
@@ -469,6 +495,8 @@ export const catalogProducts: CatalogProduct[] = [
       { label: "Shutter width", value: "450 / 600 mm modules" },
     ],
     applications: ["Residences", "Hotel rooms", "Hostels & guest houses", "Serviced apartments"],
+    series: "MODULAR WARDROBES",
+    type: "STORAGE",
   },
 ];
 
@@ -556,64 +584,49 @@ export type IndustryPage = {
 
 export const industryPages: IndustryPage[] = [
   {
-    slug: "schools",
-    name: "Schools",
+    slug: "hospitality",
+    name: "Hospitality",
     overview:
-      "Classroom, staff room and admin furniture built for institutional footfall. Our school range uses powder-coated tubular frames, rounded edges and hard-wearing tops so a classroom still looks disciplined years after handover.",
-    points: ["Two and three-seater classroom benches", "Colour-coded frames per grade", "Staff room and admin joinery", "Vacation-window installation schedules"],
-    products: ["school-bench", "impress-series", "premia-series"],
-    gallery: ["/media/products/school-bench-1.jpg", "/media/products/school-bench-2.jpg", "/media/products/school-bench-3.jpg", "/media/products/school-bench-6.jpg"],
-    projects: ["vishwakarma-institutes"],
-  },
-  {
-    slug: "colleges",
-    name: "Colleges & Campuses",
-    overview:
-      "Campus-wide interiors across lecture halls, libraries, laboratories and administration blocks — durable finishes, branded colour blocking and heavy-duty modular furniture built for daily student footfall.",
-    points: ["Lecture hall and seminar seating", "Library and reading room joinery", "Laboratory workstations", "Faculty cabins and admin counters"],
-    products: ["school-bench", "lab-workstation", "magna-series", "premia-series"],
-    gallery: ["/media/industries/college-lecture-hall.jpg", "/media/industries/college-library.jpg", "/media/industries/college-seminar-room.jpg", "/media/products/lab-workstation-3.jpg"],
-    projects: ["vishwakarma-institutes"],
-  },
-  {
-    slug: "offices",
-    name: "Offices",
-    overview:
-      "Complete office furniture programmes — reception, open-plan desking, cabins, meeting rooms and storage — delivered floor by floor without stopping your operations.",
-    points: ["Open-plan desking at any density", "Cabins, credenzas and storage walls", "Meeting and training room tables", "Phased occupied-site installation"],
-    products: ["eco-series", "spark-series", "element-series", "impact-series"],
-    gallery: ["/media/products/eco-3.jpg", "/media/products/spark-4.jpg", "/media/products/element-6.jpg", "/media/products/impact-2.jpg"],
-    projects: ["kirloskar-pneumatics", "prakash-masale", "mahle-workspace"],
-  },
-  {
-    slug: "hospitals",
-    name: "Hospitals",
-    overview:
-      "Hygienic, wipe-clean furniture for reception, nursing stations, records and pathology areas — specified for infection control and continuous 24×7 use.",
-    points: ["Seamless solid-surface counters", "Anti-bacterial laminate finishes", "Records and pharmacy storage", "Pathology and sample lab benches"],
-    products: ["lab-workstation", "premia-series", "curve-series"],
-    gallery: ["/media/industries/hospital-reception.jpg", "/media/industries/hospital-nursing-station.jpg", "/media/industries/hospital-records.jpg", "/media/products/lab-workstation-6.jpg"],
+      "Guest rooms, lobbies and F&B interiors combining premium finishes with commercial durability — designed to welcome and built to last.",
+    points: ["Room wardrobes & headboards", "Lobby & concierge counters", "Restaurant joinery", "Premium finish schedules"],
+    products: ["premia-series", "impact-series", "curve-series", "spark-series", "modular-kitchen", "modular-wardrobe"],
+    gallery: ["/media/industries/corporate-reception.jpg", "/media/industries/corporate-boardroom.jpg", "/media/products/impact-1.jpg", "/media/products/premia-2.jpg"],
     projects: [],
   },
   {
-    slug: "laboratories",
-    name: "Laboratories",
-    overview:
-      "Chemical-resistant island and wall benches, service spines, sinks, fume-safe layouts and ESD-rated assembly stations — engineered around the equipment and workflow of your lab.",
-    points: ["Chemical-resistant worktops", "Gas, water and power service spines", "Integrated sinks and drainboards", "ESD-safe electronics benches"],
-    products: ["lab-workstation", "esd-workstation"],
-    gallery: ["/media/products/lab-workstation-1.jpg", "/media/products/lab-workstation-2.jpg", "/media/products/esd-workstation-1.jpg", "/media/products/esd-workstation-4.jpg"],
-    projects: [],
-  },
-  {
-    slug: "corporate-offices",
-    name: "Corporate Offices",
+    slug: "corporate-office",
+    name: "Corporate Office",
     overview:
       "Headquarters-grade interiors: signature reception, executive cabins, boardrooms and client-facing floors, finished to a brand schedule and delivered against published programme dates.",
     points: ["Signature reception and lobby joinery", "Executive cabins and boardrooms", "Brand-matched finish schedules", "Single-point turnkey accountability"],
-    products: ["impact-series", "premia-series", "magna-series", "curve-series"],
+    products: [
+      "eco-series", "spark-series", "curve-series", "impress-series",
+      "impact-series", "element-series", "magna-series", "premia-series",
+      "esd-workstation", "lab-workstation",
+      "modular-kitchen", "modular-wardrobe",
+    ],
     gallery: ["/media/industries/corporate-reception.jpg", "/media/industries/corporate-boardroom.jpg", "/media/products/impact-1.jpg", "/media/products/curve-8.jpg"],
     projects: ["eka-mobility", "kirloskar-pneumatics"],
+  },
+  {
+    slug: "residential-projects",
+    name: "Residential Projects",
+    overview:
+      "Complete home interiors — modular kitchens, wardrobes, living and bedroom furniture tailored to your layout and lifestyle, manufactured and installed by our own teams.",
+    points: ["Bespoke space planning", "Modular kitchen & wardrobe systems", "Living and bedroom furniture", "Soft-close hardware throughout"],
+    products: ["modular-kitchen", "modular-wardrobe", "premia-series"],
+    gallery: ["/media/modular-kitchen.jpg", "/media/modular-wardrobe.jpg", "/media/products/premia-3.jpg", "/media/products/premia-4.jpg"],
+    projects: ["modular-kitchen-suite", "wardrobe-systems"],
+  },
+  {
+    slug: "retail-space",
+    name: "Retail Space",
+    overview:
+      "Display systems, cash counters and back-lit brand walls that survive merchandising changes every season — engineered for high footfall and fast turnaround.",
+    points: ["Modular display joinery", "Integrated lighting", "Fast turnaround installs", "Seasonally adaptable layouts"],
+    products: ["eco-series", "impact-series", "premia-series", "spark-series", "modular-kitchen", "modular-wardrobe"],
+    gallery: ["/media/products/eco-3.jpg", "/media/products/impact-2.jpg", "/media/products/premia-6.jpg", "/media/products/spark-4.jpg"],
+    projects: [],
   },
 ];
 
@@ -662,45 +675,26 @@ export type IndustrySection = {
 };
 
 export const industrySections: Record<string, IndustrySection[]> = {
-  schools: [
+  hospitality: [
     {
-      title: "Classroom gallery",
-      body:
-        "Two and three-seater desk-bench systems on powder-coated tubular frames, with rounded pinch-free edges and under-desk book storage sized for daily institutional footfall.",
-      images: ["/media/products/school-bench-1.jpg", "/media/products/school-bench-2.jpg", "/media/products/school-bench-4.jpg"],
+      title: "Guest rooms & lobbies",
+      body: "Wardrobes, headboards and minibar joinery finished to a hotel-grade schedule — durable enough for daily housekeeping and refined enough for five-star properties.",
+      images: ["/media/products/premia-3.jpg", "/media/products/premia-4.jpg", "/media/modular-wardrobe.jpg"],
     },
     {
-      title: "School furniture programme",
-      body:
-        "Beyond the classroom: staff rooms, principal cabins, admin counters and library joinery, colour-coded by grade and installed inside vacation windows.",
-      images: ["/media/products/school-bench-3.jpg", "/media/products/school-bench-6.jpg", "/media/products/school-bench-8.jpg"],
-    },
-  ],
-  colleges: [
-    {
-      title: "Library & reading rooms",
-      body: "Reading tables, carrels, issue counters and stack shelving finished to withstand continuous student use.",
-      images: ["/media/industries/college-library.jpg"],
+      title: "F&B interiors",
+      body: "Restaurant joinery, booth seating and reception counters in veneer, laminate and solid-surface finishes that survive high footfall and daily cleaning.",
+      images: ["/media/industries/corporate-reception.jpg", "/media/products/impact-1.jpg"],
     },
     {
-      title: "Laboratories",
-      body: "Chemical-resistant island and wall benches with service spines, sinks and lockable base storage for campus labs.",
-      images: ["/media/products/lab-workstation-3.jpg", "/media/products/lab-workstation-5.jpg"],
-    },
-    {
-      title: "Lecture halls & seminar rooms",
-      body: "Tiered lecture seating, seminar tables and faculty podiums with cable-managed tops for AV-equipped rooms.",
-      images: ["/media/industries/college-lecture-hall.jpg", "/media/industries/college-seminar-room.jpg"],
-    },
-    {
-      title: "Classroom furniture",
-      body: "Modular desk-bench runs and single-seat writing desks scaled to lecture room capacities.",
-      images: ["/media/products/school-bench-5.jpg", "/media/products/school-bench-7.jpg"],
+      title: "Public areas",
+      body: "Lobby feature walls, concierge counters and waiting-area seating planned around flow, brand expression and 24×7 durability.",
+      images: ["/media/industries/corporate-boardroom.jpg", "/media/products/curve-8.jpg"],
     },
   ],
-  offices: [
+  "corporate-office": [
     {
-      title: "Reception",
+      title: "Reception & lobbies",
       body: "Signature reception counters and waiting joinery that carry your brand finish schedule from the lift lobby in.",
       images: ["/media/industries/corporate-reception.jpg"],
     },
@@ -710,65 +704,43 @@ export const industrySections: Record<string, IndustrySection[]> = {
       images: ["/media/products/eco-3.jpg", "/media/products/spark-4.jpg", "/media/products/element-6.jpg"],
     },
     {
-      title: "Executive cabins",
-      body: "Executive desks, side returns, credenzas and storage walls in veneer, laminate and matt PU finishes.",
-      images: ["/media/products/impact-2.jpg", "/media/products/magna-4.jpg"],
-    },
-    {
-      title: "Conference & meeting rooms",
-      body: "Boardroom and discussion tables with integrated power-data boxes, sized to your room and AV layout.",
-      images: ["/media/industries/corporate-boardroom.jpg", "/media/products/premia-6.jpg"],
+      title: "Executive cabins & boardrooms",
+      body: "IMPACT, MAGNA and PREMIA desks with side returns, credenzas and storage walls in veneer, laminate and matt PU finishes.",
+      images: ["/media/products/impact-2.jpg", "/media/products/magna-4.jpg", "/media/products/premia-6.jpg"],
     },
   ],
-  hospitals: [
+  "residential-projects": [
     {
-      title: "Reception & front desk",
-      body: "Seamless solid-surface counters with anti-bacterial laminate fronts, planned for wheelchair access and 24×7 use.",
-      images: ["/media/industries/hospital-reception.jpg"],
+      title: "Modular kitchens",
+      body: "Post-formed and laminated kitchen systems on moisture-resistant carcasses, with tall units, appliance housings and soft-close hardware throughout.",
+      images: ["/media/modular-kitchen.jpg", "/media/products/modular-kitchen-1.jpg"],
     },
     {
-      title: "Waiting areas & nursing stations",
-      body: "Nursing stations, wipe-clean waiting joinery and ward storage laid out for infection-control protocols.",
-      images: ["/media/industries/hospital-nursing-station.jpg", "/media/industries/hospital-records.jpg"],
+      title: "Wardrobes & storage",
+      body: "Full-height wardrobe systems with engineered shutters, profile-lit interiors, mirror inserts and internal organisers built around what you store.",
+      images: ["/media/modular-wardrobe.jpg", "/media/products/modular-wardrobe-1.jpg"],
     },
     {
-      title: "Healthcare & pathology furniture",
-      body: "Pathology and sample lab benches with chemical-resistant tops, sinks and lockable base cabinets.",
-      images: ["/media/products/lab-workstation-6.jpg", "/media/products/lab-workstation-8.jpg"],
-    },
-  ],
-  laboratories: [
-    {
-      title: "Lab workstations",
-      body: "Island and wall benches with gas, water and power service spines, chemical-resistant tops and fume-safe layouts.",
-      images: ["/media/products/lab-workstation-1.jpg", "/media/products/lab-workstation-2.jpg", "/media/products/lab-workstation-4.jpg"],
-    },
-    {
-      title: "ESD-safe assembly benches",
-      body: "ESD-rated worktops, earthing points, overhead task lighting and pegboard panels for electronics production lines.",
-      images: ["/media/products/esd-workstation-1.jpg", "/media/products/esd-workstation-4.jpg"],
-    },
-    {
-      title: "Laboratory storage",
-      body: "Reagent shelving, lockable under-bench cabinets and tall storage tiers built into the bench line.",
-      images: ["/media/products/lab-workstation-7.jpg", "/media/products/lab-workstation-9.jpg"],
+      title: "Living & bedroom furniture",
+      body: "Bespoke entertainment units, bedsides, study desks and dressing tables finished to match your kitchen and wardrobe schedule.",
+      images: ["/media/products/premia-3.jpg", "/media/products/premia-4.jpg"],
     },
   ],
-  "corporate-offices": [
+  "retail-space": [
     {
-      title: "Signature reception",
-      body: "Headquarters-grade lobby joinery, feature walls and reception counters finished to a brand schedule.",
-      images: ["/media/industries/corporate-reception.jpg"],
+      title: "Display & merchandising",
+      body: "Modular display joinery, shelving systems and island units that adapt to seasonal campaigns and product rotations.",
+      images: ["/media/products/eco-3.jpg", "/media/products/spark-4.jpg"],
     },
     {
-      title: "Boardrooms",
-      body: "Large-format boardroom tables with veneer tops, integrated AV boxes and matching credenzas.",
-      images: ["/media/industries/corporate-boardroom.jpg", "/media/products/premia-2.jpg"],
+      title: "Cash counters & POS",
+      body: "Purpose-built counters with cable-managed tops, lockable cash drawers and branded fascia panels.",
+      images: ["/media/products/element-6.jpg", "/media/industries/corporate-reception.jpg"],
     },
     {
-      title: "Executive floors",
-      body: "IMPACT, MAGNA and PREMIA cabins with storage walls, side tables and client-facing meeting settings.",
-      images: ["/media/products/impact-1.jpg", "/media/products/magna-6.jpg", "/media/products/curve-8.jpg"],
+      title: "Brand walls & lighting",
+      body: "Back-lit feature walls, illuminated signage supports and display plinths engineered for high-footfall retail environments.",
+      images: ["/media/products/impact-2.jpg", "/media/products/curve-8.jpg"],
     },
   ],
 };
@@ -783,19 +755,67 @@ for (const i of industryPages) i.gallery = dedupe(i.gallery);
 for (const list of Object.values(industrySections)) for (const s of list) s.images = dedupe(s.images);
 
 /* ---------------------------------------------------------------------------
- * Shared browser datasets (Product Series + Product Type sidebar)
+ * Refrance-style filter options
  * ------------------------------------------------------------------------ */
-export const seriesFilterOptions = catalogCollections.map((c) => ({ id: c.id, name: c.name }));
-export const typeFilterOptions = catalogCategories.map((c) => ({ id: c.slug, name: c.name }));
+export const productRangeCategories = [
+  "All",
+  "LAB WORKSTATIONS",
+  "ESD WORKSTATIONS",
+  "SCHOOL BENCH",
+  "SUPPLIERS OF CHAIRS AND TABLES",
+  "LABORATORY",
+  "TABLES AND CUPBOARDS",
+  "CONFERENCE TABLES",
+  "STORAGE SOLUTIONS",
+];
 
+export const productCategories = [
+  "All",
+  "SPARK SERIES",
+  "IMPACT SERIES",
+  "IMPRESS SERIES",
+  "CURVE SERIES",
+  "MAGNA SERIES",
+  "PREMIA SERIES",
+  "ECO SERIES",
+  "ELEMENT SERIES",
+];
+
+export const seriesCategories = [
+  "All",
+  "SPARK SERIES",
+  "IMPACT SERIES",
+  "IMPRESS SERIES",
+  "CURVE SERIES",
+  "MAGNA SERIES",
+  "PREMIA SERIES",
+  "ECO SERIES",
+  "ELEMENT SERIES",
+];
+
+export const productTypes = [
+  "All",
+  "WORKSTATIONS",
+  "CHAIRS",
+  "TABLES",
+  "STORAGE",
+  "SEATING",
+];
+
+/* ---------------------------------------------------------------------------
+ * Shared browser datasets
+ * ------------------------------------------------------------------------ */
 export const productBrowserItems = catalogProducts.map((p) => ({
   slug: p.slug,
   name: p.name,
   desc: p.tagline,
   image: p.images[0] ?? "",
   badge: categoryBySlug(p.category)?.name ?? "Product",
-  series: [productCollection(p.slug)],
-  types: [p.category],
+  category: p.category,
+  applications: p.applications,
+  finishes: p.materials,
+  series: p.series,
+  type: p.type,
 }));
 
 export const categoryBrowserItems = catalogCategories.map((c) => ({
@@ -804,8 +824,11 @@ export const categoryBrowserItems = catalogCategories.map((c) => ({
   desc: c.desc.slice(0, 140).trim() + "…",
   image: c.banner,
   badge: `${c.products.length} products`,
-  series: Array.from(new Set(c.products.map((s) => productCollection(s) as string))),
-  types: [c.slug],
+  category: c.slug,
+  applications: Array.from(new Set(c.products.flatMap((s) => productBySlug(s)?.applications ?? []))),
+  finishes: Array.from(new Set(c.products.flatMap((s) => productBySlug(s)?.materials ?? []))),
+  series: Array.from(new Set(c.products.map((s) => productBySlug(s)?.series).filter((s): s is string => Boolean(s)))),
+  type: Array.from(new Set(c.products.map((s) => productBySlug(s)?.type).filter((t): t is string => Boolean(t)))),
 }));
 
 export const industryBrowserItems = industryPages.map((i) => ({
@@ -814,8 +837,7 @@ export const industryBrowserItems = industryPages.map((i) => ({
   desc: i.overview.slice(0, 140).trim() + "…",
   image: i.gallery[0] ?? "",
   badge: "Industry Solution",
-  series: Array.from(new Set(i.products.map((s) => productCollection(s) as string))),
-  types: Array.from(
-    new Set(i.products.map((s) => productBySlug(s)?.category).filter((c): c is string => Boolean(c))),
-  ),
+  category: i.products.map((s) => productBySlug(s)?.category).find((c): c is string => Boolean(c)) ?? "",
+  applications: Array.from(new Set(i.products.flatMap((s) => productBySlug(s)?.applications ?? []))),
+  finishes: Array.from(new Set(i.products.flatMap((s) => productBySlug(s)?.materials ?? []))),
 }));

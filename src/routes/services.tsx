@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check, ArrowRight } from "lucide-react";
+import { Check } from "lucide-react";
 import {
   media,
   services,
@@ -12,13 +12,6 @@ import { PageHero, SectionHead, CtaBand } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
 import { CostCalculator } from "@/components/site/calculator";
 import { CatalogDownload } from "@/components/site/product-media";
-import { CatalogSearch } from "@/components/site/catalog-search";
-
-const hubs = [
-  { to: "/products" as const, name: "Product Range", desc: "Thirteen commercial product families with full specifications, variants and dimensions.", image: "/media/products/impact-7.jpg" },
-  { to: "/product-categories" as const, name: "Product Categories", desc: "Office desking, technical and lab furniture, education furniture and modular interiors.", image: "/media/products/lab-workstation-2.jpg" },
-  { to: "/industries" as const, name: "Industry Solutions", desc: "Schools, colleges, offices, hospitals, laboratories and corporate offices.", image: "/media/products/school-bench-3.jpg" },
-];
 
 const title = "Services — Turnkey Interiors, Fit-outs & Manufacturing | Payal Decor";
 const description =
@@ -48,10 +41,6 @@ function Services() {
         lead="Four disciplines, one delivery team — so nothing falls between design, factory and site."
         image={media.about3}
       />
-
-      <section className="shell pt-5 lg:pt-6">
-        <CatalogSearch />
-      </section>
 
       <section className="shell space-y-4 py-6 lg:py-8">
         {services.map((s, i) => (
@@ -100,38 +89,6 @@ function Services() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Explore hub */}
-      <section id="explore" className="shell py-6 lg:py-8">
-        <SectionHead
-          eyebrow="Explore"
-          title="Product Range, Categories & Industry Solutions"
-          lead="Each opens its own dedicated browsing page with a Product Series and Product Type sidebar, live filtering and request-quote forms."
-          action={<CatalogDownload variant="outline" />}
-        />
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {hubs.map((h, i) => (
-            <Reveal key={h.name} delay={(i % 4) * 70}>
-              <Link
-                to={h.to}
-                className="card-premium group flex h-full flex-col overflow-hidden transition-all duration-400 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[var(--shadow-lift)]"
-              >
-                <div className="hover-zoom">
-                  <img src={h.image} alt={h.name} className="aspect-[16/10] w-full object-cover" loading="lazy" />
-                </div>
-                <div className="flex flex-1 flex-col p-4">
-                  <h3 className="text-sm font-semibold">{h.name}</h3>
-                  <p className="mt-1.5 flex-1 text-xs leading-relaxed text-muted-foreground">{h.desc}</p>
-                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
-                    Explore
-                    <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
         </div>
       </section>
 

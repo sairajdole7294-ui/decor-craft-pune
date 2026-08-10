@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { media, awards, usps, team, coverage, certifications } from "@/lib/site-data";
 import { PageHero, SectionHead, CtaBand, BrandButton } from "@/components/site/bits";
-import { IntroVideoCard } from "@/components/site/product-media";
 import { Reveal, Counter } from "@/components/site/motion";
 
 const title = "About Payal Decor — Interiors & Manufacturing Since 1992";
@@ -76,11 +75,11 @@ function About() {
             ))}
           </div>
         </div>
-        <Reveal delay={120} className="self-start">
+        <Reveal delay={120} className="self-center">
           {team.map((t) => (
             <figure
               key={t.name}
-              className="card-premium group relative mx-auto max-w-[20rem] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+              className="card-premium group relative mx-auto max-w-[26rem] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
             >
               <span
                 aria-hidden="true"
@@ -90,12 +89,8 @@ function About() {
                 <img
                   src={t.image}
                   alt={t.name}
-                  className="mx-auto h-auto max-h-[19rem] w-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+                  className="block h-auto w-full object-contain transition-transform duration-700 group-hover:scale-[1.05]"
                   loading="lazy"
-                />
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-card to-transparent"
                 />
               </div>
               <figcaption className="relative p-4">
@@ -108,20 +103,6 @@ function About() {
             </figure>
           ))}
         </Reveal>
-      </section>
-
-      <section className="bg-sand py-6 lg:py-8">
-        <div className="shell grid items-center gap-5 lg:grid-cols-[1fr_1.15fr]">
-          <div>
-            <SectionHead
-              eyebrow="Company Introduction"
-              title="Inside Payal Decor"
-              lead="Watch how Payal Decor delivers high-quality interior, manufacturing and commercial furniture solutions through innovation, precision, craftsmanship and decades of industry experience."
-            />
-            <BrandButton to="/manufacturing" variant="outline">See the factory</BrandButton>
-          </div>
-          <IntroVideoCard src="/videos/company-intro.mp4" poster={media.about3} />
-        </div>
       </section>
 
       <section className="bg-sand py-6 lg:py-8">

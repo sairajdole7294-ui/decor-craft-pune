@@ -1,254 +1,150 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowRight, Check } from "lucide-react";
-import { productBySlug, categoryBySlug, catalogProducts, collectionName, productCollection, type CatalogProduct } from "@/lib/catalog-data";
-import { SectionHead, CtaBand } from "@/components/site/bits";
-import { Reveal } from "@/components/site/motion";
-import { ProductGallery, CatalogDownload } from "@/components/site/product-media";
+import { useState } from "react";
+import { productBySlug, categoryBySlug, type CatalogProduct } from "@/lib/catalog-data";
+import { productById, type ReferenceProduct } from "@/data/productRangeData";
+import { company } from "@/lib/site-data";
+import { ArrowRight, Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { CatalogDownload } from "@/components/site/product-media";
 import { RequestQuoteForm } from "@/components/site/quote-form";
-import { QuotePanel, EnquiryProcess, VisitCard } from "@/components/site/panels";
+import { Reveal } from "@/components/site/motion";
 
 export const Route = createFileRoute("/products/$slug")({
-  loader: ({ params }): { product: CatalogProduct } => {
-    const product = productBySlug(params.slug);
-    if (!product) throw notFound();
-    return { product };
+  loader: ({ params }): { product: CatalogProduct | ReferenceProduct } => {
+    const bySlug = productBySlug(params.slug);
+    if (bySlug) return { product: bySlug };
+    const byId = productById(params.slug);
+    if (byId) return { product: byId };
+    throw notFound();
   },
-  head: ({ loaderData }: { loaderData?: { product: CatalogProduct } }) => {
+  head: ({ loaderData }: { loaderData?: { product: CatalogProduct | ReferenceProduct } }) => {
     if (!loaderData) {
       return { meta: [{ title: "Product not found — Payal Decor" }, { name: "robots", content: "noindex" }] };
     }
-    const t = `${loaderData.product.name} — Payal Decor`;
-    const d = loaderData.product.desc.slice(0, 155);
+    const p = loaderData.product;
+    const t = `${p.name} — Payal Decor`;
+    const d = "desc" in p ? p.desc.slice(0, 155) : p.name;
+    const slug = "slug" in p ? p.slug : p.id;
     return {
       meta: [
         { title: t },
         { name: "description", content: d },
         { property: "og:title", content: t },
         { property: "og:description", content: d },
-        { property: "og:url", content: `/products/${loaderData.product.slug}` },
+        { property: "og:url", content: `/products/${slug}` },
       ],
-      links: [{ rel: "canonical", href: `/products/${loaderData.product.slug}` }],
+      links: [{ rel: "canonical", href: `/products/${slug}` }],
     };
   },
   component: ProductPage,
 });
 
 function ProductPage() {
-  const { product } = Route.useLoaderData() as { product: CatalogProduct };
-  const category = categoryBySlug(product.category);
-  const related = catalogProducts.filter((p) => p.category === product.category && p.slug !== product.slug).slice(0, 4);
-  const rich = product.images.length >= 3;
+  const { product } = Route.useLoaderData() as { product: CatalogProduct | ReferenceProduct };
+  const isReference = !("images" in product);
+  const images = isReference ? [product.image] : product.images;
+  const desc = "desc" in product ? product.desc : `${product.name} — ${product.series} — ${product.category}`;
+  const categoryName = "slug" in product
+    ? categoryBySlug(product.category)?.name ?? product.category
+    : product.category;
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   return (
     <>
-      {/* Hero banner */}
-      <section className="relative isolate overflow-hidden">
-        <img src={product.images[0]} alt="" aria-hidden="true" className="absolute inset-0 size-full object-cover" />
-        <div aria-hidden="true" className="absolute inset-0 bg-ink/75" />
-        <div className="shell relative py-6 lg:py-8">
-          <p className="text-[0.62rem] font-bold tracking-[0.16em] text-white/60 uppercase">
-            <Link to="/products" className="hover:text-primary">Products</Link>
-            {category ? (
-              <>
-                {" / "}
-                <Link to="/product-categories/$slug" params={{ slug: category.slug }} className="hover:text-primary">
-                  {category.name}
-                </Link>
-              </>
-            ) : null}
-          </p>
-          <h1 className="mt-2 max-w-3xl text-3xl font-bold text-white lg:text-5xl">{product.name}</h1>
-          <p className="mt-2 max-w-2xl text-sm text-white/75">{product.tagline}</p>
-          <div className="mt-3 flex flex-wrap items-center gap-2 text-[0.62rem] font-bold tracking-[0.12em] text-white/70 uppercase">
-            <span className="rounded-full border border-white/25 px-2.5 py-1">{collectionName(productCollection(product.slug))}</span>
-            <span className="rounded-full border border-white/25 px-2.5 py-1">{product.variants.length} variants</span>
-            <span className="rounded-full border border-white/25 px-2.5 py-1">{product.images.length} catalog views</span>
-          </div>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <a
-              href="#request-quote"
-              className="inline-flex items-center gap-2 rounded-full bg-brand-gradient px-4 py-2.5 text-xs font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5"
-            >
-              Request Quote <ArrowRight className="size-3.5" />
-            </a>
-            <CatalogDownload variant="outline" />
-          </div>
-        </div>
-      </section>
+      {/* Breadcrumb */}
+      <div className="shell py-4">
+        <nav className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
+          <span>/</span>
+          <Link to="/products" className="hover:text-foreground transition-colors">Product Range</Link>
+          <span>/</span>
+          <span className="text-foreground">{product.name}</span>
+        </nav>
+      </div>
 
-      {/* Overview */}
-      <section className="shell grid gap-5 py-8 lg:grid-cols-[1.4fr_1fr] lg:items-start">
-        <Reveal>
-          <h2 className="text-xl font-semibold lg:text-2xl">Overview</h2>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{product.desc}</p>
-        </Reveal>
-        <Reveal delay={80} className="card-premium grid gap-2 p-4 sm:grid-cols-2 lg:grid-cols-1">
-          {product.specifications.slice(0, 3).map((s) => (
-            <div key={s.label} className="rounded-xl bg-secondary/40 p-3">
-              <p className="text-[0.6rem] font-bold tracking-[0.12em] text-primary uppercase">{s.label}</p>
-              <p className="mt-0.5 text-xs text-muted-foreground">{s.value}</p>
+      {/* Product Section */}
+      <div className="shell grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 py-8">
+        {/* Image Gallery */}
+        <div className="space-y-4">
+          <div className="aspect-square bg-muted rounded-lg overflow-hidden border border-border">
+            <img
+              src={images[currentImageIndex]}
+              alt={product.name}
+              className="w-full h-full object-contain p-4"
+            />
+          </div>
+
+          {images.length > 1 && (
+            <div className="flex gap-3 overflow-x-auto pb-2">
+              {images.map((img, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden border-2 transition-colors bg-muted ${
+                    currentImageIndex === index
+                      ? "border-primary"
+                      : "border-border hover:border-muted-foreground/50"
+                  }`}
+                >
+                  <img
+                    src={img}
+                    alt={`${product.name} ${index + 1}`}
+                    className="w-full h-full object-contain p-1"
+                  />
+                </button>
+              ))}
             </div>
-          ))}
-        </Reveal>
-      </section>
-
-      {/* Large gallery */}
-      <section className="bg-sand py-8">
-        <div className="shell">
-          <SectionHead eyebrow="Gallery" title={`${product.name} in detail`} />
-          {rich ? (
-            <Reveal>
-              <ProductGallery images={product.images} name={product.name} />
-            </Reveal>
-          ) : (
-            <Reveal className="hover-zoom overflow-hidden rounded-3xl border border-border">
-              <img src={product.images[0]} alt={product.name} className="aspect-[16/9] w-full object-cover" loading="lazy" />
-            </Reveal>
           )}
         </div>
-      </section>
 
-      {/* Variants */}
-      <section className="shell py-8">
-        <SectionHead eyebrow="Product Variants" title="Configurations available" />
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {product.variants.map((v, i) => (
-            <Reveal key={v.name} delay={(i % 4) * 60} className="card-premium p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/50">
-              <p className="text-sm font-semibold">{v.name}</p>
-              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{v.note}</p>
-            </Reveal>
-          ))}
+        {/* Product Info */}
+        <div className="lg:pt-4">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-serif text-foreground mb-4">
+            {product.name}
+          </h1>
+
+          <p className="text-base mb-6">
+            <span className="font-semibold text-foreground">Availability : </span>
+            <span className="text-green-600 font-medium">in Stock</span>
+          </p>
+
+          <p className="text-muted-foreground leading-relaxed text-base mb-8">
+            {desc}
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button
+              asChild
+              size="lg"
+              className="bg-[#f26523] hover:bg-[#f26523] text-white px-8 rounded-full text-base"
+            >
+              <Link to="/contact">Request A Quote</Link>
+            </Button>
+
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-[#f26523] text-[#f26523] hover:bg-[#f26523] hover:text-white px-8 rounded-full text-base"
+            >
+              <a href="/product-catalog.pdf" target="_blank" rel="noreferrer" download>
+                <Download className="w-4 h-4 mr-2" />
+                Download Catalogs
+              </a>
+            </Button>
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* Features */}
-      <section className="bg-sand py-8">
-        <div className="shell grid gap-5 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-          <Reveal>
-            <SectionHead eyebrow="Features" title="Engineered details" />
-            <ul className="grid gap-2">
-              {product.features.map((f) => (
-                <li key={f} className="flex gap-2 text-sm leading-relaxed text-muted-foreground">
-                  <Check className="mt-0.5 size-4 shrink-0 text-primary" />
-                  {f}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-          <Reveal delay={80} className="grid grid-cols-2 gap-2">
-            {product.images.slice(1, 5).map((src) => (
-              <div key={src} className="hover-zoom overflow-hidden rounded-2xl border border-border">
-                <img src={src} alt={product.name} className="aspect-[4/3] w-full object-cover" loading="lazy" />
-              </div>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Specifications + materials + dimensions */}
-      <section className="shell py-8">
-        <SectionHead eyebrow="Specifications" title="Technical schedule" />
-        <div className="grid gap-4 lg:grid-cols-3">
-          <Reveal className="card-premium p-5">
-            <h3 className="text-sm font-bold text-primary">Specifications</h3>
-            <dl className="mt-3 divide-y divide-border">
-              {product.specifications.map((s) => (
-                <div key={s.label} className="grid grid-cols-[9rem_1fr] gap-2 py-2">
-                  <dt className="text-xs font-semibold">{s.label}</dt>
-                  <dd className="text-xs text-muted-foreground">{s.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
-          <Reveal delay={80} className="card-premium p-5">
-            <h3 className="text-sm font-bold text-primary">Materials</h3>
-            <ul className="mt-3 space-y-2">
-              {product.materials.map((m) => (
-                <li key={m} className="flex gap-2 text-xs leading-relaxed text-muted-foreground">
-                  <Check className="mt-0.5 size-3.5 shrink-0 text-primary" />
-                  {m}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-          <Reveal delay={140} className="card-premium p-5">
-            <h3 className="text-sm font-bold text-primary">Dimensions</h3>
-            <dl className="mt-3 divide-y divide-border">
-              {product.dimensions.map((d) => (
-                <div key={d.label} className="grid grid-cols-[8rem_1fr] gap-2 py-2">
-                  <dt className="text-xs font-semibold">{d.label}</dt>
-                  <dd className="text-xs text-muted-foreground">{d.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Applications */}
-      <section className="bg-sand py-8">
+      {/* Request Quote Section */}
+      <div className="bg-sand py-8">
         <div className="shell">
-          <SectionHead eyebrow="Applications" title="Where this range is specified" />
-          <div className="flex flex-wrap gap-2">
-            {product.applications.map((a, i) => (
-              <Reveal key={a} delay={(i % 4) * 50}>
-                <span className="inline-flex rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold text-muted-foreground">
-                  {a}
-                </span>
-              </Reveal>
-            ))}
-          </div>
+          <h2 className="text-xl font-semibold lg:text-2xl mb-6">
+            Enquire about {product.name}
+          </h2>
+          <RequestQuoteForm productName={product.name} />
         </div>
-      </section>
-
-      {/* Related */}
-      {related.length ? (
-        <section className="shell py-8">
-          <SectionHead eyebrow="Related Products" title="You may also need" />
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {related.map((r, i) => (
-              <Reveal key={r.slug} delay={(i % 4) * 60}>
-                <Link
-                  to="/products/$slug"
-                  params={{ slug: r.slug }}
-                  className="card-premium group flex h-full flex-col overflow-hidden transition-all duration-400 hover:-translate-y-1 hover:border-primary/50"
-                >
-                  <div className="hover-zoom">
-                    <img src={r.images[0]} alt={r.name} className="aspect-[4/3] w-full object-cover" loading="lazy" />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="text-sm font-semibold">{r.name}</h3>
-                    <p className="mt-1 text-xs text-muted-foreground">{r.tagline}</p>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {/* Request quote */}
-      <section id="request-quote" className="bg-sand py-8">
-        <div className="shell">
-          <SectionHead
-            eyebrow="Request Quote"
-            title={`Enquire about ${product.name}`}
-            lead="Share your requirement and our team returns a customised quotation — no pricing is calculated online."
-          />
-          <div className="grid items-start gap-4 lg:grid-cols-[1.15fr_1fr]">
-            <div className="grid gap-3">
-            <Reveal>
-              <RequestQuoteForm productName={product.name} variants={product.variants} materials={product.materials} />
-            </Reveal>
-              <EnquiryProcess />
-            <VisitCard />
-            </div>
-            <QuotePanel />
-          </div>
-        </div>
-      </section>
-
-      <CtaBand />
+      </div>
     </>
   );
 }

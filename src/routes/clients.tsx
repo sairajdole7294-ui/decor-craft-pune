@@ -75,6 +75,25 @@ function Clients() {
               </Reveal>
             ))}
           </div>
+          <Reveal className="mt-6 grid gap-5 lg:grid-cols-2 lg:items-center">
+            <div>
+              <p className="text-[0.62rem] font-bold tracking-[0.14em] text-primary uppercase">CLIENT TESTIMONIAL</p>
+              <h3 className="mt-1 text-lg font-semibold text-ink-foreground">Hear From Our Clients</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-foreground/70">
+                Watch our clients share their experience working with Payal Decor — from commercial fit-outs to modular interiors and manufacturing partnerships.
+              </p>
+            </div>
+            <div className="card-premium overflow-hidden rounded-2xl">
+              <video
+                className="aspect-video w-full object-cover"
+                src="/videos/company-intro.mp4"
+                poster={media.about3}
+                controls
+                preload="metadata"
+                playsInline
+              />
+            </div>
+          </Reveal>
           <Reveal className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
             {certifications.map((c) => (
               <div key={c.title} className="flex flex-col items-center gap-2 rounded-2xl border border-white/12 bg-white/5 p-3 text-center">

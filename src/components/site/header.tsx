@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, Phone, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { company, media } from "@/lib/site-data";
@@ -8,6 +8,7 @@ export const navLinks = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/services", label: "Services" },
+  { to: "/products", label: "Products", hasDropdown: true },
   { to: "/manufacturing", label: "Manufacturing" },
   { to: "/projects", label: "Projects" },
   { to: "/gallery", label: "Gallery" },
@@ -15,9 +16,17 @@ export const navLinks = [
   { to: "/contact", label: "Contact" },
 ];
 
+export const productDropdownLinks = [
+  { to: "/products", label: "Product Range" },
+  { to: "/product-categories", label: "Product Categories" },
+  { to: "/industries", label: "Industry Solutions" },
+];
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+  const productsRef = useRef<HTMLDivElement>(null);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
@@ -29,7 +38,26 @@ export function Header() {
 
   useEffect(() => {
     setOpen(false);
+    setProductsOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!productsOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setProductsOpen(false);
+    };
+    const onClick = (e: MouseEvent) => {
+      if (productsRef.current && !productsRef.current.contains(e.target as Node)) {
+        setProductsOpen(false);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onClick);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onClick);
+    };
+  }, [productsOpen]);
 
   const onHome = pathname === "/";
   const transparent = onHome && !scrolled;
@@ -68,25 +96,75 @@ export function Header() {
           </Link>
 
           <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
-            {navLinks.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                activeOptions={{ exact: l.to === "/" }}
-                className={cn(
-                  "relative rounded-full px-2.5 py-2 text-[0.8rem] font-medium whitespace-nowrap transition-all duration-300 hover:-translate-y-px",
-                  transparent ? "text-white/80 hover:text-white" : "text-muted-foreground hover:text-foreground",
-                )}
-                activeProps={{
-                  className: cn(
-                    "!font-semibold",
-                    transparent ? "!text-white" : "!text-primary",
-                  ),
-                }}
-              >
-                {l.label}
-              </Link>
-            ))}
+            {navLinks.map((l) =>
+              l.hasDropdown ? (
+                <div
+                  key={l.to}
+                  ref={productsRef}
+                  className="relative"
+                  onMouseEnter={() => setProductsOpen(true)}
+                  onMouseLeave={() => setProductsOpen(false)}
+                >
+                  <Link
+                    to={l.to}
+                    activeOptions={{ exact: l.to === "/" }}
+                    className={cn(
+                      "relative rounded-full px-2.5 py-2 text-[0.8rem] font-medium whitespace-nowrap transition-all duration-300 hover:-translate-y-px",
+                      transparent ? "text-white/80 hover:text-white" : "text-muted-foreground hover:text-foreground",
+                    )}
+                    activeProps={{
+                      className: cn(
+                        "!font-semibold",
+                        transparent ? "!text-white" : "!text-primary",
+                      ),
+                    }}
+                  >
+                    {l.label}
+                  </Link>
+                  <div
+                    className={cn(
+                      "absolute top-full left-1/2 z-50 w-56 -translate-x-1/2 overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-lift)] transition-all duration-300",
+                      productsOpen ? "opacity-100" : "pointer-events-none opacity-0",
+                    )}
+                  >
+                    <div className="p-1.5 pt-1">
+                      {productDropdownLinks.map((dl) => (
+                        <Link
+                          key={dl.to}
+                          to={dl.to}
+                          className={cn(
+                            "block rounded-xl px-3.5 py-2.5 text-sm font-medium transition-colors",
+                            pathname === dl.to
+                              ? "bg-secondary text-primary"
+                              : "text-muted-foreground hover:bg-secondary/60 hover:text-foreground",
+                          )}
+                        >
+                          {dl.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  activeOptions={{ exact: l.to === "/" }}
+                  className={cn(
+                    "relative rounded-full px-2.5 py-2 text-[0.8rem] font-medium whitespace-nowrap transition-all duration-300 hover:-translate-y-px",
+                    transparent ? "text-white/80 hover:text-white" : "text-muted-foreground hover:text-foreground",
+                  )}
+                  activeProps={{
+                    className: cn(
+                      "!font-semibold",
+                      transparent ? "!text-white" : "!text-primary",
+                    ),
+                  }}
+                >
+                  {l.label}
+                </Link>
+              ),
+            )}
           </nav>
 
           <div className="flex items-center gap-2">
@@ -130,17 +208,57 @@ export function Header() {
           )}
         >
           <nav className="shell grid gap-0.5 py-3" aria-label="Mobile">
-            {navLinks.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                activeOptions={{ exact: l.to === "/" }}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                activeProps={{ className: "!bg-accent !text-primary !font-semibold" }}
-              >
-                {l.label}
-              </Link>
-            ))}
+            {navLinks.map((l) =>
+              l.hasDropdown ? (
+                <div key={l.to}>
+                  <button
+                    type="button"
+                    onClick={() => setProductsOpen((v) => !v)}
+                    className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                    aria-expanded={productsOpen}
+                  >
+                    {l.label}
+                    <svg
+                      className={cn("size-4 transition-transform duration-300", productsOpen && "rotate-180")}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                  </button>
+                  <div
+                    className={cn(
+                      "overflow-hidden transition-all duration-300",
+                      productsOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0",
+                    )}
+                  >
+                    {productDropdownLinks.map((dl) => (
+                      <Link
+                        key={dl.to}
+                        to={dl.to}
+                        activeOptions={{ exact: dl.to === "/products" }}
+                        className="block rounded-lg px-3 py-2 pl-6 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                        activeProps={{ className: "!bg-accent !text-primary !font-semibold" }}
+                      >
+                        {dl.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  activeOptions={{ exact: l.to === "/" }}
+                  className="rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  activeProps={{ className: "!bg-accent !text-primary !font-semibold" }}
+                >
+                  {l.label}
+                </Link>
+              ),
+            )}
             <div className="mt-2 grid grid-cols-2 gap-2">
               <a
                 href={company.phoneHref}

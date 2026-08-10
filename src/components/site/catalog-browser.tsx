@@ -12,8 +12,9 @@ export type BrowserItem = {
   desc: string;
   image: string;
   badge: string;
-  series: string[]; // series ids
-  types: string[]; // type ids
+  category: string;
+  applications: string[];
+  finishes: string[];
 };
 
 export type FilterOption = { id: string; name: string };
@@ -114,81 +115,100 @@ function FilterGroup({
 export function CatalogBrowser({
   items,
   base,
-  seriesOptions,
-  typeOptions,
+  filterGroups,
   searchPlaceholder = "Search the product range…",
   noun = "item",
 }: {
   items: BrowserItem[];
   base: BrowserBase;
-  seriesOptions: FilterOption[];
-  typeOptions: FilterOption[];
+  filterGroups: { id: string; name: string; options: FilterOption[] }[];
   searchPlaceholder?: string;
   noun?: string;
 }) {
-  const [series, setSeries] = useState<string[]>([]);
-  const [types, setTypes] = useState<string[]>([]);
+  const [filters, setFilters] = useState<Record<string, string[]>>({});
   const [q, setQ] = useState("");
   const [openSuggest, setOpenSuggest] = useState(false);
   const [cursor, setCursor] = useState(0);
   const [sort, setSort] = useState<Sort>("featured");
   const [drawer, setDrawer] = useState(false);
 
-  const count = (key: "series" | "types") => (id: string) => items.filter((i) => i[key].includes(id)).length;
-  const seriesCounts = Object.fromEntries(seriesOptions.map((o) => [o.id, count("series")(o.id)]));
-  const typeCounts = Object.fromEntries(typeOptions.map((o) => [o.id, count("types")(o.id)]));
+  const toggle = (groupId: string) => (id: string) =>
+    setFilters((prev) => {
+      const current = prev[groupId] ?? [];
+      return {
+        ...prev,
+        [groupId]: current.includes(id) ? current.filter((x) => x !== id) : [...current, id],
+      };
+    });
+
+  const clearGroup = (groupId: string) => () =>
+    setFilters((prev) => ({ ...prev, [groupId]: [] }));
+
+  const clearAll = () =>
+    setFilters(
+      filterGroups.reduce((acc, g) => ({ ...acc, [g.id]: [] }), {}),
+    );
+
+  const counts: Record<string, Record<string, number>> = {};
+  for (const group of filterGroups) {
+    counts[group.id] = Object.fromEntries(
+      group.options.map((o) => [
+        o.id,
+        items.filter((item) => {
+          const selected = filters[group.id] ?? [];
+          if (selected.length === 0) return true;
+          const values = group.id === "category" ? [item.category] : group.id === "applications" ? item.applications : item.finishes;
+          return selected.some((v) => values.includes(v));
+        }).length,
+      ]),
+    );
+  }
 
   const term = q.trim().toLowerCase();
 
   const filtered = useMemo(() => {
     const list = items.filter((p) => {
-      if (series.length && !p.series.some((s) => series.includes(s))) return false;
-      if (types.length && !p.types.some((t) => types.includes(t))) return false;
+      for (const group of filterGroups) {
+        const selected = filters[group.id] ?? [];
+        if (selected.length > 0) {
+          const values = group.id === "category" ? [p.category] : group.id === "applications" ? p.applications : p.finishes;
+          if (!selected.some((v) => values.includes(v))) return false;
+        }
+      }
       if (term && !`${p.name} ${p.desc} ${p.badge}`.toLowerCase().includes(term)) return false;
       return true;
     });
     if (sort === "az") return [...list].sort((a, b) => a.name.localeCompare(b.name));
     if (sort === "latest") return [...list].reverse();
     return list;
-  }, [items, series, types, term, sort]);
+  }, [items, filters, term, sort, filterGroups]);
 
   const suggestions = useMemo(
     () => (term ? items.filter((p) => `${p.name} ${p.desc}`.toLowerCase().includes(term)).slice(0, 6) : []),
     [items, term],
   );
 
-  const toggle = (setter: typeof setSeries) => (id: string) =>
-    setter((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
-
   const sidebar = (
     <div className="grid gap-4">
       <div>
         <p className="text-sm font-bold">Filters</p>
-        <p className="mt-0.5 text-xs text-muted-foreground">Combine series and type — results update instantly.</p>
+        <p className="mt-0.5 text-xs text-muted-foreground">Combine filters — results update instantly.</p>
       </div>
-      <FilterGroup
-        title="Product Series"
-        options={seriesOptions}
-        counts={seriesCounts}
-        selected={series}
-        onToggle={toggle(setSeries)}
-        onClear={() => setSeries([])}
-      />
-      <FilterGroup
-        title="Product Type"
-        options={typeOptions}
-        counts={typeCounts}
-        selected={types}
-        onToggle={toggle(setTypes)}
-        onClear={() => setTypes([])}
-      />
-      {series.length || types.length ? (
+      {filterGroups.map((group) => (
+        <FilterGroup
+          key={group.id}
+          title={group.name}
+          options={group.options}
+          counts={counts[group.id] ?? {}}
+          selected={filters[group.id] ?? []}
+          onToggle={toggle(group.id)}
+          onClear={clearGroup(group.id)}
+        />
+      ))}
+      {filterGroups.some((g) => (filters[g.id] ?? []).length > 0) ? (
         <button
           type="button"
-          onClick={() => {
-            setSeries([]);
-            setTypes([]);
-          }}
+          onClick={clearAll}
           className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-semibold transition-colors hover:border-primary hover:text-primary"
         >
           <X className="size-3" /> Clear all filters
@@ -270,10 +290,34 @@ export function CatalogBrowser({
         </div>
 
         <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-b border-border pb-2.5">
-          <p className="text-xs font-semibold text-muted-foreground">
-            Showing <span className="text-foreground">{filtered.length}</span> {noun}
-            {filtered.length === 1 ? "" : "s"}
-          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="text-xs font-semibold text-muted-foreground">
+              Showing <span className="text-foreground">{filtered.length}</span> {noun}
+              {filtered.length === 1 ? "" : "s"}
+            </p>
+            {filterGroups.map((group) =>
+              (filters[group.id] ?? []).map((selectedId) => {
+                const option = group.options.find((o) => o.id === selectedId);
+                if (!option) return null;
+                return (
+                  <span
+                    key={`${group.id}-${selectedId}`}
+                    className="inline-flex items-center gap-1 rounded-full border border-border bg-secondary px-2 py-0.5 text-[0.65rem] font-semibold text-foreground"
+                  >
+                    {group.name}: {option.name}
+                    <button
+                      type="button"
+                      onClick={() => toggle(group.id)(selectedId)}
+                      className="rounded-full p-0.5 transition-colors hover:text-primary"
+                      aria-label={`Remove ${option.name} filter`}
+                    >
+                      <X className="size-2.5" />
+                    </button>
+                  </span>
+                );
+              }),
+            )}
+          </div>
           <label className="flex items-center gap-2 text-xs text-muted-foreground">
             <SlidersHorizontal className="size-3.5" />
             Sort by
@@ -347,8 +391,7 @@ export function CatalogBrowser({
             <button
               type="button"
               onClick={() => {
-                setSeries([]);
-                setTypes([]);
+                clearAll();
                 setQ("");
               }}
               className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-semibold transition-colors hover:border-primary hover:text-primary"

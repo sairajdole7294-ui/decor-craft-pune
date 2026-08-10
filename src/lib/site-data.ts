@@ -506,6 +506,8 @@ export type ProductCategory = {
   features: string[];
   applications: string[];
   catalogue?: boolean;
+  category?: string;
+  series?: string;
 };
 
 export const productRange: ProductCategory[] = [
@@ -517,6 +519,8 @@ export const productRange: ProductCategory[] = [
     features: ["25 mm MR-grade engineered top", "PUR-sealed 2 mm edge banding", "Integrated cable trays & grommets", "Soft-close pedestal drawers"],
     applications: ["Corporate cabins", "Managing director suites", "Consulting rooms", "Branch offices"],
     catalogue: true,
+    category: "TABLES AND CUPBOARDS",
+    series: "PREMIA SERIES",
   },
   {
     slug: "reception-tables",
@@ -526,6 +530,8 @@ export const productRange: ProductCategory[] = [
     features: ["Curved solid-surface fascia", "Concealed LED cove lighting", "Dual-height transaction counter", "Lockable back storage"],
     applications: ["Corporate lobbies", "Hotels & hospitality", "Hospitals & clinics", "Campus admin blocks"],
     catalogue: true,
+    category: "TABLES AND CUPBOARDS",
+    series: "PREMIA SERIES",
   },
   {
     slug: "conference-tables",
@@ -535,6 +541,8 @@ export const productRange: ProductCategory[] = [
     features: ["6 to 24-seat configurations", "Flip-top power & data modules", "Post-formed rolled edges", "Concealed cable spine"],
     applications: ["Boardrooms", "Training rooms", "Faculty meeting halls", "Client presentation rooms"],
     catalogue: true,
+    category: "CONFERENCE TABLES",
+    series: "PREMIA SERIES",
   },
   {
     slug: "workstation-desks",
@@ -544,6 +552,8 @@ export const productRange: ProductCategory[] = [
     features: ["Linear, L and cluster layouts", "Acoustic fabric tack screens", "Aluminium raceway spine", "Mobile pedestals with castors"],
     applications: ["Open-plan offices", "IT & BPO floors", "Engineering design centres", "Co-working spaces"],
     catalogue: true,
+    category: "TABLES AND CUPBOARDS",
+    series: "SPARK SERIES",
   },
   {
     slug: "executive-office-tables",
@@ -553,6 +563,8 @@ export const productRange: ProductCategory[] = [
     features: ["Matched natural veneer", "Side credenza & return unit", "Leather / PU inlay options", "Concealed CPU housing"],
     applications: ["CXO cabins", "Directors' offices", "Partner rooms", "Legal & finance chambers"],
     catalogue: true,
+    category: "TABLES AND CUPBOARDS",
+    series: "PREMIA SERIES",
   },
   {
     slug: "modular-office-desks",
@@ -562,6 +574,8 @@ export const productRange: ProductCategory[] = [
     features: ["Add-on modular seats", "Tool-free reconfiguration", "Shared power spine", "Standard & height-adjustable frames"],
     applications: ["Growing startups", "Project war rooms", "Shared service centres", "Satellite offices"],
     catalogue: true,
+    category: "TABLES AND CUPBOARDS",
+    series: "ELEMENT SERIES",
   },
   {
     slug: "modular-kitchens",
@@ -571,6 +585,8 @@ export const productRange: ProductCategory[] = [
     features: ["MR / BWP ply carcass", "Post-formed shutters", "Quartz & granite counters", "Soft-close hinges and channels"],
     applications: ["Residences", "Corporate pantries", "Cafeterias", "Hostel & campus kitchens"],
     catalogue: true,
+    category: "STORAGE SOLUTIONS",
+    series: "MODULAR KITCHENS",
   },
   {
     slug: "modular-wardrobes",
@@ -580,16 +596,16 @@ export const productRange: ProductCategory[] = [
     features: ["Hinged, sliding & glass profiles", "Profile-lit internal shelving", "Pull-out shoe and accessory racks", "Aluminium framed shutters"],
     applications: ["Residences", "Hotel rooms", "Hostels & guest houses", "Serviced apartments"],
     catalogue: true,
+    category: "STORAGE SOLUTIONS",
+    series: "MODULAR WARDROBES",
   },
 ];
 
 export const industrySolutions = [
-  { name: "Corporate Offices", desc: "Reception units, workstations, cabins and collaboration zones delivered floor by floor without stopping operations.", points: ["Test fits & space planning", "Phased occupied-site installs", "Acoustic & ergonomic compliance"] },
-  { name: "Education & Campuses", desc: "Heavy-duty furniture and interiors for classrooms, labs, libraries and admin blocks — built for daily student footfall.", points: ["Impact-resistant finishes", "Lab & library joinery", "Auditorium & seminar fit-outs"] },
-  { name: "Healthcare & Hospitals", desc: "Hygienic, wipe-clean surfaces and nursing stations engineered for infection control and 24×7 use.", points: ["Seamless solid-surface counters", "Anti-bacterial laminates", "Reception & records storage"] },
-  { name: "Retail & Showrooms", desc: "Display systems, cash counters and back-lit brand walls that survive merchandising changes every season.", points: ["Modular display joinery", "Integrated lighting", "Fast turnaround installs"] },
   { name: "Hospitality", desc: "Guest rooms, lobbies and F&B interiors combining premium finishes with commercial durability.", points: ["Room wardrobes & headboards", "Lobby & concierge counters", "Restaurant joinery"] },
-  { name: "Manufacturing & Industrial", desc: "Plant offices, canteens and QC rooms delivered inside live industrial environments with strict safety protocol.", points: ["Plant-floor site discipline", "Canteen & locker systems", "Shift-friendly scheduling"] },
+  { name: "Corporate Office", desc: "Reception units, workstations, cabins and collaboration zones delivered floor by floor without stopping operations.", points: ["Test fits & space planning", "Phased occupied-site installs", "Acoustic & ergonomic compliance"] },
+  { name: "Residential Projects", desc: "Complete home interiors — modular kitchens, wardrobes, living and bedroom furniture tailored to your layout and lifestyle.", points: ["Bespoke space planning", "Modular kitchen & wardrobe systems", "Living and bedroom furniture"] },
+  { name: "Retail Space", desc: "Display systems, cash counters and back-lit brand walls that survive merchandising changes every season.", points: ["Modular display joinery", "Integrated lighting", "Fast turnaround installs"] },
 ];
 
 export const catalogueSheets = [

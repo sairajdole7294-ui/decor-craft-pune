@@ -67,7 +67,7 @@ const ProductRangeCard = ({
             variant="outline"
             className="w-full border-muted-foreground/30 text-muted-foreground hover:bg-muted hover:text-foreground"
           >
-            <a href="/product-catalog.pdf" target="_blank" rel="noreferrer" download>
+            <a href="/payal-decor-product-catalog-2026.pdf" target="_blank" rel="noreferrer" download>
               Download Catalogs
             </a>
           </Button>

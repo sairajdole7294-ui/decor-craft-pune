@@ -4,7 +4,7 @@
 import catalogAsset from "@/assets/product-catalog.pdf.asset.json";
 import { media, materialLibrary } from "@/lib/site-data";
 
-export const catalogPdf = catalogAsset.url;
+export const catalogPdf = "/payal-decor-product-catalog-2026.pdf";
 export const catalogTitle = "Payal Decor — Product Catalog 2026";
 
 const imgs = (slug: string, n: number) =>

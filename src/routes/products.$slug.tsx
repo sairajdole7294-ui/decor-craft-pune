@@ -127,7 +127,7 @@ function ProductPage() {
               variant="outline"
               className="border-[#f26523] text-[#f26523] hover:bg-[#f26523] hover:text-white px-8 rounded-full text-base"
             >
-              <a href="/product-catalog.pdf" target="_blank" rel="noreferrer" download>
+              <a href="/payal-decor-product-catalog-2026.pdf" target="_blank" rel="noreferrer" download>
                 <Download className="w-4 h-4 mr-2" />
                 Download Catalogs
               </a>

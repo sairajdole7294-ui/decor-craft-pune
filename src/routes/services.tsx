@@ -3,7 +3,6 @@ import { Check } from "lucide-react";
 import {
   media,
   services,
-  products,
   materialLibrary,
   processSteps,
   industries,
@@ -69,27 +68,6 @@ function Services() {
             </article>
           </Reveal>
         ))}
-      </section>
-
-      <section id="product-range" className="bg-sand py-6 lg:py-8">
-        <div className="shell">
-          <SectionHead eyebrow="Product Range" title="Everything we make in-house" lead="Modular systems and bespoke commissions, produced on our own CNC, edgebanding and press lines." />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {products.map((p, i) => (
-              <Reveal key={p.title} delay={i * 80}>
-                <article className="card-premium h-full overflow-hidden">
-                  <div className="hover-zoom">
-                    <img src={p.image} alt={p.title} className="h-44 w-full object-cover" loading="lazy" />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="text-sm font-semibold">{p.title}</h3>
-                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
       </section>
 
       <section className="shell py-6 lg:py-8">

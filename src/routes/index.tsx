@@ -254,7 +254,7 @@ function Index() {
             eyebrow="Product Range"
             title="Everything we make in-house"
             lead="Modular systems and bespoke commissions, produced on our own CNC, edgebanding and press lines."
-            action={<BrandButton to="/services" variant="ghost-light">See the full range</BrandButton>}
+            action={<BrandButton to="/products" variant="ghost-light">See the full range</BrandButton>}
           />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {products.map((p, i) => (

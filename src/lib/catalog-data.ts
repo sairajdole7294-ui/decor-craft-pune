@@ -6,6 +6,8 @@ import { media, materialLibrary } from "@/lib/site-data";
 
 export const catalogPdf = "/payal-decor-product-catalog-2026.pdf";
 export const catalogTitle = "Payal Decor — Product Catalog 2026";
+export const companyProfilePdf = "/Payal%20Company%20Profile%20%20(2)-1%20(2).pdf";
+export const companyProfileTitle = "Payal Decor — Company Profile";
 
 const imgs = (slug: string, n: number) =>
   Array.from({ length: n }, (_, i) => `/media/products/${slug}-${i + 1}.jpg`);

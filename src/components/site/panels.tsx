@@ -4,6 +4,7 @@ import {
   Star, Truck, Check, ArrowRight,
 } from "lucide-react";
 import { company, certifications, industries, galleryItems } from "@/lib/site-data";
+import { companyProfilePdf } from "@/lib/catalog-data";
 import { Reveal } from "@/components/site/motion";
 import { CatalogDownload } from "@/components/site/product-media";
 
@@ -78,7 +79,7 @@ export function SupportPanel() {
           Rated by corporates, campuses and manufacturers across Maharashtra — Kirloskar, EKA Mobility, Prakash Masale and more.
         </p>
         <div className="sm:col-span-2">
-          <CatalogDownload label="Download Company Profile (PDF)" />
+          <CatalogDownload label="Download Company Profile (PDF)" href={companyProfilePdf} />
         </div>
       </Reveal>
     </div>

@@ -45,8 +45,6 @@ export function CatalogDownload({
   return (
     <a
       href={href ?? catalogPdf}
-      target="_blank"
-      rel="noreferrer"
       download
       className={
         variant === "solid"

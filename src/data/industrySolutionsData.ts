@@ -2,7 +2,7 @@ import { Building2, Briefcase, Home, Store } from "lucide-react";
 
 export interface SolutionProduct {
   name: string;
-  image: string;
+  image?: string;
 }
 
 export interface SolutionData {
@@ -47,8 +47,8 @@ export const solutionsData: Record<string, SolutionData> = {
     collectionName: "Corporate Office Furniture Collection",
     icon: Briefcase,
     products: [
-      { name: "Executive Desk", image: "/media/industries/hostel/dressing-table.jpg" },
-      { name: "Ergonomic Chair", image: "/media/industries/hostel/hostel-study-table-with-storage.jpg" },
+      { name: "Executive Desk" },
+      { name: "Ergonomic Chair" },
     ],
   },
 
@@ -57,8 +57,8 @@ export const solutionsData: Record<string, SolutionData> = {
     collectionName: "Residential Furniture Collection",
     icon: Home,
     products: [
-      { name: "Living Room Sofa", image: "/media/industries/hostel/open-book-display.jpg" },
-      { name: "Dining Table Set", image: "/media/industries/hostel/kitchen-storage-rack.jpg" },
+      { name: "Living Room Sofa" },
+      { name: "Dining Table Set" },
     ],
   },
 
@@ -67,8 +67,8 @@ export const solutionsData: Record<string, SolutionData> = {
     collectionName: "Retail Display Furniture Collection",
     icon: Store,
     products: [
-      { name: "Display Rack", image: "/media/industries/hostel/cafeteria-table.jpg" },
-      { name: "Checkout Counter", image: "/media/industries/hostel/dressing-table.jpg" },
+      { name: "Display Rack" },
+      { name: "Checkout Counter" },
     ],
   },
 };

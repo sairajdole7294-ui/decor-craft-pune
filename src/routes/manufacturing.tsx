@@ -76,7 +76,7 @@ function Manufacturing() {
             </div>
           </div>
           <Reveal delay={120}>
-            <VideoShowcase src={media.factoryVideo} poster={media.workshop} />
+            <VideoShowcase src={media.factoryVideo} />
             <p className="mt-2 text-center text-[0.7rem] text-muted-foreground">Inside the Payal Decor production facility.</p>
           </Reveal>
         </div>

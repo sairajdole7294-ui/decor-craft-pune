@@ -137,9 +137,9 @@ function ProductPage() {
       </div>
 
       {/* Request Quote Section */}
-      <div className="bg-sand py-8">
+      <div className="bg-sand py-6">
         <div className="shell">
-          <h2 className="text-xl font-semibold lg:text-2xl mb-6">
+          <h2 className="text-xl font-semibold lg:text-2xl mb-4">
             Enquire about {product.name}
           </h2>
           <RequestQuoteForm productName={product.name} />

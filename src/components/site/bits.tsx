@@ -3,7 +3,7 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { Reveal } from "./motion";
-import { company, clientLogos, media } from "@/lib/site-data";
+import { company, clientLogos, clientNames, media } from "@/lib/site-data";
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
@@ -112,7 +112,7 @@ export function PageHero({
 }: {
   eyebrow: string;
   title: ReactNode;
-  lead: string;
+  lead?: string;
   image: string;
   crumbs: string;
   children?: ReactNode;
@@ -249,5 +249,29 @@ export function LegalPage({
         </div>
       </section>
     </>
+  );
+}
+
+export function ClientLogoGrid() {
+  const logos = clientLogos;
+
+  return (
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      {logos.map((src) => (
+        <div
+          key={src}
+          className="flex h-40 flex-col rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+        >
+          <div className="flex h-24 w-full items-center justify-center sm:h-28">
+            <img
+              src={src}
+              alt="Client logo"
+              loading="lazy"
+              className="max-h-full max-w-[70%] object-contain"
+            />
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }

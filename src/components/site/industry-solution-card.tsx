@@ -3,19 +3,23 @@ import { Button } from "@/components/ui/button";
 
 interface IndustrySolutionCardProps {
   name: string;
-  image: string;
+  image?: string;
 }
 
 const IndustrySolutionCard = ({ name, image }: IndustrySolutionCardProps) => {
   return (
     <div className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300">
-      <div className="aspect-[4/3] overflow-hidden bg-muted">
-        <img
-          src={image}
-          alt={name}
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-        />
-      </div>
+      {image ? (
+        <div className="aspect-[4/3] overflow-hidden bg-muted">
+          <img
+            src={image}
+            alt={name}
+            className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+      ) : (
+        <div className="aspect-[4/3] bg-muted" />
+      )}
       <div className="p-4 text-center">
         <h3 className="text-base font-medium text-foreground mb-3">{name}</h3>
         <Button

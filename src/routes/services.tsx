@@ -83,28 +83,6 @@ function Services() {
         </div>
       </section>
 
-      <section className="surface-ink py-6 lg:py-8">
-        <div className="shell">
-          <SectionHead tone="ink" eyebrow="Design & Installation Process" title="Six stages, one point of contact" lead="You always know what is happening on your floor plate this week." />
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {processSteps.map((s, i) => (
-              <Reveal key={s.n} delay={(i % 3) * 80} className="rounded-2xl border border-white/12 bg-white/5 p-4 transition-colors hover:border-primary/50">
-                <span className="font-[family-name:var(--font-display)] text-2xl font-bold text-primary">{s.n}</span>
-                <h3 className="mt-1 text-sm font-semibold text-ink-foreground">{s.t}</h3>
-                <p className="mt-1.5 text-xs leading-relaxed text-ink-foreground/60">{s.d}</p>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="mt-6 flex flex-wrap gap-2">
-            {industries.map((i) => (
-              <span key={i} className="rounded-full border border-white/15 px-3 py-1.5 text-[0.7rem] font-semibold text-ink-foreground/70">
-                {i}
-              </span>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-
       <section className="shell py-6 lg:py-8">
         <SectionHead eyebrow="Project Planner" title="Share your project brief" lead="Six quick steps — send the details on WhatsApp and our team returns a customised quotation." />
         <CostCalculator />

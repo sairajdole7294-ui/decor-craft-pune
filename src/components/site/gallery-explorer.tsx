@@ -190,10 +190,9 @@ export function VideoShowcase({
       <video
         className="aspect-video w-full object-cover"
         src={src}
-        poster={poster}
         controls
         playsInline
-        preload="none"
+        preload="metadata"
       />
     </div>
   );

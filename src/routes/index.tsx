@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import * as Icons from "lucide-react";
 
 const processIcons = [
@@ -55,7 +56,6 @@ function Index() {
         <video
           className="absolute inset-0 size-full object-cover object-[center_40%]"
           src={media.heroVideo}
-          poster={media.banner}
           preload="metadata"
           autoPlay
           muted
@@ -341,39 +341,25 @@ function Index() {
         </div>
       </section>
 
-      {/* Process */}
-      <section className="shell py-6 lg:py-8">
-        <SectionHead
-          eyebrow="How We Work"
-          title="A process built on published dates"
-          lead="Six stages, one point of contact. You always know what is happening on your floor plate this week."
-        />
-        <div className="relative">
-          {/* timeline spine */}
-          <span
-            aria-hidden
-            className="absolute top-6 left-[1.15rem] bottom-6 w-px bg-gradient-to-b from-primary/60 via-border to-transparent md:top-[1.6rem] md:right-6 md:bottom-auto md:left-6 md:h-px md:w-auto md:bg-gradient-to-r"
-          />
-          <ol className="relative grid gap-3 md:grid-cols-3">
-            {processSteps.map((s, i) => {
-              const Icon = processIcons[i % processIcons.length];
-              return (
-                <Reveal key={s.n} delay={(i % 3) * 90} as="li">
-                  <div className="card-premium group relative h-full overflow-hidden p-4 pl-14 transition-all duration-500 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[var(--shadow-lift)] md:pt-12 md:pl-4">
-                    <span className="absolute top-4 left-4 grid size-9 place-items-center rounded-full border border-border bg-card text-primary shadow-[var(--shadow-card)] transition-all duration-500 group-hover:scale-110 group-hover:border-primary/60 group-hover:bg-brand-gradient group-hover:text-primary-foreground">
-                      <Icon className="size-4" />
-                    </span>
-                    <span className="absolute top-4 right-4 font-[family-name:var(--font-display)] text-2xl font-bold text-border transition-colors duration-500 group-hover:text-primary/40">
-                      {s.n}
-                    </span>
-                    <h3 className="text-sm font-semibold">{s.t}</h3>
-                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{s.d}</p>
-                    <span className="mt-3 block h-0.5 w-8 rounded-full bg-brand-gradient opacity-40 transition-all duration-500 group-hover:w-16 group-hover:opacity-100" />
-                  </div>
-                </Reveal>
-              );
-            })}
-          </ol>
+      <section className="surface-ink py-6 lg:py-8">
+        <div className="shell">
+          <SectionHead tone="ink" eyebrow="Design & Installation Process" title="Six stages, one point of contact" lead="You always know what is happening on your floor plate this week." />
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {processSteps.map((s, i) => (
+              <Reveal key={s.n} delay={(i % 3) * 80} className="rounded-2xl border border-white/12 bg-white/5 p-4 transition-colors hover:border-primary/50">
+                <span className="font-[family-name:var(--font-display)] text-2xl font-bold text-primary">{s.n}</span>
+                <h3 className="mt-1 text-sm font-semibold text-ink-foreground">{s.t}</h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-ink-foreground/60">{s.d}</p>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="mt-6 flex flex-wrap gap-2">
+            {industries.map((i) => (
+              <span key={i} className="rounded-full border border-white/15 px-3 py-1.5 text-[0.7rem] font-semibold text-ink-foreground/70">
+                {i}
+              </span>
+            ))}
+          </Reveal>
         </div>
       </section>
 
@@ -414,28 +400,44 @@ function Index() {
       <section className="surface-ink py-6 lg:py-8">
         <div className="shell">
           <SectionHead tone="ink" eyebrow="Client Voices" title="What our clients say" lead="Testimonials from the corporates, campuses and studios whose spaces we've delivered." />
-          <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">
-            {testimonials.map((t, i) => (
-              <Reveal key={t.name} delay={i * 80} className="w-[85%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]">
-                <figure className="h-full rounded-2xl border border-white/12 bg-white/5 p-5 backdrop-blur-md transition-colors hover:border-primary/50">
-                  <Icons.Quote className="size-5 text-primary" />
-                  <blockquote className="mt-3 text-sm leading-relaxed text-ink-foreground/80">{t.quote}</blockquote>
-                  <figcaption className="mt-4 border-t border-white/10 pt-3">
-                    <p className="text-sm font-semibold text-ink-foreground">{t.name}</p>
-                    <p className="text-xs text-ink-foreground/50">{t.role}</p>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
+          <div className="relative">
+            <div id="testimonial-scroll" className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">
+              {testimonials.map((t, i) => (
+                <Reveal key={t.name} delay={i * 80} className="w-[85%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]">
+                  <figure className="h-full rounded-2xl border border-white/12 bg-white/5 p-5 backdrop-blur-md transition-colors hover:border-primary/50">
+                    <Icons.Quote className="size-5 text-primary" />
+                    <blockquote className="mt-3 text-sm leading-relaxed text-ink-foreground/80">{t.quote}</blockquote>
+                    <figcaption className="mt-4 border-t border-white/10 pt-3">
+                      <p className="text-sm font-semibold text-ink-foreground">{t.name}</p>
+                      <p className="text-xs text-ink-foreground/50">{t.role}</p>
+                    </figcaption>
+                  </figure>
+                </Reveal>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById('testimonial-scroll');
+                if (el) el.scrollBy({ left: -300, behavior: 'smooth' });
+              }}
+              aria-label="Previous testimonial"
+              className="absolute left-2 top-1/2 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full bg-card/90 text-ink-foreground shadow-md backdrop-blur transition-all hover:bg-card hover:text-primary md:flex"
+            >
+              <Icons.ChevronLeft className="size-5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById('testimonial-scroll');
+                if (el) el.scrollBy({ left: 300, behavior: 'smooth' });
+              }}
+              aria-label="Next testimonial"
+              className="absolute right-2 top-1/2 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full bg-card/90 text-ink-foreground shadow-md backdrop-blur transition-all hover:bg-card hover:text-primary md:flex"
+            >
+              <Icons.ChevronRight className="size-5" />
+            </button>
           </div>
-          <Reveal className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
-            {certifications.map((c) => (
-              <div key={c.title} className="flex flex-col items-center gap-2 rounded-2xl border border-white/12 bg-white/5 p-3 text-center">
-                <img src={c.image} alt={c.title} className="h-16 w-auto object-contain" loading="lazy" />
-                <p className="text-[0.65rem] font-semibold text-ink-foreground/70">{c.title}</p>
-              </div>
-            ))}
-          </Reveal>
         </div>
       </section>
 

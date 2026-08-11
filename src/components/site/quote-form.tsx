@@ -67,39 +67,39 @@ export function RequestQuoteForm({ productName, variants = [], materials = [] }:
   }
 
   const field =
-    "w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm outline-none transition-colors focus:border-primary";
-  const label = "text-[0.68rem] font-bold tracking-[0.12em] text-muted-foreground uppercase";
+    "w-full rounded-lg border border-border bg-background px-2 py-1.5 text-sm outline-none transition-colors focus:border-primary";
+  const label = "text-[0.68rem] font-bold tracking-[0.12em] text-muted-foreground uppercase mb-0.5";
 
   return (
-    <form onSubmit={onSubmit} className="card-premium grid gap-3 p-5 sm:grid-cols-2">
+    <form onSubmit={onSubmit} className="card-premium grid gap-2 p-3 sm:grid-cols-2">
       <div className="sm:col-span-2">
         <label className={label} htmlFor="q-product">Product name</label>
-        <input id="q-product" name="product" value={productName} readOnly className={`${field} mt-1 bg-secondary/50 font-semibold`} />
+        <input id="q-product" name="product" value={productName} readOnly className={`${field} bg-secondary/50 font-semibold`} />
       </div>
 
       <div>
         <label className={label} htmlFor="q-variant">Product variant</label>
         {variants.length ? (
-          <select id="q-variant" name="variant" className={`${field} mt-1`} defaultValue="">
+          <select id="q-variant" name="variant" className={`${field}`} defaultValue="">
             <option value="">Select a variant</option>
             {variants.map((v) => (
               <option key={v.name} value={v.name}>{v.name}</option>
             ))}
           </select>
         ) : (
-          <input id="q-variant" name="variant" maxLength={MAX.text} className={`${field} mt-1`} placeholder="e.g. Linear" />
+          <input id="q-variant" name="variant" maxLength={MAX.text} className={`${field}`} placeholder="e.g. Linear" />
         )}
       </div>
 
       <div>
         <label className={label} htmlFor="q-qty">Quantity</label>
-        <input id="q-qty" name="quantity" maxLength={20} className={`${field} mt-1`} placeholder="e.g. 40 seats" />
+        <input id="q-qty" name="quantity" maxLength={20} className={`${field}`} placeholder="e.g. 40 seats" />
       </div>
 
       <div>
         <label className={label} htmlFor="q-material">Material / finish</label>
         {materials.length ? (
-          <select id="q-material" name="material" className={`${field} mt-1`} defaultValue="">
+          <select id="q-material" name="material" className={`${field}`} defaultValue="">
             <option value="">Select a material</option>
             {materials.map((m) => (
               <option key={m} value={m}>{m}</option>
@@ -107,50 +107,50 @@ export function RequestQuoteForm({ productName, variants = [], materials = [] }:
             <option value="Need recommendation">Need recommendation</option>
           </select>
         ) : (
-          <input id="q-material" name="material" maxLength={MAX.text} className={`${field} mt-1`} />
+          <input id="q-material" name="material" maxLength={MAX.text} className={`${field}`} />
         )}
       </div>
 
       <div>
         <label className={label} htmlFor="q-company">Company name</label>
-        <input id="q-company" name="companyName" maxLength={MAX.text} className={`${field} mt-1`} />
+        <input id="q-company" name="companyName" maxLength={MAX.text} className={`${field}`} />
       </div>
 
       <div>
         <label className={label} htmlFor="q-person">Contact person *</label>
-        <input id="q-person" name="person" required maxLength={MAX.text} className={`${field} mt-1`} />
+        <input id="q-person" name="person" required maxLength={MAX.text} className={`${field}`} />
       </div>
 
       <div>
         <label className={label} htmlFor="q-mobile">Mobile number *</label>
-        <input id="q-mobile" name="mobile" required inputMode="tel" maxLength={20} className={`${field} mt-1`} placeholder="+91" />
+        <input id="q-mobile" name="mobile" required inputMode="tel" maxLength={20} className={`${field}`} placeholder="+91" />
       </div>
 
       <div>
         <label className={label} htmlFor="q-email">Email</label>
-        <input id="q-email" name="email" type="email" maxLength={160} className={`${field} mt-1`} />
+        <input id="q-email" name="email" type="email" maxLength={160} className={`${field}`} />
       </div>
 
       <div>
         <label className={label} htmlFor="q-city">City</label>
-        <input id="q-city" name="city" maxLength={MAX.text} className={`${field} mt-1`} />
+        <input id="q-city" name="city" maxLength={MAX.text} className={`${field}`} />
       </div>
 
       <div className="sm:col-span-2">
         <label className={label} htmlFor="q-details">Project details</label>
-        <textarea id="q-details" name="details" rows={3} maxLength={MAX.long} className={`${field} mt-1 resize-none`} />
+        <textarea id="q-details" name="details" rows={2} maxLength={MAX.long} className={`${field} mt-0.5 resize-none`} />
       </div>
 
       <div className="sm:col-span-2">
         <button
           type="submit"
           disabled={sending}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-gradient px-5 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)] disabled:opacity-70"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-gradient px-5 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)] disabled:opacity-70"
         >
           <MessageCircle className="size-4" />
           Send Enquiry on WhatsApp
         </button>
-        <p className="mt-2 text-center text-[0.68rem] text-muted-foreground">
+        <p className="mt-1 text-center text-[0.68rem] text-muted-foreground">
           No pricing is calculated online — our team reviews your requirement and returns a customised quotation.
         </p>
       </div>

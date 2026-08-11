@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Quote } from "lucide-react";
-import { media, clientNames, testimonials, certifications, industries } from "@/lib/site-data";
-import { PageHero, SectionHead, CtaBand, LogoMarquee } from "@/components/site/bits";
+import { media, clientNames, industries } from "@/lib/site-data";
+import { PageHero, SectionHead, CtaBand, ClientLogoGrid, Eyebrow } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
 
 const title = "Clients — Corporates & Campuses We Serve | Payal Decor";
@@ -33,9 +32,8 @@ function Clients() {
         image={media.about3}
       />
 
-      <section className="shell space-y-3 py-6 lg:py-8">
-        <LogoMarquee />
-        <LogoMarquee reverse />
+      <section className="shell py-6 lg:py-8">
+        <ClientLogoGrid />
       </section>
 
       <section className="bg-sand py-6 lg:py-8">
@@ -60,47 +58,23 @@ function Clients() {
 
       <section className="surface-ink py-6 lg:py-8">
         <div className="shell">
-          <SectionHead tone="ink" eyebrow="Client Voices" title="Reviews from delivered spaces" lead="Testimonials from the corporates, campuses and studios whose spaces we've delivered." />
-          <div className="grid gap-4 sm:grid-cols-2">
-            {testimonials.map((t, i) => (
-              <Reveal key={t.name} delay={i * 80}>
-                <figure className="h-full rounded-2xl border border-white/12 bg-white/5 p-5 backdrop-blur-md transition-colors hover:border-primary/50">
-                  <Quote className="size-5 text-primary" />
-                  <blockquote className="mt-3 text-sm leading-relaxed text-ink-foreground/80">{t.quote}</blockquote>
-                  <figcaption className="mt-4 border-t border-white/10 pt-3">
-                    <p className="text-sm font-semibold text-ink-foreground">{t.name}</p>
-                    <p className="text-xs text-ink-foreground/50">{t.role}</p>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="mt-6 grid gap-5 lg:grid-cols-2 lg:items-center">
+          <Reveal className="grid gap-5 lg:grid-cols-2 lg:items-center">
             <div>
-              <p className="text-[0.62rem] font-bold tracking-[0.14em] text-primary uppercase">CLIENT TESTIMONIAL</p>
-              <h3 className="mt-1 text-lg font-semibold text-ink-foreground">Hear From Our Clients</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-foreground/70">
-                Watch our clients share their experience working with Payal Decor — from commercial fit-outs to modular interiors and manufacturing partnerships.
+              <Eyebrow>OUR CLIENT STORIES</Eyebrow>
+              <h2 className="mt-2 text-2xl leading-[1.12] font-semibold sm:text-3xl lg:text-[2.6rem] text-ink-foreground">Client Testimonials</h2>
+              <p className="mt-3 text-sm leading-relaxed sm:text-[0.95rem] text-ink-foreground/70">
+                Hear directly from our clients about their experience with Payal Decor — from commercial interiors and modular solutions to furniture manufacturing and complete project execution. Their feedback reflects our focus on quality, precision, timely delivery and professional service.
               </p>
             </div>
             <div className="card-premium overflow-hidden rounded-2xl">
               <video
                 className="aspect-video w-full object-cover"
                 src="/videos/company-intro.mp4"
-                poster={media.about3}
                 controls
                 preload="metadata"
                 playsInline
               />
             </div>
-          </Reveal>
-          <Reveal className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
-            {certifications.map((c) => (
-              <div key={c.title} className="flex flex-col items-center gap-2 rounded-2xl border border-white/12 bg-white/5 p-3 text-center">
-                <img src={c.image} alt={c.title} className="h-16 w-auto object-contain" loading="lazy" />
-                <p className="text-[0.65rem] font-semibold text-ink-foreground/70">{c.title}</p>
-              </div>
-            ))}
           </Reveal>
         </div>
       </section>

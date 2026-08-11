@@ -81,7 +81,6 @@ export function IntroVideoCard({
         <video
           className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
           src={src}
-          poster={poster}
           controls={playing}
           preload="metadata"
           playsInline

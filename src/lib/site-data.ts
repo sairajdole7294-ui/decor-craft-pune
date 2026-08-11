@@ -239,8 +239,6 @@ export const projects: Project[] = [
     scope: ["Modular kitchen", "Tall units", "Counter fabrication", "Installation"],
     images: [
       media.kitchen,
-      asset("313966bc-5ce1-4c91-9e06-7d649f6cac0a/tabm4.jpg"),
-      asset("f93a9afc-8e61-43a6-9908-85694edf0335/tabm5.jpg"),
     ],
   },
   {
@@ -257,26 +255,6 @@ export const projects: Project[] = [
     scope: ["Wardrobe manufacturing", "Site measurement", "Installation", "After-sales servicing"],
     images: [
       media.wardrobe,
-      asset("0a33e764-4556-4e54-a7e4-32473d239e30/tabc2.jpg"),
-      asset("8c4d7045-c3f0-4376-940f-3736eb2c018b/tabc3.jpg"),
-    ],
-  },
-  {
-    slug: "factory-floor",
-    name: "Payal Decor Production Facility",
-    client: "Payal Decor",
-    location: "Pune, Maharashtra",
-    year: 2021,
-    area: "In-house",
-    category: "Factory",
-    type: "Manufacturing Facility",
-    desc: "Our own factory floor — Biesse, Homag, Altendorf, Felder and Technogem lines under one roof, giving precision, repeatability and control over every deadline.",
-    materials: ["Biesse Rover Gold CNC", "Biesse Jade 240", "Altendorf WA8X", "Technogem hot press"],
-    scope: ["Panel processing", "CNC routing", "Edge banding", "Assembly & QC"],
-    images: [
-      asset("c25170cc-6f50-4dbb-94c0-007ab83d1bbb/biesse-rover.jpg"),
-      asset("1b094869-1d7b-42d3-a6ac-925e113b3dbd/edgebander.jpg"),
-      asset("d1e6fcf5-2ee1-415d-bc38-6ed7e23371af/tab11.jpg"),
     ],
   },
 ];
@@ -387,6 +365,18 @@ export const testimonials = [
       "Every unit was engineered to our layout rather than forced into a catalogue size. That difference shows in how the office works day to day.",
     name: "Prakash Masale",
     role: "Management · Pune",
+  },
+  {
+    quote:
+      "We had a great experience working with Payal Decor. The team understood our requirements well, maintained good quality throughout the work, and delivered the project professionally. We are happy with the overall execution and service.",
+    name: "Mahale",
+    role: "Client · Pune",
+  },
+  {
+    quote:
+      "We had a great experience working with Payal Decor. The team understood our requirements well, maintained good quality throughout the work, and delivered the project professionally. We are happy with the overall execution and service.",
+    name: "Kirloskar Pneumatic",
+    role: "Client · Pune",
   },
 ];
 

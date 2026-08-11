@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Grid2X2, List, MapPin, Ruler, Search, CalendarDays, ArrowUpRight } from "lucide-react";
+import { Grid2X2, List, MapPin, Ruler, CalendarDays, ArrowUpRight } from "lucide-react";
 import { projects, projectCategories, type Project } from "@/lib/site-data";
 import { Reveal } from "./motion";
 import { Lightbox } from "./lightbox";
@@ -40,7 +40,6 @@ function Select({
 
 export function ProjectsExplorer() {
   const [cat, setCat] = useState("All");
-  const [q, setQ] = useState("");
   const [loc, setLoc] = useState(locations[0]);
   const [year, setYear] = useState(years[0]);
   const [type, setType] = useState(types[0]);
@@ -49,19 +48,14 @@ export function ProjectsExplorer() {
   const [imgIndex, setImgIndex] = useState(0);
 
   const filtered = useMemo(() => {
-    const needle = q.trim().toLowerCase();
     return projects.filter((p) => {
       if (cat !== "All" && p.category !== cat) return false;
       if (loc !== locations[0] && p.location !== loc) return false;
       if (year !== years[0] && String(p.year) !== year) return false;
       if (type !== types[0] && p.type !== type) return false;
-      if (!needle) return true;
-      return [p.name, p.client, p.location, p.type, p.desc, ...p.materials, ...p.scope]
-        .join(" ")
-        .toLowerCase()
-        .includes(needle);
+      return true;
     });
-  }, [cat, q, loc, year, type]);
+  }, [cat, loc, year, type]);
 
   const related = active ? projects.filter((p) => p.slug !== active.slug && p.category === active.category).slice(0, 3) : [];
 
@@ -73,23 +67,13 @@ export function ProjectsExplorer() {
   return (
     <div>
       <Reveal className="rounded-2xl border border-border bg-card p-4 shadow-[var(--shadow-card)]">
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-end">
-          <label className="relative flex-1">
-            <span className="text-[0.62rem] font-bold tracking-[0.14em] text-muted-foreground uppercase">Search</span>
-            <Search className="pointer-events-none absolute bottom-2.5 left-3 size-4 text-muted-foreground" />
-            <input
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Search by client, material, location…"
-              className="mt-1 w-full rounded-lg border border-border bg-background py-2 pr-3 pl-9 text-sm outline-none transition-colors focus:border-primary"
-            />
-          </label>
-          <div className="grid flex-[2] grid-cols-1 gap-3 sm:grid-cols-3">
-            <Select label="Location" value={loc} onChange={setLoc} options={locations} />
-            <Select label="Year" value={year} onChange={setYear} options={years} />
-            <Select label="Project type" value={type} onChange={setType} options={types} />
-          </div>
-          <div className="flex items-center gap-1 self-start rounded-lg border border-border p-1 lg:self-end">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:items-end">
+          <Select label="Location" value={loc} onChange={setLoc} options={locations} />
+          <Select label="Year" value={year} onChange={setYear} options={years} />
+          <Select label="Project type" value={type} onChange={setType} options={types} />
+        </div>
+        <div className="mt-4 flex items-center justify-end">
+          <div className="flex items-center gap-1 rounded-lg border border-border p-1">
             <button
               type="button"
               aria-label="Grid view"
@@ -137,12 +121,12 @@ export function ProjectsExplorer() {
       {filtered.length === 0 ? (
         <div className="mt-6 rounded-2xl border border-dashed border-border p-10 text-center">
           <p className="text-sm font-semibold">No projects match those filters.</p>
-          <p className="mt-1 text-xs text-muted-foreground">Try clearing the search or picking another category.</p>
+          <p className="mt-1 text-xs text-muted-foreground">Try picking another category.</p>
         </div>
       ) : view === "grid" ? (
-        <div className="mt-5 columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4">
+        <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((p, i) => (
-            <Reveal key={p.slug} delay={(i % 3) * 90} className="break-inside-avoid">
+            <Reveal key={p.slug} delay={(i % 3) * 90}>
               <button
                 type="button"
                 onClick={() => open(p)}
@@ -153,7 +137,7 @@ export function ProjectsExplorer() {
                     src={p.images[0]}
                     alt={p.name}
                     loading="lazy"
-                    className={cn("w-full object-cover", i % 3 === 1 ? "h-72" : i % 3 === 2 ? "h-56" : "h-64")}
+                    className="h-64 w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-95" />
                   <span className="absolute top-3 left-3 rounded-full bg-white/15 px-2.5 py-1 text-[0.62rem] font-bold tracking-wide text-white uppercase backdrop-blur-md">

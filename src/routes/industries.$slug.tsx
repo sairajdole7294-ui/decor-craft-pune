@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, Outlet, useMatch } from "@tanstack/react-router";
 import { solutionsData, type SolutionData } from "@/data/industrySolutionsData";
 import { SectionHead } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
@@ -31,7 +31,12 @@ export const Route = createFileRoute("/industries/$slug")({
 });
 
 function IndustryDetail() {
-  const { solution } = Route.useLoaderData() as { slug: string; solution: SolutionData };
+  const { solution, slug } = Route.useLoaderData() as { slug: string; solution: SolutionData };
+  const isProductDetail = useMatch({ from: '/industries/$slug/$product', shouldThrow: false });
+
+  if (isProductDetail) {
+    return <Outlet />;
+  }
 
   return (
     <>
@@ -72,6 +77,8 @@ function IndustryDetail() {
               <Reveal key={i} delay={i * 70}>
                 <IndustrySolutionCard
                   name={product.name}
+                  slug={product.slug}
+                  industrySlug={slug}
                   image={product.image}
                 />
               </Reveal>
@@ -79,6 +86,7 @@ function IndustryDetail() {
           </div>
         </div>
       </section>
+      <Outlet />
     </>
   );
 }

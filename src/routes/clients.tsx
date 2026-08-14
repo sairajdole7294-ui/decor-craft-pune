@@ -76,6 +76,25 @@ function Clients() {
               />
             </div>
           </Reveal>
+
+          <Reveal className="mt-8 grid gap-5 lg:grid-cols-2 lg:items-center">
+            <div>
+              <Eyebrow>CLIENT EXPERIENCE</Eyebrow>
+              <h2 className="mt-2 text-2xl leading-[1.12] font-semibold sm:text-3xl lg:text-[2.6rem] text-ink-foreground">What our clients say</h2>
+              <p className="mt-3 text-sm leading-relaxed sm:text-[0.95rem] text-ink-foreground/70">
+                Watch another client share their experience with Payal Decor. Their feedback highlights our commitment to design quality, manufacturing precision and reliable project execution.
+              </p>
+            </div>
+            <div className="card-premium overflow-hidden rounded-2xl bg-black">
+              <video
+                className="aspect-video w-full object-cover object-center"
+                src="/videos/testimonial-2.mp4"
+                controls
+                preload="metadata"
+                playsInline
+              />
+            </div>
+          </Reveal>
         </div>
       </section>
 

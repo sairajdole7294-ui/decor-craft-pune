@@ -60,7 +60,7 @@ export const services = [
     id: "manufacturing",
     n: "02",
     title: "Custom Manufacturing",
-    image: media.wardrobe,
+    image: "/media/custom-manufacture.webp",
     summary:
       "Custom furniture and modular manufacturing tailored to your brand identity, space requirements and design preferences — produced on our own lines.",
     points: ["CNC routing & nesting", "Automatic edge banding", "Post-forming & hot press", "Powder coating & upholstery"],
@@ -78,7 +78,7 @@ export const services = [
     id: "design",
     n: "04",
     title: "Commercial Interior Design",
-    image: asset("9bf9850d-447e-4eca-97b4-1171adec9776/tab3d1.webp"),
+    image: "/media/commercial-interior-design.jpg",
     summary:
       "Planning, 3D design and execution integrated in one team — faster timelines, premium materials and innovative layouts for modern business environments.",
     points: ["Space planning & test fits", "Photoreal 3D visualisation", "Material & colour consultancy", "Value engineering"],
@@ -98,12 +98,12 @@ export const products = [
   },
   {
     title: "Office Workstations",
-    image: asset("7f087a03-d9c0-434f-80ef-c46388f6f644/mahale.jpg"),
+    image: "/media/office-workstation.jpg",
     desc: "Linear, cluster and cubicle workstations with privacy screens and integrated cable management.",
   },
   {
     title: "Reception & TV Units",
-    image: asset("3702b250-9057-4210-92f6-c6d2c0b8cf51/eka.jpg"),
+    image: "/media/reception-tv-units.jpg",
     desc: "Signature reception desks and media walls in veneer, solid surface and back-lit finishes.",
   },
 ];

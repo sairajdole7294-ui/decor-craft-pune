@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { media } from "@/lib/site-data";
 import { PageHero, CtaBand } from "@/components/site/bits";
 import { ProjectsExplorer } from "@/components/site/projects-explorer";
+import { useSearch } from "@tanstack/react-router";
 
 const title = "Projects — Commercial Interiors Delivered in Pune | Payal Decor";
 const description =
@@ -22,6 +23,8 @@ export const Route = createFileRoute("/projects")({
 });
 
 function Projects() {
+  const search = useSearch({ from: "/projects" }) as { project?: string };
+
   return (
     <>
       <PageHero
@@ -32,7 +35,7 @@ function Projects() {
         image={media.about1}
       />
       <section className="shell py-6 lg:py-8">
-        <ProjectsExplorer />
+        <ProjectsExplorer initialProjectSlug={search.project} />
       </section>
       <CtaBand title="Your project could be next on this list." />
     </>

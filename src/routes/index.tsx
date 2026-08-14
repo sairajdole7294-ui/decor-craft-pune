@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import * as Icons from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 const processIcons = [
   Icons.MessagesSquare,
@@ -91,6 +92,10 @@ function Index() {
           <Reveal delay={280} className="mt-6 flex flex-wrap gap-3">
             <BrandButton to="/contact">Book Free Consultation</BrandButton>
             <BrandButton to="/gallery" variant="ghost-light">Watch Our Work</BrandButton>
+            <BrandButton to="/ai-space-visualizer" variant="outline">
+              <Sparkles className="size-4" />
+              AI Visualize Your Space
+            </BrandButton>
           </Reveal>
 
           <Reveal delay={360} className="mt-7 flex flex-wrap gap-2">
@@ -286,7 +291,7 @@ function Index() {
         <div className="grid gap-4 md:grid-cols-3">
           {projects.slice(0, 3).map((p, i) => (
             <Reveal key={p.slug} delay={i * 100}>
-              <Link to="/projects" className="card-premium group block h-full overflow-hidden">
+              <a href={`/projects?project=${p.slug}`} className="card-premium group block h-full overflow-hidden">
                 <div className="hover-zoom relative">
                   <img src={p.images[0]} alt={p.name} className="h-56 w-full object-cover" loading="lazy" />
                   <span className="absolute inset-0 bg-gradient-to-t from-ink/80 to-transparent" />
@@ -299,7 +304,7 @@ function Index() {
                   <p className="mt-1.5 line-clamp-3 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
                   <p className="mt-3 text-[0.7rem] font-semibold text-primary">{p.client} — {p.location}</p>
                 </div>
-              </Link>
+              </a>
             </Reveal>
           ))}
         </div>

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useEffect, useState } from "react";
 import { Grid2X2, List, MapPin, Ruler, CalendarDays, ArrowUpRight } from "lucide-react";
 import { projects, projectCategories, type Project } from "@/lib/site-data";
 import { Reveal } from "./motion";
@@ -38,7 +38,7 @@ function Select({
   );
 }
 
-export function ProjectsExplorer() {
+export function ProjectsExplorer({ initialProjectSlug }: { initialProjectSlug?: string }) {
   const [cat, setCat] = useState("All");
   const [loc, setLoc] = useState(locations[0]);
   const [year, setYear] = useState(years[0]);
@@ -46,6 +46,15 @@ export function ProjectsExplorer() {
   const [view, setView] = useState<"grid" | "list">("grid");
   const [active, setActive] = useState<Project | null>(null);
   const [imgIndex, setImgIndex] = useState(0);
+
+  useEffect(() => {
+    if (!initialProjectSlug) return;
+    const match = projects.find((p) => p.slug === initialProjectSlug);
+    if (match) {
+      setActive(match);
+      setImgIndex(0);
+    }
+  }, [initialProjectSlug]);
 
   const filtered = useMemo(() => {
     return projects.filter((p) => {

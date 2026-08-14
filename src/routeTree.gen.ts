@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AiSpaceVisualizerRouteImport } from './routes/ai-space-visualizer'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as CatalogRouteImport } from './routes/catalog'
 import { Route as ClientsRouteImport } from './routes/clients'
@@ -28,6 +29,7 @@ import { Route as ProductCategoriesIndexRouteImport } from './routes/product-cat
 import { Route as ProductCategoriesSlugRouteImport } from './routes/product-categories.$slug'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
+import { Route as IndustriesSlugProductRouteImport } from './routes/industries.$slug.$product'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -37,6 +39,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiSpaceVisualizerRoute = AiSpaceVisualizerRouteImport.update({
+  id: '/ai-space-visualizer',
+  path: '/ai-space-visualizer',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CareersRoute = CareersRouteImport.update({
@@ -124,10 +131,16 @@ const ProductsSlugRoute = ProductsSlugRouteImport.update({
   path: '/products/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IndustriesSlugProductRoute = IndustriesSlugProductRouteImport.update({
+  id: '/$product',
+  path: '/$product',
+  getParentRoute: () => IndustriesSlugRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/ai-space-visualizer': typeof AiSpaceVisualizerRoute
   '/careers': typeof CareersRoute
   '/catalog': typeof CatalogRoute
   '/clients': typeof ClientsRoute
@@ -139,16 +152,18 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/terms': typeof TermsRoute
-  '/industries/$slug': typeof IndustriesSlugRoute
+  '/industries/$slug': typeof IndustriesSlugRouteWithChildren
   '/product-categories/$slug': typeof ProductCategoriesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/industries/': typeof IndustriesIndexRoute
   '/product-categories/': typeof ProductCategoriesIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/industries/$slug/$product': typeof IndustriesSlugProductRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/ai-space-visualizer': typeof AiSpaceVisualizerRoute
   '/careers': typeof CareersRoute
   '/catalog': typeof CatalogRoute
   '/clients': typeof ClientsRoute
@@ -160,17 +175,19 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/terms': typeof TermsRoute
-  '/industries/$slug': typeof IndustriesSlugRoute
+  '/industries/$slug': typeof IndustriesSlugRouteWithChildren
   '/product-categories/$slug': typeof ProductCategoriesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/industries': typeof IndustriesIndexRoute
   '/product-categories': typeof ProductCategoriesIndexRoute
   '/products': typeof ProductsIndexRoute
+  '/industries/$slug/$product': typeof IndustriesSlugProductRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/ai-space-visualizer': typeof AiSpaceVisualizerRoute
   '/careers': typeof CareersRoute
   '/catalog': typeof CatalogRoute
   '/clients': typeof ClientsRoute
@@ -182,18 +199,20 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/terms': typeof TermsRoute
-  '/industries/$slug': typeof IndustriesSlugRoute
+  '/industries/$slug': typeof IndustriesSlugRouteWithChildren
   '/product-categories/$slug': typeof ProductCategoriesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
   '/industries/': typeof IndustriesIndexRoute
   '/product-categories/': typeof ProductCategoriesIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/industries/$slug/$product': typeof IndustriesSlugProductRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/ai-space-visualizer'
     | '/careers'
     | '/catalog'
     | '/clients'
@@ -211,10 +230,12 @@ export interface FileRouteTypes {
     | '/industries/'
     | '/product-categories/'
     | '/products/'
+    | '/industries/$slug/$product'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/ai-space-visualizer'
     | '/careers'
     | '/catalog'
     | '/clients'
@@ -232,10 +253,12 @@ export interface FileRouteTypes {
     | '/industries'
     | '/product-categories'
     | '/products'
+    | '/industries/$slug/$product'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/ai-space-visualizer'
     | '/careers'
     | '/catalog'
     | '/clients'
@@ -253,11 +276,13 @@ export interface FileRouteTypes {
     | '/industries/'
     | '/product-categories/'
     | '/products/'
+    | '/industries/$slug/$product'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AiSpaceVisualizerRoute: typeof AiSpaceVisualizerRoute
   CareersRoute: typeof CareersRoute
   CatalogRoute: typeof CatalogRoute
   ClientsRoute: typeof ClientsRoute
@@ -269,7 +294,7 @@ export interface RootRouteChildren {
   ProjectsRoute: typeof ProjectsRoute
   ServicesRoute: typeof ServicesRoute
   TermsRoute: typeof TermsRoute
-  IndustriesSlugRoute: typeof IndustriesSlugRoute
+  IndustriesSlugRoute: typeof IndustriesSlugRouteWithChildren
   ProductCategoriesSlugRoute: typeof ProductCategoriesSlugRoute
   ProductsSlugRoute: typeof ProductsSlugRoute
   IndustriesIndexRoute: typeof IndustriesIndexRoute
@@ -291,6 +316,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-space-visualizer': {
+      id: '/ai-space-visualizer'
+      path: '/ai-space-visualizer'
+      fullPath: '/ai-space-visualizer'
+      preLoaderRoute: typeof AiSpaceVisualizerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/careers': {
@@ -412,12 +444,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/industries/$slug/$product': {
+      id: '/industries/$slug/$product'
+      path: '/$product'
+      fullPath: '/industries/$slug/$product'
+      preLoaderRoute: typeof IndustriesSlugProductRouteImport
+      parentRoute: typeof IndustriesSlugRoute
+    }
   }
 }
+
+interface IndustriesSlugRouteChildren {
+  IndustriesSlugProductRoute: typeof IndustriesSlugProductRoute
+}
+
+const IndustriesSlugRouteChildren: IndustriesSlugRouteChildren = {
+  IndustriesSlugProductRoute: IndustriesSlugProductRoute,
+}
+
+const IndustriesSlugRouteWithChildren = IndustriesSlugRoute._addFileChildren(
+  IndustriesSlugRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AiSpaceVisualizerRoute: AiSpaceVisualizerRoute,
   CareersRoute: CareersRoute,
   CatalogRoute: CatalogRoute,
   ClientsRoute: ClientsRoute,
@@ -429,7 +481,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsRoute: ProjectsRoute,
   ServicesRoute: ServicesRoute,
   TermsRoute: TermsRoute,
-  IndustriesSlugRoute: IndustriesSlugRoute,
+  IndustriesSlugRoute: IndustriesSlugRouteWithChildren,
   ProductCategoriesSlugRoute: ProductCategoriesSlugRoute,
   ProductsSlugRoute: ProductsSlugRoute,
   IndustriesIndexRoute: IndustriesIndexRoute,

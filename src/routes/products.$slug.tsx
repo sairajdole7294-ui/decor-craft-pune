@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { productBySlug, categoryBySlug, type CatalogProduct } from "@/lib/catalog-data";
 import { productById, type ReferenceProduct } from "@/data/productRangeData";
+import { allProducts as categoryProducts, type ProductCategoryItem } from "@/data/productCategoriesData";
 import { company } from "@/lib/site-data";
 import { ArrowRight, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,20 +11,22 @@ import { RequestQuoteForm } from "@/components/site/quote-form";
 import { Reveal } from "@/components/site/motion";
 
 export const Route = createFileRoute("/products/$slug")({
-  loader: ({ params }): { product: CatalogProduct | ReferenceProduct } => {
+  loader: ({ params }): { product: CatalogProduct | ReferenceProduct | ProductCategoryItem } => {
     const bySlug = productBySlug(params.slug);
     if (bySlug) return { product: bySlug };
     const byId = productById(params.slug);
     if (byId) return { product: byId };
+    const byCategorySlug = categoryProducts.find((p) => p.slug === params.slug);
+    if (byCategorySlug) return { product: byCategorySlug };
     throw notFound();
   },
-  head: ({ loaderData }: { loaderData?: { product: CatalogProduct | ReferenceProduct } }) => {
+  head: ({ loaderData }: { loaderData?: { product: CatalogProduct | ReferenceProduct | ProductCategoryItem } }) => {
     if (!loaderData) {
       return { meta: [{ title: "Product not found — Payal Decor" }, { name: "robots", content: "noindex" }] };
     }
     const p = loaderData.product;
     const t = `${p.name} — Payal Decor`;
-    const d = "desc" in p ? p.desc.slice(0, 155) : p.name;
+    const d = "desc" in p && p.desc ? p.desc.slice(0, 155) : p.name;
     const slug = "slug" in p ? p.slug : p.id;
     return {
       meta: [
@@ -40,13 +43,10 @@ export const Route = createFileRoute("/products/$slug")({
 });
 
 function ProductPage() {
-  const { product } = Route.useLoaderData() as { product: CatalogProduct | ReferenceProduct };
+  const { product } = Route.useLoaderData() as { product: CatalogProduct | ReferenceProduct | ProductCategoryItem };
   const isReference = !("images" in product);
   const images = isReference ? [product.image] : product.images;
-  const desc = "desc" in product ? product.desc : `${product.name} — ${product.series} — ${product.category}`;
-  const categoryName = "slug" in product
-    ? categoryBySlug(product.category)?.name ?? product.category
-    : product.category;
+  const desc = "desc" in product && product.desc ? product.desc : `${product.name} — ${product.series} — ${(product as any).category ?? (product as any).type ?? ""}`;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   return (
@@ -63,10 +63,10 @@ function ProductPage() {
       </div>
 
       {/* Product Section */}
-      <div className="shell grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 py-8">
+      <div className="shell grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 py-6">
         {/* Image Gallery */}
         <div className="space-y-4">
-          <div className="aspect-square bg-muted rounded-lg overflow-hidden border border-border">
+          <div className="aspect-[4/3] bg-muted rounded-lg overflow-hidden border border-border">
             <img
               src={images[currentImageIndex]}
               alt={product.name}
@@ -108,7 +108,7 @@ function ProductPage() {
             <span className="text-green-600 font-medium">in Stock</span>
           </p>
 
-          <p className="text-muted-foreground leading-relaxed text-base mb-8">
+          <p className="text-muted-foreground leading-relaxed text-base mb-6">
             {desc}
           </p>
 

@@ -29,6 +29,7 @@ export const allProducts = [
     image: "/media/assets/LAB WORKSTATION/51.jpg",
     category: "LAB WORKSTATIONS",
     series: "SPARK SERIES",
+    desc: "Entry-level laboratory workstation from the Spark series, designed for basic lab setups and educational use. Built on a robust MS powder-coated frame with a laminated tabletop suitable for routine lab tasks, sample testing and student practicals in schools, colleges and small research labs.",
   },
   {
     id: "2",
@@ -36,6 +37,7 @@ export const allProducts = [
     image: "/media/assets/LAB WORKSTATION/52.jpg",
     category: "LAB WORKSTATIONS",
     series: "SPARK SERIES",
+    desc: "Compact lab workstation variant in the Spark series, ideal for space-constrained laboratories. Features a durable work surface and integrated cable management for small-scale research, testing and compact analytical setups where floor space is limited.",
   },
   {
     id: "3",
@@ -43,6 +45,7 @@ export const allProducts = [
     image: "/media/assets/LAB WORKSTATION/53.jpg",
     category: "LAB WORKSTATIONS",
     series: "SPARK SERIES",
+    desc: "Standard-height lab workstation from the Spark series, suitable for general laboratory use. Provides a stable, level surface with easy-to-clean laminates for daily experimental work, documentation and routine analysis across educational and research labs.",
   },
   {
     id: "4",
@@ -50,6 +53,7 @@ export const allProducts = [
     image: "/media/assets/LAB WORKSTATION/54.jpg",
     category: "LAB WORKSTATIONS",
     series: "IMPACT SERIES",
+    desc: "Heavy-duty laboratory workstation from the Impact series, engineered for demanding lab environments. Constructed with thicker gauge materials and reinforced joints for sustained load-bearing under heavy equipment and continuous use.",
   },
   {
     id: "5",
@@ -57,6 +61,7 @@ export const allProducts = [
     image: "/media/assets/LAB WORKSTATION/55.jpg",
     category: "LAB WORKSTATIONS",
     series: "IMPACT SERIES",
+    desc: "Wide-format lab workstation in the Impact series, offering expanded workspace for collaborative research. Supports multiple operators, shared equipment setups and team-based experimental workflows in modern laboratory layouts.",
   },
   {
     id: "6",
@@ -64,6 +69,7 @@ export const allProducts = [
     image: "/media/assets/LAB WORKSTATION/56.jpg",
     category: "LAB WORKSTATIONS",
     series: "IMPACT SERIES",
+    desc: "Corner-configuration lab workstation from the Impact series, maximising floor space in irregular lab layouts. Ideal for equipment-intensive corners, workstation clusters and space-efficient laboratory planning.",
   },
   {
     id: "7",
@@ -71,6 +77,7 @@ export const allProducts = [
     image: "/media/assets/LAB WORKSTATION/57.jpg",
     category: "LAB WORKSTATIONS",
     series: "CURVE SERIES",
+    desc: "Ergonomic lab workstation from the Curve series, designed for extended lab sessions. Features a front-curved work edge and comfortable knee clearance for seated laboratory tasks, microscopy and prolonged bench work.",
   },
   {
     id: "8",
@@ -78,6 +85,7 @@ export const allProducts = [
     image: "/media/assets/LAB WORKSTATION/58.jpg",
     category: "LAB WORKSTATIONS",
     series: "PREMIA SERIES",
+    desc: "Premium laboratory workstation from the Premia series, combining refined aesthetics with functional durability. Finished with high-pressure laminates and precision edge-banding for a clean lab environment suited to client-facing research facilities.",
   },
   {
     id: "9",
@@ -85,6 +93,7 @@ export const allProducts = [
     image: "/media/assets/LAB WORKSTATION/59.jpg",
     category: "LAB WORKSTATIONS",
     series: "ECO SERIES",
+    desc: "Economy lab workstation from the Eco series, offering reliable performance for budget-conscious laboratory fit-outs. Uses cost-effective materials without compromising on structural stability for standard testing and educational labs.",
   },
   {
     id: "10",
@@ -92,6 +101,7 @@ export const allProducts = [
     image: "/media/assets/LAB WORKSTATION/60.jpg",
     category: "LAB WORKSTATIONS",
     series: "ELEMENT SERIES",
+    desc: "Modular lab workstation from the Element series, designed for flexible laboratory reconfiguration. Compatible with add-on accessories, overhead trays and under-desk storage for evolving lab needs and future expansion.",
   },
   {
     id: "11",
@@ -99,6 +109,7 @@ export const allProducts = [
     series: "IMPRESS SERIES",
     category: "ESD  WORKSTATIONS",
     image: "/media/assets/ESD WORKSTATION/40.jpg",
+    desc: "Standard ESD-safe workstation from the Impress series, designed for electronics assembly and sensitive component handling. Features a conductive tabletop and grounded frame to protect static-sensitive devices during manufacturing and testing operations.",
   },
   {
     id: "12",
@@ -106,6 +117,7 @@ export const allProducts = [
     series: "IMPRESS SERIES",
     category: "ESD  WORKSTATIONS",
     image: "/media/assets/ESD WORKSTATION/41.jpg",
+    desc: "Enhanced ESD workstation from the Impress Pro line, built for high-volume electronic manufacturing. Includes wrist-strap grounding points, ESD-safe storage bins and improved surface resistivity for stricter cleanroom protocols.",
   },
   {
     id: "13",
@@ -113,6 +125,7 @@ export const allProducts = [
     series: "CURVE SERIES",
     category: "ESD  WORKSTATIONS",
     image: "/media/assets/ESD WORKSTATION/42.jpg",
+    desc: "Ergonomic ESD workstation from the Curve series, combining static protection with operator comfort. The curved front edge reduces wrist strain during prolonged assembly, inspection or precision soldering tasks.",
   },
   {
     id: "14",
@@ -120,6 +133,7 @@ export const allProducts = [
     series: "CURVE SERIES",
     category: "ESD  WORKSTATIONS",
     image: "/media/assets/ESD WORKSTATION/43.jpg",
+    desc: "Expanded ESD workstation from the Curve Plus series, offering extra depth for larger PCBs and multi-station setups. Maintains full static dissipation while accommodating two-person collaborative workflows.",
   },
   {
     id: "15",
@@ -127,6 +141,7 @@ export const allProducts = [
     series: "MAGNA SERIES",
     category: "ESD  WORKSTATIONS",
     image: "/media/assets/ESD WORKSTATION/44.jpg",
+    desc: "Heavy-duty ESD workstation from the Magna series, rated for high-payload applications such as power-electronics assembly. Reinforced frame and high-load tabletop maintain ESD integrity under weight and continuous operation.",
   },
   {
     id: "16",
@@ -134,6 +149,7 @@ export const allProducts = [
     series: "PREMIA SERIES",
     category: "ESD  WORKSTATIONS",
     image: "/media/assets/ESD WORKSTATION/45.jpg",
+    desc: "Premium ESD workstation from the Premia series, finished with high-grade laminates and concealed cable routing. Suitable for R&D labs and quality-control stations where both static safety and professional appearance matter.",
   },
   {
     id: "17",
@@ -141,6 +157,7 @@ export const allProducts = [
     series: "ECO SERIES",
     category: "ESD  WORKSTATIONS",
     image: "/media/assets/ESD WORKSTATION/46.jpg",
+    desc: "Cost-effective ESD workstation from the Eco series, delivering reliable static protection for standard electronics assembly. A practical choice for entry-level ESD zones without adding extra operational cost.",
   },
   {
     id: "18",
@@ -148,6 +165,7 @@ export const allProducts = [
     series: "ELEMENT SERIES",
     category: "ESD  WORKSTATIONS",
     image: "/media/assets/ESD WORKSTATION/47.jpg",
+    desc: "Modular ESD workstation from the Element series, designed for configurable assembly lines. Accepts optional tool rails, monitor arms and under-drawer units while maintaining full static-safe construction.",
   },
   {
     id: "19",
@@ -155,6 +173,7 @@ export const allProducts = [
     series: "ELEMENT SERIES",
     category: "ESD  WORKSTATIONS",
     image: "/media/assets/ESD WORKSTATION/48.jpg",
+    desc: "Professional-grade ESD workstation from the Element Pro range, built for high-reliability semiconductor and medical-electronics environments. Provides certified surface resistance and integrated grounding accessories.",
   },
   {
     id: "20",
@@ -162,6 +181,7 @@ export const allProducts = [
     series: "SPARK SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/63.jpg",
+    desc: "Entry-level school bench from the Spark series, designed for primary and secondary classrooms. Built on a sturdy tubular frame with a high-pressure laminate top for scratch and stain resistance, making it ideal for daily institutional use across schools and educational campuses.",
   },
   {
     id: "21",
@@ -169,6 +189,7 @@ export const allProducts = [
     series: "SPARK SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/64.jpg",
+    desc: "Upgraded school bench variant in the Spark Plus series, offering increased seating width and a book-rest for comfortable long-duration study. Suitable for higher-secondary and coaching environments where extended focus is needed during exam preparation.",
   },
   {
     id: "22",
@@ -176,6 +197,7 @@ export const allProducts = [
     series: "IMPACT SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/65.jpg",
+    desc: "Heavy-duty school bench from the Impact series, engineered for high-traffic institutional use. Reinforced cross-bracing and anti-tip legs ensure stability in crowded classrooms, labs and exam halls with heavy daily usage.",
   },
   {
     id: "23",
@@ -183,6 +205,7 @@ export const allProducts = [
     series: "IMPACT SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/66.jpg",
+    desc: "Professional-grade school bench from the Impact Pro line, combining strength with ergonomic seating. Features a contoured seat pan and rounded edges for improved student comfort during extended lectures and practical sessions.",
   },
   {
     id: "24",
@@ -190,6 +213,7 @@ export const allProducts = [
     series: "IMPRESS SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/67.jpg",
+    desc: "Contemporary school bench from the Impress series, with a modern silhouette suitable for upgraded campus interiors. Available in multiple laminate finishes to match school colour schemes and enhance learning spaces.",
   },
   {
     id: "25",
@@ -197,6 +221,7 @@ export const allProducts = [
     series: "CURVE SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/68.jpg",
+    desc: "Ergonomic school bench from the Curve series, designed with a gently curved seat and backrest to support healthy posture. Ideal for schools prioritising student wellness and modern furniture standards.",
   },
   {
     id: "26",
@@ -204,6 +229,7 @@ export const allProducts = [
     series: "MAGNA SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/69.jpg",
+    desc: "Extra-large school bench from the Magna series, built for three-seat configurations or shared workstations. Supports higher weight ratings for use in vocational training and workshop classrooms.",
   },
   {
     id: "27",
@@ -211,6 +237,7 @@ export const allProducts = [
     series: "PREMIA SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/70.jpg",
+    desc: "Premium school bench from the Premia series, finished with wood-grain or solid-colour laminates for an upscale classroom look. Combines aesthetics with the durability required for daily institutional use.",
   },
   {
     id: "28",
@@ -218,6 +245,7 @@ export const allProducts = [
     series: "ECO SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/71.jpg",
+    desc: "Economy school bench from the Eco series, providing essential functionality at an accessible price point. Reliable construction makes it suitable for government and budget-aided educational institutions.",
   },
   {
     id: "29",
@@ -225,6 +253,7 @@ export const allProducts = [
     series: "ELEMENT SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/72.jpg",
+    desc: "Modular school bench from the Element series, designed for flexible classroom layouts. Stackable or linkable options allow quick reconfiguration between individual seating and group-learning arrangements.",
   },
   {
     id: "30",
@@ -232,6 +261,7 @@ export const allProducts = [
     series: "SPARK SERIES",
     category: "SUPPLIERS OF CHAIRS AND TABLES",
     image: "/media/assets/Suppliers of Chairs & Tables/beanch_one.png",
+    desc: "Entry-level ergonomic chair from the Spark series, designed for daily office use. Features adjustable seat height and a breathable mesh back to support comfortable, healthy sitting throughout the workday.",
   },
   {
     id: "31",
@@ -239,6 +269,7 @@ export const allProducts = [
     series: "IMPACT SERIES",
     category: "SUPPLIERS OF CHAIRS AND TABLES",
     image: "/media/assets/Suppliers of Chairs & Tables/categaries_two.png",
+    desc: "High-back executive chair from the Impact series, built for management cabins and boardrooms. Offers full lumbar support, padded armrests and a heavy-duty base for all-day authority seating.",
   },
   {
     id: "32",
@@ -246,6 +277,7 @@ export const allProducts = [
     series: "IMPRESS SERIES",
     category: "SUPPLIERS OF CHAIRS AND TABLES",
     image: "/media/assets/Suppliers of Chairs & Tables/categries_two.png",
+    desc: "Complete dining table set from the Impress series, combining a solid-surface tabletop with matching chairs. Ideal for corporate cafeterias, staff dining areas and hospitality breakout spaces.",
   },
   {
     id: "33",
@@ -253,6 +285,7 @@ export const allProducts = [
     series: "CURVE SERIES",
     category: "SUPPLIERS OF CHAIRS AND TABLES",
     image: "/media/assets/Suppliers of Chairs & Tables/new_chair.png",
+    desc: "Collaborative training table from the Curve series, shaped to encourage group interaction and workshops. Available in modular lengths that can be combined for large training sessions or separated for breakout use.",
   },
   {
     id: "34",
@@ -260,6 +293,7 @@ export const allProducts = [
     series: "MAGNA SERIES",
     category: "SUPPLIERS OF CHAIRS AND TABLES",
     image: "/media/assets/Suppliers of Chairs & Tables/office_chair.png",
+    desc: "Robust visitor chair from the Magna series, designed for reception and waiting areas. Built with a steel frame and high-density foam to withstand frequent use while maintaining a professional appearance.",
   },
   {
     id: "35",
@@ -267,6 +301,7 @@ export const allProducts = [
     series: "PREMIA SERIES",
     category: "SUPPLIERS OF CHAIRS AND TABLES",
     image: "/media/assets/Suppliers of Chairs & Tables/table_one.png",
+    desc: "Premium conference table from the Premia series, crafted for executive meeting rooms. Features a seamless tabletop with integrated cable management and a refined finish suitable for high-profile client presentations.",
   },
   {
     id: "36",
@@ -274,6 +309,7 @@ export const allProducts = [
     series: "SPARK SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/school_beanch_five.png",
+    desc: "Dual-seat school bench from the Spark series, ideal for paired learning and shared desktop activities in modern classrooms. Compact footprint fits standard classroom layouts while accommodating two students side by side comfortably.",
   },
   {
     id: "37",
@@ -281,6 +317,7 @@ export const allProducts = [
     series: "IMPACT SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/school_beanch_four.png",
+    desc: "Rugged classroom bench from the Impact series, built for daily heavy use in school labs and drawing rooms. Reinforced legs and anti-skid feet keep the bench stable on polished floors.",
   },
   {
     id: "38",
@@ -288,6 +325,7 @@ export const allProducts = [
     series: "IMPRESS SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/school_beanch_one.png",
+    desc: "Stylish student bench from the Impress series, designed for modern educational interiors. Combines clean lines with durable construction for libraries, computer labs and study halls.",
   },
   {
     id: "39",
@@ -295,6 +333,7 @@ export const allProducts = [
     series: "CURVE SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/school_beanch_six.png",
+    desc: "Space-saving school bench from the Curve series, optimised for smaller classrooms and tutorial rooms. Its compact design maintains comfort without crowding limited floor space.",
   },
   {
     id: "40",
@@ -302,6 +341,7 @@ export const allProducts = [
     series: "MAGNA SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/school_beanch_three.png",
+    desc: "Industrial-grade school bench from the Magna series, suited for workshops, technical labs and outdoor covered areas. Built with thicker sections and corrosion-resistant fasteners for long-term durability.",
   },
   {
     id: "41",
@@ -309,6 +349,7 @@ export const allProducts = [
     series: "ECO SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/school_beanch_two.png",
+    desc: "Smart-value school bench from the Eco series, delivering essential classroom seating at an economical price. Lightweight yet strong, it is easy to stack and rearrange for different teaching layouts.",
   },
   {
     id: "42",
@@ -316,6 +357,7 @@ export const allProducts = [
     series: "PREMIA SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/school_beanch_one.png",
+    desc: "Deluxe school bench from the Premia series, featuring padded seating options and premium laminate finishes. Designed for schools that want to offer students a more comfortable and refined learning environment.",
   },
   {
     id: "43",
@@ -323,6 +365,7 @@ export const allProducts = [
     series: "ELEMENT SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/school_beanch_six.png",
+    desc: "Classic-style school bench from the Element series, with a timeless design suited for traditional and contemporary campuses alike. Built for easy maintenance and long service life.",
   },
   {
     id: "44",
@@ -330,6 +373,7 @@ export const allProducts = [
     series: "SPARK SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/school_beanch_three.png",
+    desc: "Junior school bench from the Spark series, sized appropriately for younger students. Lower seat height and smaller proportions help children maintain proper posture during early-years learning.",
   },
   {
     id: "45",
@@ -337,6 +381,7 @@ export const allProducts = [
     series: "IMPACT SERIES",
     category: "SCHOOL BENCH",
     image: "/media/assets/School Bench/school_beanch_two.png",
+    desc: "Study-focused school bench from the Impact series, combining a stable seat with an optional writing board or book-rest. Ideal for self-study areas, libraries and examination halls.",
   },
   {
     id: "46",
@@ -344,6 +389,7 @@ export const allProducts = [
     series: "SPARK SERIES",
     category: "LABORATORY",
     image: "/media/assets/Laborotory/Laboratory_Furniture1.png",
+    desc: "General-purpose laboratory workstation from the Spark series, suited for routine testing and sample preparation. Offers a chemical-resistant tabletop and a simple frame design for easy relocation within the lab.",
   },
   {
     id: "47",
@@ -351,6 +397,7 @@ export const allProducts = [
     series: "IMPACT SERIES",
     category: "LABORATORY",
     image: "/media/assets/Laborotory/laboratory_furniture_2.png",
+    desc: "Chemical-resistant lab table from the Impact series, built for wet labs and chemistry stations. Features an epoxy-resin or HPL top with integrated sink cutouts and splash-back containment for safe spill management.",
   },
   {
     id: "48",
@@ -358,6 +405,7 @@ export const allProducts = [
     series: "IMPRESS SERIES",
     category: "LABORATORY",
     image: "/media/assets/Laborotory/laboratory_3.png",
+    desc: "Physics and electronics lab bench from the Impress series, designed for circuit assembly, instrumentation and measurement work. Includes built-in power strips, grounding points and tool-hanging rails.",
   },
   {
     id: "49",
@@ -365,6 +413,7 @@ export const allProducts = [
     series: "CURVE SERIES",
     category: "LABORATORY",
     image: "/media/assets/Laborotory/laboratory_4.png",
+    desc: "Curved-front laboratory storage unit from the Curve series, providing safe enclosed storage for reagents, glassware and lab consumables. Adjustable shelving accommodates different container sizes and lab equipment.",
   },
   {
     id: "50",
@@ -372,6 +421,7 @@ export const allProducts = [
     series: "MAGNA SERIES",
     category: "LABORATORY",
     image: "/media/assets/Laborotory/laboratory5.png",
+    desc: "Heavy-duty laboratory table from the Magna series, rated for large equipment such as spectrometers, balances and centrifuges. Reinforced structure ensures minimal vibration during sensitive measurements.",
   },
   {
     id: "51",
@@ -379,6 +429,7 @@ export const allProducts = [
     series: "PREMIA SERIES",
     category: "LABORATORY",
     image: "/media/assets/Laborotory/laboratory6.png",
+    desc: "Advanced laboratory bench from the Premia series, integrating service channels, gas taps and data ports within a clean-lined carcass. Ideal for modern R&D labs requiring both functionality and aesthetics.",
   },
   {
     id: "52",
@@ -386,6 +437,7 @@ export const allProducts = [
     series: "ECO SERIES",
     category: "LABORATORY",
     image: "/media/assets/Laborotory/laboratory_7.png",
+    desc: "Compact laboratory table from the Eco series, designed for small lab rooms and sample-storage corners. Provides essential workspace and shelving without consuming excessive floor area.",
   },
   {
     id: "53",
@@ -393,6 +445,7 @@ export const allProducts = [
     series: "ELEMENT SERIES",
     category: "LABORATORY",
     image: "/media/assets/Laborotory/laboratory_8.png",
+    desc: "Fully modular laboratory setup from the Element series, allowing benches, storage towers and utility columns to be reconfigured as research needs change. Supports future lab expansion without full replacement.",
   },
   {
     id: "54",
@@ -400,6 +453,7 @@ export const allProducts = [
     series: "ELEMENT SERIES",
     category: "TABLES AND CUPBOARDS",
     image: "/media/assets/tables & Cupboard/table_and_cupboar.png",
+    desc: "Versatile office table from the Element series, suitable for individual workstations and small meeting areas. Clean lines and a compact footprint make it adaptable to various office layouts and space constraints.",
   },
   {
     id: "55",
@@ -407,6 +461,7 @@ export const allProducts = [
     series: "IMPACT SERIES",
     category: "TABLES AND CUPBOARDS",
     image: "/media/assets/tables & Cupboard/table_and_cubord2.png",
+    desc: "Heavy-duty storage cupboard from the Impact series, built for office and lab document storage. Features lockable doors, adjustable shelves and a scratch-resistant exterior for everyday institutional use.",
   },
   {
     id: "56",
@@ -414,6 +469,7 @@ export const allProducts = [
     series: "SPARK SERIES",
     category: "TABLES AND CUPBOARDS",
     image: "/media/assets/tables & Cupboard/table_cupboard3.png",
+    desc: "Executive office table from the Spark series, designed for manager cabins and private offices. Offers a spacious tabletop with integrated cable routing and a professional finish that pairs well with executive seating.",
   },
   {
     id: "57",
@@ -421,6 +477,7 @@ export const allProducts = [
     series: "MAGNA SERIES",
     category: "TABLES AND CUPBOARDS",
     image: "/media/assets/tables & Cupboard/table_cupboard4.png",
+    desc: "High-capacity utility cupboard from the Magna series, intended for storing stationery, files and office supplies. Reinforced construction supports heavier loads and frequent daily access.",
   },
   {
     id: "58",
@@ -428,6 +485,7 @@ export const allProducts = [
     series: "PREMIA SERIES",
     category: "TABLES AND CUPBOARDS",
     image: "/media/assets/tables & Cupboard/table_cupboard_5.png",
+    desc: "Conference table from the Premia series, offering an elegant boardroom surface with built-in data and power integration. Available in multiple lengths to seat 6–20 participants comfortably.",
   },
   {
     id: "59",
@@ -435,6 +493,7 @@ export const allProducts = [
     series: "CURVE SERIES",
     category: "TABLES AND CUPBOARDS",
     image: "/media/assets/tables & Cupboard/table_cupboard_6.png",
+    desc: "Designer cupboard from the Curve series, featuring a curved door front and soft-close hinges. Adds a refined touch to reception areas, lounge zones and modern office common spaces.",
   },
   {
     id: "60",
@@ -442,6 +501,7 @@ export const allProducts = [
     series: "ECO SERIES",
     category: "TABLES AND CUPBOARDS",
     image: "/media/assets/tables & Cupboard/table_cupboard_7.png",
+    desc: "Economical work table from the Eco series, intended for utility rooms, back-office tasks and temporary workstations. Simple construction keeps costs low while remaining fully functional.",
   },
   {
     id: "61",
@@ -449,6 +509,7 @@ export const allProducts = [
     series: "IMPRESS SERIES",
     category: "TABLES AND CUPBOARDS",
     image: "/media/assets/tables & Cupboard/table_cupboard_eight.png",
+    desc: "Premium office cupboard from the Impress series, finished with wood-texture laminates and concealed handle grooves. Ideal for storing confidential files and office records in a secure, stylish enclosure.",
   },
   {
     id: "62",
@@ -456,6 +517,7 @@ export const allProducts = [
     series: "IMPRESS SERIES",
     category: "SUPPLIERS OF CHAIRS AND TABLES",
     image: "/media/assets/CONFERENCE/1.png",
+    desc: "Matching chair-and-table set from the Impress series, designed for small meeting rooms and executive offices. The set includes a compact conference table with two upholstered chairs for a cohesive, professional look.",
   },
   {
     id: "63",
@@ -463,6 +525,7 @@ export const allProducts = [
     series: "IMPRESS SERIES",
     category: "SUPPLIERS OF CHAIRS AND TABLES",
     image: "/media/assets/CONFERENCE/2.png",
+    desc: "Premium chair-and-table set from the Impress Elite range, built for director cabins and high-end meeting spaces. Features a larger table surface and high-back chairs with premium cushioning.",
   },
   {
     id: "64",
@@ -470,6 +533,7 @@ export const allProducts = [
     series: "SPARK SERIES",
     category: "CONFERENCE TABLES",
     image: "/media/assets/CONFERENCE/3.png",
+    desc: "Entry-level conference table from the Spark series, designed for small team meetings and client discussions. Compact rectangular form with a smooth tabletop finish suitable for daily multi-use meeting rooms.",
   },
   {
     id: "65",
@@ -477,6 +541,7 @@ export const allProducts = [
     series: "IMPACT SERIES",
     category: "CONFERENCE TABLES",
     image: "/media/assets/CONFERENCE/4.png",
+    desc: "Large boardroom table from the Impact series, built for executive meetings and board presentations. Heavy-duty construction supports in-built power and data ports for seamless conference technology integration.",
   },
   {
     id: "66",
@@ -484,6 +549,7 @@ export const allProducts = [
     series: "IMPRESS SERIES",
     category: "CONFERENCE TABLES",
     image: "/media/assets/CONFERENCE/5.png",
+    desc: "Executive conference table from the Impress series, combining a sophisticated silhouette with practical meeting features. Available in oval or boat shapes to encourage open discussion around the table.",
   },
   {
     id: "67",
@@ -491,6 +557,7 @@ export const allProducts = [
     series: "CURVE SERIES",
     category: "CONFERENCE TABLES",
     image: "/media/assets/CONFERENCE/6.png",
+    desc: "Curved meeting table from the Curve series, shaped to bring participants closer together for better eye contact and collaboration. Ideal for design reviews, brainstorming sessions and team stand-ups.",
   },
   {
     id: "68",
@@ -498,6 +565,7 @@ export const allProducts = [
     series: "MAGNA SERIES",
     category: "CONFERENCE TABLES",
     image: "/media/assets/CURVE SERIES/37.jpg",
+    desc: "Extra-large conference table from the Magna series, capable of seating 16–24 attendees. Engineered with a reinforced subframe and leveling feet to maintain stability on uneven office floors.",
   },
   {
     id: "69",
@@ -505,6 +573,7 @@ export const allProducts = [
     series: "PREMIA SERIES",
     category: "CONFERENCE TABLES",
     image: "/media/assets/CURVE SERIES/38.jpg",
+    desc: "Premium conference table from the Premia series, finished with premium veneer or high-gloss laminates. Designed for senior leadership meetings, investor presentations and flagship office interiors.",
   },
   {
     id: "70",
@@ -512,6 +581,7 @@ export const allProducts = [
     series: "SPARK SERIES",
     category: "STORAGE SOLUTIONS",
     image: "/media/assets/STORAGES/1.png",
+    desc: "Compact storage cabinet from the Spark series, suitable for general office filing and stationery storage. Features lockable drawers and a compact footprint that fits under most office desks.",
   },
   {
     id: "71",
@@ -519,6 +589,7 @@ export const allProducts = [
     series: "IMPACT SERIES",
     category: "STORAGE SOLUTIONS",
     image: "/media/assets/STORAGES/2.png",
+    desc: "Industrial-grade metal storage unit from the Impact series, built for warehouses, workshops and back-of-house areas. Welded steel construction with powder-coat finish for abrasion and moisture resistance.",
   },
   {
     id: "72",
@@ -526,6 +597,7 @@ export const allProducts = [
     series: "IMPRESS SERIES",
     category: "STORAGE SOLUTIONS",
     image: "/media/assets/STORAGES/3.png",
+    desc: "Premium storage cupboard from the Impress series, combining glass or solid doors with internal adjustable shelving. Ideal for displaying awards, storing sensitive documents or organising office supplies neatly.",
   },
   {
     id: "73",
@@ -533,6 +605,7 @@ export const allProducts = [
     series: "CURVE SERIES",
     category: "STORAGE SOLUTIONS",
     image: "/media/assets/STORAGES/4.png",
+    desc: "Open modular storage rack from the Curve series, suited for libraries, sample rooms and retail back-stores. Multiple shelf heights accommodate books, boxes, samples and display items.",
   },
   {
     id: "74",
@@ -540,6 +613,7 @@ export const allProducts = [
     series: "MAGNA SERIES",
     category: "STORAGE SOLUTIONS",
     image: "/media/assets/STORAGES/5.png",
+    desc: "Extra-heavy-duty storage cabinet from the Magna series, rated for tools, equipment and high-volume inventory. Reinforced shelves and a secure locking mechanism protect valuable assets in industrial environments.",
   },
   {
     id: "75",
@@ -547,6 +621,7 @@ export const allProducts = [
     series: "PREMIA SERIES",
     category: "STORAGE SOLUTIONS",
     image: "/media/assets/STORAGES/6.png",
+    desc: "Designer office storage unit from the Premia series, finished with premium laminates and soft-close doors. Adds organised, stylish storage to executive cabins, reception areas and client-facing zones.",
   },
   {
     id: "76",
@@ -554,6 +629,7 @@ export const allProducts = [
     series: "ECO SERIES",
     category: "STORAGE SOLUTIONS",
     image: "/media/assets/STORAGES/7.png",
+    desc: "Compact storage cabinet from the Eco series, providing basic enclosed storage for small offices and home workspaces. Lightweight and easy to assemble without specialised tools.",
   },
   {
     id: "77",
@@ -561,6 +637,7 @@ export const allProducts = [
     series: "ELEMENT SERIES",
     category: "STORAGE SOLUTIONS",
     image: "/media/assets/STORAGES/8.png",
+    desc: "Multi-purpose storage rack from the Element series, combining open and closed storage in one unit. Works well as a pantry shelf, stationery rack or light equipment cabinet in commercial spaces.",
   },
   {
     id: "78",
@@ -568,6 +645,7 @@ export const allProducts = [
     series: "IMPRESS SERIES",
     category: "STORAGE SOLUTIONS",
     image: "/media/assets/STORAGES/9.png",
+    desc: "Deluxe storage system from the Impress series, offering a mix of hanging, shelving and drawer configurations. Designed for personal offices and shared storage rooms that need both accessibility and organisation.",
   },
 ];
 
@@ -587,4 +665,6 @@ export type ReferenceProduct = {
   image: string;
   category: string;
   series: string;
+  desc?: string;
 };
+

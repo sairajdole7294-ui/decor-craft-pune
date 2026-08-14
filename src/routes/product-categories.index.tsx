@@ -120,6 +120,7 @@ function CategoriesIndex() {
                   id={product.id}
                   name={product.name}
                   image={product.image}
+                  slug={product.slug}
                 />
               ))}
             </div>

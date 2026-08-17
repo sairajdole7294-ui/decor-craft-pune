@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { Sparkles, Upload, X, ImagePlus, Loader2, RefreshCw, Armchair, LayoutGrid, Palette, Lightbulb, Ruler, AlertTriangle, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/motion";
 import { SectionHead } from "@/components/site/bits";
@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/select";
 import { Link } from "@tanstack/react-router";
 import { generateAIVisualization } from "@/lib/gemini-image.server";
+
+const SESSION_KEY = "ai-furniture-suggestion-session";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const ACCEPTED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -48,7 +50,43 @@ export default function AiVisualizer() {
   const [error, setError] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const [result, setResult] = useState<any>(null);
+  const [persistedFile, setPersistedFile] = useState<{ name: string; size: number } | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem(SESSION_KEY);
+      if (saved) {
+        const state = JSON.parse(saved);
+        if (state.preview) setPreview(state.preview);
+        if (state.spaceType) setSpaceType(state.spaceType);
+        if (state.result) setResult(state.result);
+        if (state.error) setError(state.error);
+        if (state.fileName) setPersistedFile({ name: state.fileName, size: state.fileSize || 0 });
+      }
+    } catch {
+      // ignore parse/storage errors
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!result) return;
+    try {
+      sessionStorage.setItem(
+        SESSION_KEY,
+        JSON.stringify({
+          preview,
+          spaceType,
+          result,
+          error,
+          fileName: file?.name || persistedFile?.name,
+          fileSize: file?.size || persistedFile?.size || 0,
+        }),
+      );
+    } catch {
+      // quota exceeded or other storage error
+    }
+  }, [result, preview, spaceType, error, file?.name, file?.size, persistedFile]);
 
   const validateFile = useCallback((f: File): string | null => {
     const ext = f.name.split(".").pop()?.toLowerCase();
@@ -70,11 +108,17 @@ export default function AiVisualizer() {
         setError(validationError);
         setFile(null);
         setPreview(null);
+        setPersistedFile(null);
+        try { sessionStorage.removeItem(SESSION_KEY); } catch {}
         return;
       }
       setFile(f);
-      const url = URL.createObjectURL(f);
-      setPreview(url);
+      setPersistedFile({ name: f.name, size: f.size });
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreview(reader.result as string);
+      };
+      reader.readAsDataURL(f);
     },
     [validateFile],
   );
@@ -100,22 +144,24 @@ export default function AiVisualizer() {
   const clearFile = useCallback(() => {
     setFile(null);
     setPreview(null);
+    setPersistedFile(null);
     setResult(null);
+    try { sessionStorage.removeItem(SESSION_KEY); } catch {}
   }, []);
 
   const scrollToForm = useCallback(() => {
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
-  const canAnalyze = file && spaceType;
+  const canAnalyze = (file || preview) && spaceType;
 
   const handleAnalyze = useCallback(async () => {
-    if (!canAnalyze || !file) return;
+    if (!canAnalyze || (!file && !preview)) return;
     setIsAnalyzing(true);
     setError(null);
 
     try {
-      const base64Data = await fileToBase64(file);
+      const base64Data = file ? await fileToBase64(file) : (preview || "");
       const response = await (generateAIVisualization as any)({
         data: {
           imageData: base64Data,
@@ -133,19 +179,22 @@ export default function AiVisualizer() {
     } finally {
       setIsAnalyzing(false);
     }
-  }, [canAnalyze, file, spaceType]);
+  }, [canAnalyze, file, preview, spaceType]);
 
   const handleReset = useCallback(() => {
     setResult(null);
     setError(null);
+    try { sessionStorage.removeItem(SESSION_KEY); } catch {}
   }, []);
 
   const handleStartOver = useCallback(() => {
     setFile(null);
     setPreview(null);
+    setPersistedFile(null);
     setSpaceType("");
     setResult(null);
     setError(null);
+    try { sessionStorage.removeItem(SESSION_KEY); } catch {}
   }, []);
 
   const showResult = result && !error;
@@ -255,9 +304,9 @@ export default function AiVisualizer() {
                     </div>
                     <div className="flex items-center justify-between bg-secondary/40 px-4 py-2.5">
                       <div className="min-w-0">
-                        <p className="truncate text-sm font-medium">{file?.name}</p>
+                        <p className="truncate text-sm font-medium">{file?.name || persistedFile?.name}</p>
                         <p className="text-xs text-muted-foreground">
-                          {file?.size ? `${(file.size / 1024 / 1024).toFixed(2)} MB` : ""}
+                          {file?.size ? `${(file.size / 1024 / 1024).toFixed(2)} MB` : (persistedFile?.size ? `${(persistedFile.size / 1024 / 1024).toFixed(2)} MB` : "")}
                         </p>
                       </div>
                       <Button

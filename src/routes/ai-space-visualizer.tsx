@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import AiVisualizer from "@/components/site/ai-visualizer";
 
-const title = "AI Space Visualizer — Payal Decor";
+const title = "AI Furniture Suggestions — Payal Decor";
 const description =
-  "Upload a photo of your space and describe your requirements to generate an AI-powered furniture visualization.";
+  "Upload a photo of your space and get AI-powered furniture suggestions matched with Payal Decor products.";
 
 export const Route = createFileRoute("/ai-space-visualizer")({
   head: () => ({

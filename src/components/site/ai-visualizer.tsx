@@ -1,12 +1,11 @@
-import { useState, useCallback, type ReactNode, useRef } from "react";
-import { Sparkles, Upload, X, ImagePlus, Loader2, Download, RefreshCw } from "lucide-react";
+import { useState, useCallback, useRef } from "react";
+import { Sparkles, Upload, X, ImagePlus, Loader2, RefreshCw, Armchair, LayoutGrid, Palette, Lightbulb, Ruler, AlertTriangle, ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/motion";
 import { SectionHead } from "@/components/site/bits";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -14,10 +13,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Link } from "@tanstack/react-router";
 import { generateAIVisualization } from "@/lib/gemini-image.server";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
-const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"];
+const ACCEPTED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 const SPACE_OPTIONS = [
   "Living Room",
@@ -25,8 +25,8 @@ const SPACE_OPTIONS = [
   "Kitchen",
   "Office",
   "Reception",
-  "Commercial Space",
-  "Retail Space",
+  "Commercial Office",
+  "Retail",
   "Hostel / PG",
   "Other",
 ] as const;
@@ -40,30 +40,20 @@ function fileToBase64(file: File): Promise<string> {
   });
 }
 
-function downloadImage(dataUrl: string, filename: string) {
-  const link = document.createElement("a");
-  link.href = dataUrl;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
 export default function AiVisualizer() {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [spaceType, setSpaceType] = useState("");
-  const [description, setDescription] = useState("");
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [dragOver, setDragOver] = useState(false);
-  const [generatedImage, setGeneratedImage] = useState<string | null>(null);
-  const [generationError, setGenerationError] = useState<string | null>(null);
+  const [result, setResult] = useState<any>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
   const validateFile = useCallback((f: File): string | null => {
-    if (!ACCEPTED_TYPES.includes(f.type)) {
-      return "Unsupported format. Please upload JPG, PNG or WEBP.";
+    const ext = f.name.split(".").pop()?.toLowerCase();
+    if (!ACCEPTED_TYPES.includes(f.type) && !["jpg", "jpeg", "png", "webp"].includes(ext || "")) {
+      return "Unsupported format. Please upload JPG, JPEG, PNG or WEBP.";
     }
     if (f.size > MAX_FILE_SIZE) {
       return "File is too large. Maximum size is 10MB.";
@@ -74,8 +64,7 @@ export default function AiVisualizer() {
   const handleFile = useCallback(
     (f: File) => {
       setError(null);
-      setGenerationError(null);
-      setGeneratedImage(null);
+      setResult(null);
       const validationError = validateFile(f);
       if (validationError) {
         setError(validationError);
@@ -111,75 +100,74 @@ export default function AiVisualizer() {
   const clearFile = useCallback(() => {
     setFile(null);
     setPreview(null);
-    setGeneratedImage(null);
-    setGenerationError(null);
+    setResult(null);
   }, []);
 
   const scrollToForm = useCallback(() => {
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
-  const canGenerate = file && spaceType && description.trim().length > 0;
+  const canAnalyze = file && spaceType;
 
-  const handleGenerate = useCallback(async () => {
-    if (!canGenerate || !file) return;
-    setIsGenerating(true);
+  const handleAnalyze = useCallback(async () => {
+    if (!canAnalyze || !file) return;
+    setIsAnalyzing(true);
     setError(null);
-    setGenerationError(null);
 
     try {
       const base64Data = await fileToBase64(file);
-      const result = await (generateAIVisualization as any)({
+      const response = await (generateAIVisualization as any)({
         data: {
           imageData: base64Data,
           spaceType,
-          description: description.trim(),
         },
       });
 
-      if (result.success && result.image) {
-        setGeneratedImage(result.image);
+      if (response.success && response.recommendations) {
+        setResult(response);
       } else {
-        setGenerationError(result.message || "We couldn't create the visualization this time. Please try again.");
+        setError(response.message || "We couldn't analyze your space this time. Please try again.");
       }
     } catch {
-      setGenerationError("We couldn't create the visualization this time. Please try again.");
+      setError("We couldn't analyze your space this time. Please try again.");
     } finally {
-      setIsGenerating(false);
+      setIsAnalyzing(false);
     }
-  }, [canGenerate, file, spaceType, description]);
+  }, [canAnalyze, file, spaceType]);
 
-  const handleDownload = useCallback(() => {
-    if (generatedImage) {
-      downloadImage(generatedImage, "payal-decor-ai-visualization.png");
-    }
-  }, [generatedImage]);
-
-  const handleTryAgain = useCallback(() => {
-    setGeneratedImage(null);
-    setGenerationError(null);
+  const handleReset = useCallback(() => {
+    setResult(null);
+    setError(null);
   }, []);
 
-  const handleCreateAnother = useCallback(() => {
+  const handleStartOver = useCallback(() => {
     setFile(null);
     setPreview(null);
     setSpaceType("");
-    setDescription("");
-    setGeneratedImage(null);
-    setGenerationError(null);
+    setResult(null);
+    setError(null);
   }, []);
 
-  const showSuccess = generatedImage && !generationError;
-  const showError = generationError && !generatedImage;
+  const showResult = result && !error;
+  const showError = error && !result;
+
+  const SectionIcon = ({ icon: Icon, label }: { icon: any; label: string }) => (
+    <div className="flex items-center gap-2">
+      <div className="flex size-8 items-center justify-center rounded-lg bg-accent text-primary">
+        <Icon className="size-4" />
+      </div>
+      <h3 className="text-sm font-semibold">{label}</h3>
+    </div>
+  );
 
   return (
     <div className="mx-auto max-w-6xl">
       <Reveal>
         <div className="mx-auto max-w-3xl text-center">
           <SectionHead
-            eyebrow="AI Visualizer"
-            title="Visualize Your Space With AI"
-            lead="Upload a photo of your space, describe what you need, and create an AI-powered furniture visualization."
+            eyebrow="AI Furniture Suggestions"
+            title="Get AI Furniture Suggestions"
+            lead="Upload a photo of your space, select the space type, and our AI will analyze it to suggest the best furniture and interior solutions from Payal Decor."
             align="center"
           />
           <div className="mt-6">
@@ -188,7 +176,7 @@ export default function AiVisualizer() {
               className="bg-brand-gradient text-primary-foreground hover:shadow-[var(--shadow-lift)]"
             >
               <Sparkles className="mr-2 size-4" />
-              Start Visualizing
+              Start Analyzing
             </Button>
           </div>
         </div>
@@ -197,13 +185,12 @@ export default function AiVisualizer() {
       <div ref={formRef} className="mt-10 grid gap-6 lg:grid-cols-[1fr_1fr]">
         {/* Left: Upload + Form */}
         <div className="space-y-5">
-          {/* Upload */}
           <Reveal>
             <Card>
               <CardContent className="p-5">
-                <Label className="text-sm font-semibold">Upload Your Space</Label>
+                <Label className="text-sm font-semibold">Upload Your Space Image</Label>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Drop your image here or browse. Supported formats: JPG, JPEG, PNG, WEBP.
+                  Drop your image here or browse. Supported formats: JPG, JPEG, PNG, WEBP. Maximum size: 10MB.
                 </p>
 
                 {!preview ? (
@@ -233,7 +220,7 @@ export default function AiVisualizer() {
                     </div>
                     <Input
                       type="file"
-                      accept="image/jpeg,image/png,image/webp"
+                      accept="image/jpeg,image/jpg,image/png,image/webp"
                       onChange={onBrowse}
                       className="hidden"
                       id="ai-upload"
@@ -286,20 +273,19 @@ export default function AiVisualizer() {
                   </div>
                 )}
 
-                {(error || generationError) && (
-                  <p className="mt-2 text-xs text-red-500">{error || generationError}</p>
+                {(error) && (
+                  <p className="mt-2 text-xs text-red-500">{error}</p>
                 )}
               </CardContent>
             </Card>
           </Reveal>
 
-          {/* Space Type */}
           <Reveal delay={80}>
             <Card>
               <CardContent className="p-5">
-                <Label className="text-sm font-semibold">What&apos;s the space?</Label>
+                <Label className="text-sm font-semibold">Select Space Type</Label>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Select the type of space you want to visualize.
+                  Choose the type of space in your uploaded image.
                 </p>
                 <div className="mt-3">
                   <Select value={spaceType} onValueChange={setSpaceType}>
@@ -319,62 +305,24 @@ export default function AiVisualizer() {
             </Card>
           </Reveal>
 
-          {/* Description */}
           <Reveal delay={160}>
-            <Card>
-              <CardContent className="p-5">
-                <Label className="text-sm font-semibold">Describe What You Need</Label>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Tell us what furniture or interior elements you&apos;d like to visualize.
-                </p>
-                <Textarea
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Example: Add a modern reception desk, comfortable seating and storage cabinets. Keep the existing wall and flooring."
-                  className="mt-3 min-h-[120px]"
-                />
-              </CardContent>
-            </Card>
-          </Reveal>
-
-          {/* Generate Button */}
-          <Reveal delay={240}>
-            <div className="flex flex-wrap items-center gap-3">
-              <Button
-                onClick={handleGenerate}
-                disabled={!canGenerate || isGenerating}
-                className="bg-brand-gradient text-primary-foreground hover:shadow-[var(--shadow-lift)] disabled:opacity-60"
-              >
-                {isGenerating ? (
-                  <>
-                    <Loader2 className="mr-2 size-4 animate-spin" />
-                    Creating your space...
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="mr-2 size-4" />
-                    Generate Visualization
-                  </>
-                )}
-              </Button>
-              {showSuccess && (
+            <Button
+              onClick={handleAnalyze}
+              disabled={!canAnalyze || isAnalyzing}
+              className="w-full bg-brand-gradient text-primary-foreground hover:shadow-[var(--shadow-lift)] disabled:opacity-60"
+            >
+              {isAnalyzing ? (
                 <>
-                  <Button
-                    variant="outline"
-                    onClick={handleTryAgain}
-                  >
-                    <RefreshCw className="mr-2 size-4" />
-                    Try Again
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    onClick={handleCreateAnother}
-                  >
-                    Create Another Visualization
-                  </Button>
+                  <Loader2 className="mr-2 size-4 animate-spin" />
+                  Analyzing your space...
+                </>
+              ) : (
+                <>
+                  <Sparkles className="mr-2 size-4" />
+                  Get AI Furniture Suggestions
                 </>
               )}
-            </div>
+            </Button>
           </Reveal>
         </div>
 
@@ -382,74 +330,188 @@ export default function AiVisualizer() {
         <div className="space-y-5">
           <Reveal delay={120}>
             <Card className="h-full">
-              <CardContent className="flex h-full flex-col items-center justify-center p-6 text-center">
-                {isGenerating ? (
-                  <div className="flex flex-col items-center gap-4">
+              <CardContent className="flex h-full flex-col p-6">
+                {isAnalyzing ? (
+                  <div className="flex flex-col items-center justify-center gap-4 py-10">
                     <Loader2 className="size-12 animate-spin text-primary" />
-                    <div>
-                      <p className="text-sm font-semibold">Creating your space...</p>
+                    <div className="text-center">
+                      <p className="text-sm font-semibold">Analyzing your space...</p>
                       <p className="mt-1 text-xs text-muted-foreground">
-                        Our AI is visualizing your furniture and interior requirements.
+                        Our AI is identifying furniture opportunities and matching them with Payal Decor solutions.
                       </p>
                     </div>
                   </div>
-                ) : showSuccess && generatedImage ? (
-                  <div className="flex w-full flex-col items-center gap-4">
-                    <p className="text-sm font-semibold">Your AI Visualization</p>
-                    <div className="w-full overflow-hidden rounded-xl border border-border">
-                      <img
-                        src={generatedImage}
-                        alt="AI generated visualization"
-                        className="w-full object-cover"
-                      />
+                ) : showResult && result ? (
+                  <div className="flex h-full flex-col gap-5 overflow-y-auto">
+                    <div>
+                      <p className="text-sm font-semibold text-primary">AI Furniture Suggestions</p>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        Based on your {spaceType.toLowerCase()} analysis
+                      </p>
                     </div>
-                    <div className="flex flex-wrap items-center justify-center gap-2">
+
+                    {result.recommendations.furniture?.length > 0 && (
+                      <div className="rounded-xl border border-border bg-secondary/20 p-4">
+                        <SectionIcon icon={Armchair} label="Recommended Furniture" />
+                        <ul className="mt-3 space-y-2">
+                          {result.recommendations.furniture.map((item: string, i: number) => (
+                            <li key={i} className="flex gap-2 text-xs leading-relaxed text-muted-foreground">
+                              <ArrowRight className="mt-0.5 size-3 shrink-0 text-primary" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {result.recommendations.layout?.length > 0 && (
+                      <div className="rounded-xl border border-border bg-secondary/20 p-4">
+                        <SectionIcon icon={LayoutGrid} label="Space & Layout Suggestions" />
+                        <ul className="mt-3 space-y-2">
+                          {result.recommendations.layout.map((item: string, i: number) => (
+                            <li key={i} className="flex gap-2 text-xs leading-relaxed text-muted-foreground">
+                              <ArrowRight className="mt-0.5 size-3 shrink-0 text-primary" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {result.recommendations.materials?.length > 0 && (
+                      <div className="rounded-xl border border-border bg-secondary/20 p-4">
+                        <SectionIcon icon={Palette} label="Material & Colour Suggestions" />
+                        <ul className="mt-3 space-y-2">
+                          {result.recommendations.materials.map((item: string, i: number) => (
+                            <li key={i} className="flex gap-2 text-xs leading-relaxed text-muted-foreground">
+                              <ArrowRight className="mt-0.5 size-3 shrink-0 text-primary" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {result.recommendations.optimization?.length > 0 && (
+                      <div className="rounded-xl border border-border bg-secondary/20 p-4">
+                        <SectionIcon icon={Lightbulb} label="Space Optimization" />
+                        <ul className="mt-3 space-y-2">
+                          {result.recommendations.optimization.map((item: string, i: number) => (
+                            <li key={i} className="flex gap-2 text-xs leading-relaxed text-muted-foreground">
+                              <ArrowRight className="mt-0.5 size-3 shrink-0 text-primary" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {result.recommendations.considerations?.length > 0 && (
+                      <div className="rounded-xl border border-border bg-secondary/20 p-4">
+                        <SectionIcon icon={Ruler} label="Design Considerations" />
+                        <ul className="mt-3 space-y-2">
+                          {result.recommendations.considerations.map((item: string, i: number) => (
+                            <li key={i} className="flex gap-2 text-xs leading-relaxed text-muted-foreground">
+                              <ArrowRight className="mt-0.5 size-3 shrink-0 text-primary" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {result.matchedProducts?.length > 0 && (
+                      <div>
+                        <p className="text-sm font-semibold">Matched Payal Decor Products</p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          Products from our catalogue that suit your space
+                        </p>
+                        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                          {result.matchedProducts.map((product: any, i: number) => (
+                            <Card key={i} className="overflow-hidden">
+                              <CardContent className="p-0">
+                                <div className="aspect-video w-full overflow-hidden bg-secondary/40">
+                                  <img
+                                    src={product.image}
+                                    alt={product.name}
+                                    className="size-full object-cover"
+                                  />
+                                </div>
+                                <div className="p-3">
+                                  <p className="text-xs font-semibold">{product.name}</p>
+                                  <p className="mt-1 line-clamp-2 text-[0.7rem] leading-relaxed text-muted-foreground">
+                                    {product.desc}
+                                  </p>
+                                  <div className="mt-2 flex flex-wrap gap-2">
+                                    <Button asChild size="sm" variant="outline" className="h-7 text-[0.65rem]">
+                                      <Link to={product.url}>View Product</Link>
+                                    </Button>
+                                    <Button asChild size="sm" className="h-7 bg-brand-gradient text-[0.65rem] text-primary-foreground">
+                                      <Link to="/contact">Request Quote</Link>
+                                    </Button>
+                                  </div>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="flex items-start gap-2 rounded-lg border border-border bg-accent/30 p-3">
+                      <AlertTriangle className="mt-0.5 size-4 shrink-0 text-primary" />
+                      <p className="text-[0.7rem] leading-relaxed text-muted-foreground">
+                        AI suggestions are for general guidance only and do not replace professional interior design consultation.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-2">
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={handleDownload}
+                        onClick={handleReset}
                       >
-                        <Download className="mr-2 size-4" />
-                        Download Image
+                        <RefreshCw className="mr-2 size-3" />
+                        Try Another Image
                       </Button>
                       <Button
-                        variant="ghost"
+                        variant="secondary"
                         size="sm"
-                        onClick={handleTryAgain}
+                        onClick={handleStartOver}
                       >
-                        <RefreshCw className="mr-2 size-4" />
-                        Try Again
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={handleCreateAnother}
-                      >
-                        Create Another Visualization
+                        Start Over
                       </Button>
                     </div>
                   </div>
                 ) : showError ? (
-                  <div className="flex flex-col items-center gap-3">
+                  <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
                     <div className="flex size-14 items-center justify-center rounded-full bg-accent text-primary">
                       <Sparkles className="size-7" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold">Unable to generate visualization</p>
+                      <p className="text-sm font-semibold">Unable to analyze space</p>
                       <p className="mt-1 text-xs text-muted-foreground">
-                        {generationError}
+                        {error}
                       </p>
                     </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleReset}
+                    >
+                      <RefreshCw className="mr-2 size-3" />
+                      Try Again
+                    </Button>
                   </div>
                 ) : (
-                  <div className="flex flex-col items-center gap-3">
+                  <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
                     <div className="flex size-14 items-center justify-center rounded-full bg-accent text-primary">
                       <Sparkles className="size-7" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold">Your visualization will appear here</p>
+                      <p className="text-sm font-semibold">Your suggestions will appear here</p>
                       <p className="mt-1 text-xs text-muted-foreground">
-                        Upload an image, select a space type and describe your requirements to get started.
+                        Upload an image and select a space type to get AI furniture suggestions.
                       </p>
                     </div>
                   </div>

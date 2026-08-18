@@ -1,10 +1,10 @@
 import { createServerFn } from "@tanstack/react-start";
 import fs from "node:fs";
 import path from "node:path";
-import { catalogProducts, productBySlug, productBrowserItems, categoryBrowserItems, industryBrowserItems } from "@/lib/catalog-data";
-import { allProducts, productById } from "@/data/productRangeData";
-import { allProducts as categoryProducts, type ProductCategoryItem } from "@/data/productCategoriesData";
-import { allSolutions, type SolutionProduct } from "@/data/industrySolutionsData";
+import { catalogProducts } from "@/lib/catalog-data";
+import { allProducts } from "@/data/productRangeData";
+import { allProducts as categoryProducts } from "@/data/productCategoriesData";
+import { allSolutions } from "@/data/industrySolutionsData";
 
 function loadDevVars(): Record<string, string> {
   const filePath = path.join(process.cwd(), ".dev.vars");
@@ -87,6 +87,8 @@ for (const solution of allSolutions) {
 }
 
 const uniqueCatalog = Array.from(new Map(shopCatalog.map(p => [p.name + p.url, p])).values());
+
+console.log("[ShopAI] Catalogue loaded. Total products:", uniqueCatalog.length);
 
 const QUERY_TO_CATEGORIES: Record<string, string[]> = {
   bedroom: ["residential", "hostel", "modular-wardrobe", "general"],
@@ -177,8 +179,9 @@ function getRelevantCategories(query: string): string[] {
 
 function buildFilteredCatalog(query: string): ShopProduct[] {
   const relevantCategories = getRelevantCategories(query);
-  
+
   if (relevantCategories.length === 0) {
+    console.log("[ShopAI] No relevant categories found for query:", query);
     return uniqueCatalog.slice(0, 40);
   }
 
@@ -186,7 +189,7 @@ function buildFilteredCatalog(query: string): ShopProduct[] {
     relevantCategories.map(c => CATEGORY_ALIASES[c] || c)
   );
 
-  return uniqueCatalog.filter(p => {
+  const filtered = uniqueCatalog.filter(p => {
     const productCat = (p.category || "").toLowerCase();
     const productType = (p.type || "").toLowerCase();
     const productSeries = (p.series || "").toLowerCase();
@@ -206,6 +209,10 @@ function buildFilteredCatalog(query: string): ShopProduct[] {
     }
     return false;
   }).slice(0, 40);
+
+  console.log("[ShopAI] Filtered catalogue for query:", query, "| Categories:", relevantCategories, "| Filtered count:", filtered.length);
+
+  return filtered;
 }
 
 function buildCatalogText(products: ShopProduct[]): string {
@@ -223,6 +230,7 @@ export const generateShopAI = createServerFn({ method: "POST" })
     const apiKey = env.SHOP_AI_GEMINI_API_KEY;
 
     if (!apiKey) {
+      console.log("[ShopAI] API key missing");
       return { success: false, message: "Shop with AI is temporarily unavailable. Please try again later." };
     }
 
@@ -235,8 +243,18 @@ export const generateShopAI = createServerFn({ method: "POST" })
 
       const trimmedQuery = query.trim();
       const relevantCategories = getRelevantCategories(trimmedQuery);
-      const filteredCatalog = buildFilteredCatalog(trimmedQuery);
+      let filteredCatalog = buildFilteredCatalog(trimmedQuery);
       const catalogText = buildCatalogText(filteredCatalog);
+
+      if (filteredCatalog.length === 0 && uniqueCatalog.length > 0) {
+        console.log("[ShopAI] Filtered catalogue empty, falling back to full catalogue");
+        filteredCatalog = uniqueCatalog.slice(0, 40);
+      }
+
+      if (uniqueCatalog.length === 0) {
+        console.log("[ShopAI] CRITICAL: Empty product catalogue");
+        return { success: false, message: "Product catalogue is temporarily unavailable. Please try again later." };
+      }
 
       const prompt = `You are a product matching assistant for Payal Decor, a commercial interiors and furniture company in Pune, India.
 
@@ -277,6 +295,7 @@ Your task:
       if (!response.ok) {
         const errorText = await response.text();
         if (response.status === 429 || errorText.toLowerCase().includes("quota")) {
+          console.log("[ShopAI] Gemini quota exceeded");
           return { success: false, message: "Shop with AI is temporarily unavailable. Please try again later." };
         }
         return { success: false, message: "We couldn't find matches this time. Please try again." };
@@ -288,6 +307,7 @@ Your task:
       const textPart = parts.find((part: any) => part.text);
 
       if (!textPart?.text) {
+        console.log("[ShopAI] Gemini returned no text");
         return { success: false, message: "We couldn't find matches this time. Please try again." };
       }
 
@@ -299,20 +319,30 @@ Your task:
           matchedNames = JSON.parse(jsonMatch[0]);
           if (!Array.isArray(matchedNames)) matchedNames = [];
         } else {
+          console.log("[ShopAI] No JSON array found in Gemini response");
           return { success: false, message: "We couldn't find matches this time. Please try again." };
         }
       } catch {
+        console.log("[ShopAI] Failed to parse Gemini JSON response");
         return { success: false, message: "We couldn't find matches this time. Please try again." };
       }
+
+      console.log("[ShopAI] Gemini returned names:", matchedNames);
 
       const matchedProducts = matchedNames
         .map(name => uniqueCatalog.find(p => p.name.toLowerCase() === name.toLowerCase()))
         .filter((p): p is ShopProduct => Boolean(p))
         .slice(0, 6);
 
+      if (matchedProducts.length === 0 && matchedNames.length > 0) {
+        console.log("[ShopAI] Gemini returned names but none matched catalogue:", matchedNames);
+      }
+
       if (matchedProducts.length === 0) {
         return { success: false, message: "No exact matches found. Try describing your requirement with more details like room type, furniture type, or material." };
       }
+
+      console.log("[ShopAI] Returning", matchedProducts.length, "matched products");
 
       return {
         success: true,
@@ -330,6 +360,7 @@ Your task:
         })),
       };
     } catch (error) {
+      console.log("[ShopAI] Handler error:", error);
       return { success: false, message: "We couldn't find matches this time. Please try again." };
     }
   });

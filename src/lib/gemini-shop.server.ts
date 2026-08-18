@@ -224,6 +224,41 @@ function buildCatalogText(products: ShopProduct[]): string {
     .join("\n");
 }
 
+function fallbackMatchProducts(query: string, catalog: ShopProduct[]): ShopProduct[] {
+  const lower = query.toLowerCase();
+  const words = lower.split(/[^a-z0-9]+/).filter(w => w.length > 2);
+  const stopWords = new Set(["i", "need", "want", "looking", "for", "the", "a", "an", "some", "please", "find", "show", "me", "my", "best", "good", "new", "modern", "wooden", "steel", "metal", "plastic", "fabric", "leather", "office", "bedroom", "kitchen", "living", "room", "reception", "retail", "hostel", "pg", "commercial"]);
+
+  const keywords = words.filter(w => !stopWords.has(w));
+  if (keywords.length === 0) {
+    keywords.push(...words.slice(0, 3));
+  }
+
+  const scored = catalog.map(p => {
+    let score = 0;
+    const searchText = `${p.name} ${p.category} ${p.type || ""} ${p.desc} ${(p.applications || []).join(" ")} ${(p.materials || []).join(" ")}`.toLowerCase();
+
+    for (const kw of keywords) {
+      if (searchText.includes(kw)) {
+        score += 1;
+      }
+      if (p.name.toLowerCase().includes(kw)) {
+        score += 3;
+      }
+      if ((p.type || "").toLowerCase().includes(kw)) {
+        score += 2;
+      }
+    }
+
+    return { ...p, score };
+  });
+
+  return scored
+    .filter(p => p.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 6);
+}
+
 export const generateShopAI = createServerFn({ method: "POST" })
   .handler(async (ctx) => {
     const env = { ...process.env, ...loadDevVars() };
@@ -267,13 +302,14 @@ ${catalogText}
 
 Your task:
 1. Understand what the user is looking for from their description.
-2. Find the EXACT product names from the catalogue above that best match the user's requirement.
-3. Return ONLY a valid JSON array of product names. Example:
+2. Inspect the catalogue products carefully and match based on semantic meaning, product name, category, type, material, room/use-case and related keywords.
+3. Find the EXACT product names from the catalogue above that best match the user's requirement.
+4. Return ONLY a valid JSON array of product names. Example:
 ["Product Name 1", "Product Name 2", "Product Name 3"]
-4. Return at most 6 products.
-5. Do NOT invent products. Only use names exactly as they appear in the catalogue above.
-6. If no product matches well, return an empty array [].
-7. Do NOT include any text outside the JSON array.`;
+5. Return at most 6 products, prefer 3-6 best matches when suitable products exist.
+6. Do NOT invent products. Only use names exactly as they appear in the catalogue above.
+7. Return [] ONLY when there is genuinely no relevant product in the provided catalogue.
+8. Do NOT include any text outside the JSON array.`;
 
       const response = await fetch(
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=" + apiKey,
@@ -302,9 +338,16 @@ Your task:
       }
 
       const data = await response.json();
+      console.log("[ShopAI] Gemini response status:", response.status, "| ok:", response.ok);
+      console.log("[ShopAI] Gemini response top-level keys:", Object.keys(data));
+
       const candidate = data.candidates?.[0];
       const parts = candidate?.content?.parts || [];
       const textPart = parts.find((part: any) => part.text);
+
+      console.log("[ShopAI] Candidate keys:", candidate ? Object.keys(candidate) : "none");
+      console.log("[ShopAI] Parts count:", parts.length);
+      console.log("[ShopAI] Text part present:", Boolean(textPart?.text));
 
       if (!textPart?.text) {
         console.log("[ShopAI] Gemini returned no text");
@@ -314,25 +357,36 @@ Your task:
       let matchedNames: string[] = [];
       try {
         let text = textPart.text.replace(/```json/g, "").replace(/```/g, "").trim();
+        console.log("[ShopAI] Extracted text preview:", text.substring(0, 500));
         const jsonMatch = text.match(/\[[\s\S]*\]/);
+        console.log("[ShopAI] JSON array match found:", Boolean(jsonMatch));
         if (jsonMatch) {
           matchedNames = JSON.parse(jsonMatch[0]);
-          if (!Array.isArray(matchedNames)) matchedNames = [];
+          console.log("[ShopAI] Parsed result type:", typeof matchedNames, "| isArray:", Array.isArray(matchedNames), "| length:", matchedNames.length);
+          if (!Array.isArray(matchedNames)) {
+            console.log("[ShopAI] Parsed result is not an array, resetting to []");
+            matchedNames = [];
+          }
         } else {
           console.log("[ShopAI] No JSON array found in Gemini response");
           return { success: false, message: "We couldn't find matches this time. Please try again." };
         }
-      } catch {
-        console.log("[ShopAI] Failed to parse Gemini JSON response");
+      } catch (e) {
+        console.log("[ShopAI] Failed to parse Gemini JSON response:", (e as Error).message);
         return { success: false, message: "We couldn't find matches this time. Please try again." };
       }
 
       console.log("[ShopAI] Gemini returned names:", matchedNames);
 
-      const matchedProducts = matchedNames
+      let matchedProducts = matchedNames
         .map(name => uniqueCatalog.find(p => p.name.toLowerCase() === name.toLowerCase()))
         .filter((p): p is ShopProduct => Boolean(p))
         .slice(0, 6);
+
+      if (matchedProducts.length === 0 && matchedNames.length === 0 && filteredCatalog.length > 0) {
+        console.log("[ShopAI] Gemini returned empty array, using fallback matching against filtered catalogue");
+        matchedProducts = fallbackMatchProducts(trimmedQuery, filteredCatalog);
+      }
 
       if (matchedProducts.length === 0 && matchedNames.length > 0) {
         console.log("[ShopAI] Gemini returned names but none matched catalogue:", matchedNames);

@@ -129,6 +129,8 @@ export const generateAIVisualization = createServerFn({ method: "POST" })
     const env = { ...process.env, ...loadDevVars() };
     const apiKey = env.GEMINI_API_KEY;
 
+    console.log("[AI] environment key configured:", Boolean(apiKey));
+
     if (!apiKey) {
       return { success: false, message: "AI furniture suggestion is temporarily unavailable. Please try again later." };
     }
@@ -141,6 +143,7 @@ export const generateAIVisualization = createServerFn({ method: "POST" })
       }
 
       const base64Data = imageData.replace(/^data:image\/\w+;base64,/, "");
+      console.log("[AI] image data present:", Boolean(base64Data), "| length:", base64Data?.length || 0);
       if (!base64Data || base64Data.length < 100) {
         return { success: false, message: "Please upload a valid room or space image." };
       }
@@ -191,6 +194,8 @@ Do not include any text outside the JSON. Do not claim exact measurements unless
         }
       );
 
+      console.log("[AI] Gemini response status:", response.status);
+
       if (!response.ok) {
         const errorText = await response.text();
         if (response.status === 429 || errorText.toLowerCase().includes("quota")) {
@@ -203,6 +208,8 @@ Do not include any text outside the JSON. Do not claim exact measurements unless
       const candidate = data.candidates?.[0];
       const parts = candidate?.content?.parts || [];
       const textPart = parts.find((part: any) => part.text);
+
+      console.log("[AI] Gemini text part present:", Boolean(textPart?.text));
 
       if (!textPart?.text) {
         return { success: false, message: "We couldn't analyze your space this time. Please try again." };

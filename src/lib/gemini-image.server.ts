@@ -125,8 +125,7 @@ function matchProducts(spaceType: string, recommendations: any) {
 }
 
 const GEMINI_MODELS = [
-  "gemini-flash-latest",
-  "gemini-2.5-flash",
+  "gemini-3.5-flash-lite",
 ];
 
 async function callGeminiModel(apiKey: string, model: string, prompt: string, base64Data: string): Promise<Response> {

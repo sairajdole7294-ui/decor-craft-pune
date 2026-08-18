@@ -96,6 +96,10 @@ function Index() {
               <Sparkles className="size-4" />
               AI Visualize Your Space
             </BrandButton>
+            <BrandButton to="/shop-with-ai" variant="outline">
+              <Sparkles className="size-4" />
+              Shop with AI
+            </BrandButton>
           </Reveal>
 
           <Reveal delay={360} className="mt-7 flex flex-wrap gap-2">

@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Menu, Phone, X } from "lucide-react";
+import { Menu, Phone, X, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { company, media } from "@/lib/site-data";
 
@@ -13,6 +13,7 @@ export const navLinks = [
   { to: "/projects", label: "Projects" },
   { to: "/gallery", label: "Gallery" },
   { to: "/clients", label: "Clients" },
+  { to: "/shop-with-ai", label: "Shop with AI" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -109,7 +110,7 @@ export function Header() {
                     to={l.to}
                     activeOptions={{ exact: l.to === "/" }}
                     className={cn(
-                      "relative rounded-full px-2.5 py-2 text-[0.8rem] font-medium whitespace-nowrap transition-all duration-300 hover:-translate-y-px",
+                      "relative inline-flex items-center gap-1 rounded-full px-2.5 py-2 text-[0.8rem] font-medium whitespace-nowrap transition-all duration-300 hover:-translate-y-px",
                       transparent ? "text-white/80 hover:text-white" : "text-muted-foreground hover:text-foreground",
                     )}
                     activeProps={{
@@ -119,7 +120,14 @@ export function Header() {
                       ),
                     }}
                   >
-                    {l.label}
+                    {l.to === "/shop-with-ai" ? (
+                      <>
+                        <Sparkles className="size-3.5" />
+                        {l.label}
+                      </>
+                    ) : (
+                      l.label
+                    )}
                   </Link>
                   <div
                     className={cn(
@@ -151,7 +159,7 @@ export function Header() {
                   to={l.to}
                   activeOptions={{ exact: l.to === "/" }}
                   className={cn(
-                    "relative rounded-full px-2.5 py-2 text-[0.8rem] font-medium whitespace-nowrap transition-all duration-300 hover:-translate-y-px",
+                    "relative inline-flex items-center gap-1 rounded-full px-2.5 py-2 text-[0.8rem] font-medium whitespace-nowrap transition-all duration-300 hover:-translate-y-px",
                     transparent ? "text-white/80 hover:text-white" : "text-muted-foreground hover:text-foreground",
                   )}
                   activeProps={{
@@ -161,7 +169,14 @@ export function Header() {
                     ),
                   }}
                 >
-                  {l.label}
+                  {l.to === "/shop-with-ai" ? (
+                    <>
+                      <Sparkles className="size-3.5" />
+                      {l.label}
+                    </>
+                  ) : (
+                    l.label
+                  )}
                 </Link>
               ),
             )}
@@ -211,14 +226,21 @@ export function Header() {
             {navLinks.map((l) =>
               l.hasDropdown ? (
                 <div key={l.to}>
-                  <button
-                    type="button"
-                    onClick={() => setProductsOpen((v) => !v)}
-                    className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                    aria-expanded={productsOpen}
-                  >
-                    {l.label}
-                    <svg
+                   <button
+                     type="button"
+                     onClick={() => setProductsOpen((v) => !v)}
+                     className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                     aria-expanded={productsOpen}
+                   >
+                     {l.to === "/shop-with-ai" ? (
+                       <span className="inline-flex items-center gap-1.5">
+                         <Sparkles className="size-4" />
+                         {l.label}
+                       </span>
+                     ) : (
+                       l.label
+                     )}
+                     <svg
                       className={cn("size-4 transition-transform duration-300", productsOpen && "rotate-180")}
                       fill="none"
                       stroke="currentColor"
@@ -255,7 +277,14 @@ export function Header() {
                   className="rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                   activeProps={{ className: "!bg-accent !text-primary !font-semibold" }}
                 >
-                  {l.label}
+                  {l.to === "/shop-with-ai" ? (
+                    <span className="inline-flex items-center gap-1.5">
+                      <Sparkles className="size-4" />
+                      {l.label}
+                    </span>
+                  ) : (
+                    l.label
+                  )}
                 </Link>
               ),
             )}

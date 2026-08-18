@@ -22,6 +22,7 @@ import { Route as ManufacturingRouteImport } from './routes/manufacturing'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ShopWithAiRouteImport } from './routes/shop-with-ai'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as IndustriesIndexRouteImport } from './routes/industries.index'
 import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
@@ -96,6 +97,11 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShopWithAiRoute = ShopWithAiRouteImport.update({
+  id: '/shop-with-ai',
+  path: '/shop-with-ai',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -151,6 +157,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
+  '/shop-with-ai': typeof ShopWithAiRoute
   '/terms': typeof TermsRoute
   '/industries/$slug': typeof IndustriesSlugRouteWithChildren
   '/product-categories/$slug': typeof ProductCategoriesSlugRoute
@@ -174,6 +181,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
+  '/shop-with-ai': typeof ShopWithAiRoute
   '/terms': typeof TermsRoute
   '/industries/$slug': typeof IndustriesSlugRouteWithChildren
   '/product-categories/$slug': typeof ProductCategoriesSlugRoute
@@ -198,6 +206,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
+  '/shop-with-ai': typeof ShopWithAiRoute
   '/terms': typeof TermsRoute
   '/industries/$slug': typeof IndustriesSlugRouteWithChildren
   '/product-categories/$slug': typeof ProductCategoriesSlugRoute
@@ -223,6 +232,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/projects'
     | '/services'
+    | '/shop-with-ai'
     | '/terms'
     | '/industries/$slug'
     | '/product-categories/$slug'
@@ -246,6 +256,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/projects'
     | '/services'
+    | '/shop-with-ai'
     | '/terms'
     | '/industries/$slug'
     | '/product-categories/$slug'
@@ -269,6 +280,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/projects'
     | '/services'
+    | '/shop-with-ai'
     | '/terms'
     | '/industries/$slug'
     | '/product-categories/$slug'
@@ -293,6 +305,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   ProjectsRoute: typeof ProjectsRoute
   ServicesRoute: typeof ServicesRoute
+  ShopWithAiRoute: typeof ShopWithAiRoute
   TermsRoute: typeof TermsRoute
   IndustriesSlugRoute: typeof IndustriesSlugRouteWithChildren
   ProductCategoriesSlugRoute: typeof ProductCategoriesSlugRoute
@@ -395,6 +408,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/shop-with-ai': {
+      id: '/shop-with-ai'
+      path: '/shop-with-ai'
+      fullPath: '/shop-with-ai'
+      preLoaderRoute: typeof ShopWithAiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -480,6 +500,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   ProjectsRoute: ProjectsRoute,
   ServicesRoute: ServicesRoute,
+  ShopWithAiRoute: ShopWithAiRoute,
   TermsRoute: TermsRoute,
   IndustriesSlugRoute: IndustriesSlugRouteWithChildren,
   ProductCategoriesSlugRoute: ProductCategoriesSlugRoute,

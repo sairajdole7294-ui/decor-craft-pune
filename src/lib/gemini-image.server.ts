@@ -124,6 +124,68 @@ function matchProducts(spaceType: string, recommendations: any) {
   return scored.filter(p => p.score > 0).sort((a, b) => b.score - a.score).slice(0, 6);
 }
 
+const GEMINI_MODELS = [
+  "gemini-flash-latest",
+  "gemini-1.5-flash",
+];
+
+async function callGeminiModel(apiKey: string, model: string, prompt: string, base64Data: string): Promise<Response> {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+  return fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      contents: [
+        {
+          parts: [
+            { text: prompt },
+            { inlineData: { mimeType: "image/jpeg", data: base64Data } },
+          ],
+        },
+      ],
+    }),
+  });
+}
+
+async function fetchWithRetry(apiKey: string, prompt: string, base64Data: string): Promise<Response> {
+  let lastStatus = 0;
+  let lastResponse: Response | null = null;
+
+  for (const model of GEMINI_MODELS) {
+    for (let attempt = 0; attempt < 3; attempt++) {
+      console.log(`[AI] Attempt ${attempt + 1}/3 with model: ${model}`);
+      const response = await callGeminiModel(apiKey, model, prompt, base64Data);
+      lastResponse = response;
+      lastStatus = response.status;
+
+      if (response.ok) {
+        console.log(`[AI] Model ${model} responded OK`);
+        return response;
+      }
+
+      const errorText = await response.text();
+      const is503 = response.status === 503;
+      const is429 = response.status === 429 || errorText.toLowerCase().includes("quota");
+
+      if (is503 && attempt < 2) {
+        const delay = Math.pow(2, attempt) * 1000;
+        console.log(`[AI] Model ${model} returned 503, retrying in ${delay}ms...`);
+        await new Promise((r) => setTimeout(r, delay));
+        continue;
+      }
+
+      if (is503 && attempt === 2 && model !== GEMINI_MODELS[GEMINI_MODELS.length - 1]) {
+        console.log(`[AI] Model ${model} exhausted retries, falling back to ${GEMINI_MODELS[GEMINI_MODELS.length - 1]}`);
+        break;
+      }
+
+      return response;
+    }
+  }
+
+  return lastResponse as Response;
+}
+
 export const generateAIVisualization = createServerFn({ method: "POST" })
   .handler(async (ctx) => {
     const env = { ...process.env, ...loadDevVars() };
@@ -176,35 +238,27 @@ Respond ONLY with valid JSON in this exact format:
 
 Do not include any text outside the JSON. Do not claim exact measurements unless they can actually be determined from the image. Keep recommendations practical and relevant to what is visible.`;
 
-      const response = await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=" + apiKey,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [
-              {
-                parts: [
-                  { text: prompt },
-                  { inlineData: { mimeType: "image/jpeg", data: base64Data } },
-                ],
-              },
-            ],
-          }),
-        }
-      );
-
-      console.log("[AI] Gemini response status:", response.status);
+      const response = await fetchWithRetry(apiKey, prompt, base64Data);
+      console.log("[AI] Final Gemini response status:", response.status);
 
       if (!response.ok) {
         const errorText = await response.text();
+        console.log("[AI] Gemini error status:", response.status, "| error preview:", errorText.substring(0, 200));
         if (response.status === 429 || errorText.toLowerCase().includes("quota")) {
           return { success: false, message: "AI furniture suggestion is temporarily unavailable. Please try again later." };
+        }
+        if (response.status === 404) {
+          return { success: false, message: "AI model is temporarily unavailable. Please try again later." };
+        }
+        if (response.status === 503) {
+          return { success: false, message: "AI service is busy. Please try again in a few moments." };
         }
         return { success: false, message: "We couldn't analyze your space this time. Please try again." };
       }
 
       const data = await response.json();
+      console.log("[AI] Gemini response top-level keys:", Object.keys(data));
+
       const candidate = data.candidates?.[0];
       const parts = candidate?.content?.parts || [];
       const textPart = parts.find((part: any) => part.text);
@@ -212,6 +266,7 @@ Do not include any text outside the JSON. Do not claim exact measurements unless
       console.log("[AI] Gemini text part present:", Boolean(textPart?.text));
 
       if (!textPart?.text) {
+        console.log("[AI] Gemini returned no text part. Candidate keys:", candidate ? Object.keys(candidate) : "none");
         return { success: false, message: "We couldn't analyze your space this time. Please try again." };
       }
 
@@ -222,9 +277,11 @@ Do not include any text outside the JSON. Do not claim exact measurements unless
         if (jsonMatch) {
           recommendations = JSON.parse(jsonMatch[0]);
         } else {
+          console.log("[AI] No JSON object found in Gemini text. Text preview:", text.substring(0, 200));
           return { success: false, message: "We couldn't analyze your space this time. Please try again." };
         }
-      } catch {
+      } catch (e) {
+        console.log("[AI] JSON parse error:", (e as Error).message);
         return { success: false, message: "We couldn't analyze your space this time. Please try again." };
       }
 

@@ -9,6 +9,24 @@ import { Input } from "@/components/ui/input";
 import { Link } from "@tanstack/react-router";
 import { generateShopAI } from "@/lib/gemini-shop.server";
 
+// Sensible fallback used only when a matched product has no usable image.
+const PRODUCT_FALLBACK_IMAGE = "/media/products/p28.jpg";
+
+function ProductImage({ src, alt }: { src: string; alt: string }) {
+  const [imgSrc, setImgSrc] = useState(src || PRODUCT_FALLBACK_IMAGE);
+  return (
+    <img
+      src={imgSrc}
+      alt={alt}
+      className="size-full object-cover"
+      loading="lazy"
+      onError={() => {
+        if (imgSrc !== PRODUCT_FALLBACK_IMAGE) setImgSrc(PRODUCT_FALLBACK_IMAGE);
+      }}
+    />
+  );
+}
+
 export default function ShopWithAI() {
   const [query, setQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
@@ -171,11 +189,7 @@ export default function ShopWithAI() {
                         <Card key={i} className="overflow-hidden">
                           <CardContent className="p-0">
                             <div className="aspect-video w-full overflow-hidden bg-secondary/40">
-                              <img
-                                src={product.image}
-                                alt={product.name}
-                                className="size-full object-cover"
-                              />
+                              <ProductImage src={product.image} alt={product.name} />
                             </div>
                             <div className="p-3">
                               <p className="text-xs font-semibold">{product.name}</p>

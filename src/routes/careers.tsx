@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MapPin, Briefcase, Clock } from "lucide-react";
-import { media, openRoles, company } from "@/lib/site-data";
+import { media, openRoles, careersApplyUrl, careersApplyHref } from "@/lib/site-data";
 import { PageHero, SectionHead, CtaBand, BrandButton } from "@/components/site/bits";
 import { Reveal } from "@/components/site/motion";
 
@@ -39,7 +39,9 @@ function Careers() {
         lead="Join a Pune team that designs, manufactures and installs under one roof — and has been doing it since 1992."
         image={media.workshop}
       >
-        <BrandButton href={`mailto:${company.email}?subject=Career%20enquiry`}>Send your CV</BrandButton>
+        <BrandButton href={`${careersApplyUrl}?subject=${encodeURIComponent("Career Enquiry")}`}>
+          Send your CV
+        </BrandButton>
       </PageHero>
 
       <section className="shell py-6 lg:py-8">
@@ -70,7 +72,7 @@ function Careers() {
                       <span className="inline-flex items-center gap-1"><Clock className="size-3" />{r.type}</span>
                     </div>
                   </div>
-                  <BrandButton href={`mailto:${company.email}?subject=Application: ${encodeURIComponent(r.title)}`} variant="outline" className="shrink-0">
+                  <BrandButton href={careersApplyHref(r.title)} variant="outline" className="shrink-0 whitespace-nowrap">
                     Apply
                   </BrandButton>
                 </article>

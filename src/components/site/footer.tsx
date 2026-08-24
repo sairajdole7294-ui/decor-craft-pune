@@ -37,31 +37,17 @@ export function Footer() {
     <footer className="surface-ink">
       <div className="shell grid gap-6 py-6 lg:grid-cols-[1.5fr_2fr_1.4fr] lg:py-8">
         <div>
-          <div className="flex items-center gap-2.5">
-            <img src={media.logo} alt="Payal Decor" className="size-10 object-contain" />
-            <span>
-              <span className="block font-[family-name:var(--font-display)] text-lg font-bold text-ink-foreground">
-                Payal Decor
-              </span>
-              <span className="text-[0.65rem] font-semibold tracking-[0.16em] text-ink-foreground/55 uppercase">
-                {company.tagline}
-              </span>
-            </span>
+          <div className="flex items-center">
+            <img
+              src={media.logo}
+              alt="Payal Decor"
+              className="h-14 w-auto max-w-[11rem] object-contain sm:h-16 sm:max-w-[12rem]"
+            />
           </div>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-foreground/65">
             Turnkey commercial interiors, modular furniture and custom manufacturing — designed,
             produced in our own factory and installed by our own teams.
           </p>
-          <div className="mt-5 flex flex-wrap gap-2">
-            {["ISO 9001:2015", "In-House Factory", "30+ Years"].map((b) => (
-              <span
-                key={b}
-                className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[0.68rem] font-semibold text-ink-foreground/75"
-              >
-                {b}
-              </span>
-            ))}
-          </div>
         </div>
 
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">

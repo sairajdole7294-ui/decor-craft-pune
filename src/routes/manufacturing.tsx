@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { media, machines, capabilities, factorySteps } from "@/lib/site-data";
 import { PageHero, SectionHead, CtaBand } from "@/components/site/bits";
-import { Reveal } from "@/components/site/motion";
+import { Reveal, CapabilityBars } from "@/components/site/motion";
 import { VideoShowcase } from "@/components/site/gallery-explorer";
 
 const title = "Manufacturing — In-House Factory in Pune | Payal Decor";
@@ -60,20 +60,7 @@ function Manufacturing() {
         <div className="shell grid gap-6 lg:grid-cols-2 lg:items-center">
           <div>
             <SectionHead eyebrow="Capability" title="What the floor can absorb" lead="Capacity utilisation across the disciplines we run in-house." />
-            <div className="space-y-3">
-              {capabilities.map((c, i) => (
-                <Reveal key={c.name} delay={i * 70}>
-                  <div className="flex items-baseline justify-between text-xs">
-                    <span className="font-semibold">{c.name}</span>
-                    <span className="font-bold text-primary">{c.pct}%</span>
-                  </div>
-                  <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-border">
-                    <div className="h-full rounded-full bg-brand-gradient" style={{ width: `${c.pct}%` }} />
-                  </div>
-                  <p className="mt-1 text-[0.68rem] text-muted-foreground">{c.note}</p>
-                </Reveal>
-              ))}
-            </div>
+            <CapabilityBars items={capabilities} />
           </div>
           <Reveal delay={120}>
             <VideoShowcase src={media.factoryVideo} />

@@ -15,7 +15,7 @@ import {
   media, company, stats, services, products, usps, projects, capabilities,
   processSteps, testimonials, faqs, certifications, industries,
 } from "@/lib/site-data";
-import { Reveal, Counter } from "@/components/site/motion";
+import { Reveal, Counter, CapabilityBars } from "@/components/site/motion";
 import { SectionHead, BrandButton, LogoMarquee, CtaBand, Eyebrow } from "@/components/site/bits";
 import { CostCalculator } from "@/components/site/calculator";
 import { SupportPanel } from "@/components/site/panels";
@@ -323,22 +323,7 @@ function Index() {
               title="Machines that make the difference"
               lead="Biesse, Homag, Altendorf, Felder and Technogem lines under one roof — precision, repeatability and control over every deadline."
             />
-            <div className="space-y-3">
-              {capabilities.map((c, i) => (
-                <Reveal key={c.name} delay={i * 70}>
-                  <div>
-                    <div className="flex items-baseline justify-between text-xs">
-                      <span className="font-semibold">{c.name}</span>
-                      <span className="font-bold text-primary">{c.pct}%</span>
-                    </div>
-                    <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-border">
-                      <div className="h-full rounded-full bg-brand-gradient transition-[width] duration-1000" style={{ width: `${c.pct}%` }} />
-                    </div>
-                    <p className="mt-1 text-[0.68rem] text-muted-foreground">{c.note}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
+            <CapabilityBars items={capabilities} />
             <div className="mt-5">
               <BrandButton to="/manufacturing" variant="outline">Inside our manufacturing facility</BrandButton>
             </div>
@@ -479,7 +464,9 @@ function Index() {
                   Send us your drawing or requirement — we reply with scope, budget range and a schedule.
                 </p>
               </div>
-              <BrandButton to="/contact">Talk to our team</BrandButton>
+              <BrandButton to="/contact" className="shrink-0 whitespace-nowrap">
+                Talk to our team
+              </BrandButton>
             </Reveal>
           </div>
           <SupportPanel />

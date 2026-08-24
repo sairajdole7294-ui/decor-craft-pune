@@ -39,6 +39,13 @@ export const company = {
     "https://www.google.com/maps?q=Katraj+Kondhwa+Road+Vidyanagar+Katraj+Pune+411046&output=embed",
 };
 
+// Careers application destination. Defaults to email; replace with a Google Form
+// URL (e.g. "https://forms.gle/...") when one is provided — every Apply button
+// reads from here so the link stays consistent and easy to update.
+export const careersApplyUrl = `mailto:${company.email}`;
+export const careersApplyHref = (role: string) =>
+  `${careersApplyUrl}?subject=${encodeURIComponent(`Application: ${role}`)}`;
+
 export const stats = [
   { value: 30, suffix: "+", label: "Years Experience", note: "Since 1992" },
   { value: 500, suffix: "+", label: "Projects Delivered", note: "Across Pune & Maharashtra" },

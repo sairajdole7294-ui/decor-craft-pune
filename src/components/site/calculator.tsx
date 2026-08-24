@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, ChevronLeft, ChevronRight, ClipboardList, RefreshCw, MessageCircle } from "lucide-react";
+import { Check, ChevronLeft, ChevronRight, ClipboardList, RefreshCw, MessageCircle, ChevronDown } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { Reveal } from "./motion";
@@ -407,6 +407,22 @@ export function ContactForm() {
     toast.success("Opening WhatsApp", { description: "Your enquiry is pre-filled — just hit send." });
   };
 
+  const projectTypeOptions = [
+    "Residential Interior",
+    "Commercial Interior",
+    "Office",
+    "Modular Kitchen",
+    "Furniture",
+    "Wardrobe",
+    "Renovation",
+    "Other",
+  ];
+
+  const selectCls = cn(
+    "rounded-lg border bg-background px-3 py-2.5 text-sm outline-none transition-colors focus:border-primary",
+    errors.type ? "border-destructive" : "border-border",
+  );
+
   return (
     <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-card)]">
       <div className="border-b border-border bg-secondary/60 px-5 py-4">
@@ -418,7 +434,22 @@ export function ContactForm() {
         <Field label="Mobile number*" type="tel" value={form.phone} onChange={set("phone")} placeholder="+91 ..." error={errors.phone} />
         <Field label="Email" type="email" value={form.email} onChange={set("email")} placeholder="you@company.com" error={errors.email} />
         <Field label="City" value={form.city} onChange={set("city")} placeholder="Pune" />
-        <Field className="sm:col-span-2" label="Project type" value={form.type} onChange={set("type")} placeholder="Office fit-out, modular kitchen…" />
+        <label className="flex flex-col gap-1 sm:col-span-2">
+          <span className="text-[0.68rem] font-bold tracking-[0.12em] text-muted-foreground uppercase">Project type</span>
+          <div className="relative">
+            <select
+              value={form.type}
+              onChange={(e) => set("type")(e.target.value)}
+              className={cn(selectCls, "w-full appearance-none pr-9", !form.type && "text-muted-foreground")}
+            >
+              <option value="" disabled>Select project type…</option>
+              {projectTypeOptions.map((o) => (
+                <option key={o} value={o} className="text-foreground">{o}</option>
+              ))}
+            </select>
+            <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+          </div>
+        </label>
         <Field
           className="sm:col-span-2"
           label="Project details*"

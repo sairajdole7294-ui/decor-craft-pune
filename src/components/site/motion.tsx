@@ -32,6 +32,34 @@ export function useInView<T extends HTMLElement>(once = true) {
   return { ref, shown };
 }
 
+type Capability = { name: string; pct: number; note?: string };
+
+export function CapabilityBars({ items }: { items: Capability[] }) {
+  const { ref, shown } = useInView<HTMLDivElement>();
+  return (
+    <div ref={ref} className="space-y-3">
+      {items.map((c, i) => (
+        <div key={c.name}>
+          <div className="flex items-baseline justify-between text-xs">
+            <span className="font-semibold">{c.name}</span>
+            <span className="font-bold text-primary">{c.pct}%</span>
+          </div>
+          <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-border">
+            <div
+              className="h-full rounded-full bg-brand-gradient transition-[width] duration-1000 ease-out"
+              style={{
+                width: shown ? `${c.pct}%` : "0%",
+                transitionDelay: `${i * 90}ms`,
+              }}
+            />
+          </div>
+          {c.note ? <p className="mt-1 text-[0.68rem] text-muted-foreground">{c.note}</p> : null}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function Reveal({
   children,
   delay = 0,

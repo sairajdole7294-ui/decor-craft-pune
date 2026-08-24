@@ -65,10 +65,6 @@ export function SupportPanel() {
         </div>
       </Reveal>
 
-      <Reveal delay={70} className="card-premium p-5">
-        <TrustGrid />
-      </Reveal>
-
       <Reveal delay={120} className="card-premium grid gap-3 p-5 sm:grid-cols-[auto_1fr] sm:items-center">
         <div className="flex items-center gap-1 text-primary">
           {[0, 1, 2, 3, 4].map((i) => (

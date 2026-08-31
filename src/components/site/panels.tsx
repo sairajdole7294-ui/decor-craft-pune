@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import {
   Phone, MessageCircle, Mail, MapPin, Clock, ShieldCheck, Factory, Award,
-  Star, Truck, Check, ArrowRight,
+  Star, Truck, Check, ArrowRight, Building2,
 } from "lucide-react";
 import { company, certifications, industries, galleryItems } from "@/lib/site-data";
 import { companyProfilePdf } from "@/lib/catalog-data";
@@ -53,7 +53,7 @@ function TrustGrid() {
 /** Side panel used beside the homepage FAQ list. */
 export function SupportPanel() {
   return (
-    <div className="grid gap-3">
+    <div className="flex h-full flex-col gap-3">
       <Reveal className="card-premium p-5">
         <p className="text-[0.65rem] font-bold tracking-[0.14em] text-primary uppercase">Free Consultation</p>
         <h3 className="mt-2 text-lg font-semibold">Talk to the team running your project</h3>
@@ -65,7 +65,16 @@ export function SupportPanel() {
         </div>
       </Reveal>
 
-      <Reveal delay={120} className="card-premium grid gap-3 p-5 sm:grid-cols-[auto_1fr] sm:items-center">
+      <Reveal delay={120} className="card-premium grid h-full gap-3 p-5 sm:grid-cols-[auto_1fr] sm:items-center">
+        <div className="sm:col-span-2">
+          <div className="flex items-center gap-1.5 text-primary">
+            <Building2 className="size-3.5" />
+            <span className="text-[0.65rem] font-bold tracking-[0.14em] uppercase">Trusted Experience</span>
+          </div>
+          <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+            Built on 30+ years of experience, our in-house manufacturing capabilities and commitment to quality, we deliver thoughtful interior solutions for homes, offices and commercial spaces.
+          </p>
+        </div>
         <div className="flex items-center gap-1 text-primary">
           {[0, 1, 2, 3, 4].map((i) => (
             <Star key={i} className="size-4 fill-current" />
@@ -74,7 +83,7 @@ export function SupportPanel() {
         <p className="text-xs leading-relaxed text-muted-foreground">
           Rated by corporates, campuses and manufacturers across Maharashtra — Kirloskar, EKA Mobility, Prakash Masale and more.
         </p>
-        <div className="sm:col-span-2">
+        <div className="sm:col-span-2 flex items-end">
           <CatalogDownload label="Download Company Profile (PDF)" href={companyProfilePdf} />
         </div>
       </Reveal>

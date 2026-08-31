@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Menu, Phone, X, Sparkles } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { company, media } from "@/lib/site-data";
 
@@ -13,7 +13,6 @@ export const navLinks = [
   { to: "/projects", label: "Projects" },
   { to: "/gallery", label: "Gallery" },
   { to: "/clients", label: "Clients" },
-  { to: "/shop-with-ai", label: "Shop with AI" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -74,9 +73,6 @@ export function Header() {
             <a href={`mailto:${company.email}`} className="transition-colors hover:text-primary">
               {company.email}
             </a>
-            <a href={company.phoneHref} className="transition-colors hover:text-primary">
-              {company.phone}
-            </a>
           </div>
         </div>
       </div>
@@ -87,8 +83,8 @@ export function Header() {
           transparent ? "bg-transparent" : "surface-glass shadow-[0_1px_0_0_var(--border)]",
         )}
       >
-        <div className="shell flex h-16 items-center justify-between gap-3 lg:h-[4.5rem]">
-          <Link to="/" className="flex items-center" aria-label="Payal Decor home">
+        <div className="shell flex h-16 items-center justify-between gap-4 lg:h-[4.5rem]">
+          <Link to="/" className="flex items-center lg:mr-2" aria-label="Payal Decor home">
             <img
               src={media.logo}
               alt="Payal Decor"
@@ -120,14 +116,7 @@ export function Header() {
                       ),
                     }}
                   >
-                    {l.to === "/shop-with-ai" ? (
-                      <>
-                        <Sparkles className="size-3.5" />
-                        {l.label}
-                      </>
-                    ) : (
-                      l.label
-                    )}
+                    {l.label}
                   </Link>
                   <div
                     className={cn(
@@ -168,33 +157,14 @@ export function Header() {
                       transparent ? "!text-white" : "!text-primary",
                     ),
                   }}
-                >
-                  {l.to === "/shop-with-ai" ? (
-                    <>
-                      <Sparkles className="size-3.5" />
-                      {l.label}
-                    </>
-                  ) : (
-                    l.label
-                  )}
-                </Link>
+                  >
+                    {l.label}
+                  </Link>
               ),
             )}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <a
-              href={company.phoneHref}
-              className={cn(
-                "hidden items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold whitespace-nowrap transition-colors xl:inline-flex",
-                transparent
-                  ? "border-white/25 text-white hover:bg-white/10"
-                  : "border-border text-foreground hover:border-primary hover:text-primary",
-              )}
-            >
-              <Phone className="size-3.5" />
-              {company.phone}
-            </a>
+          <div className="flex items-center gap-2 lg:ml-2">
             <Link
               to="/contact"
               className="hidden whitespace-nowrap rounded-full bg-brand-gradient px-4 py-2.5 text-xs font-semibold text-primary-foreground shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-lift)] sm:inline-flex"
@@ -230,17 +200,10 @@ export function Header() {
                      type="button"
                      onClick={() => setProductsOpen((v) => !v)}
                      className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                     aria-expanded={productsOpen}
-                   >
-                     {l.to === "/shop-with-ai" ? (
-                       <span className="inline-flex items-center gap-1.5">
-                         <Sparkles className="size-4" />
-                         {l.label}
-                       </span>
-                     ) : (
-                       l.label
-                     )}
-                     <svg
+                      aria-expanded={productsOpen}
+                    >
+                      {l.label}
+                      <svg
                       className={cn("size-4 transition-transform duration-300", productsOpen && "rotate-180")}
                       fill="none"
                       stroke="currentColor"
@@ -277,24 +240,11 @@ export function Header() {
                   className="rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                   activeProps={{ className: "!bg-accent !text-primary !font-semibold" }}
                 >
-                  {l.to === "/shop-with-ai" ? (
-                    <span className="inline-flex items-center gap-1.5">
-                      <Sparkles className="size-4" />
-                      {l.label}
-                    </span>
-                  ) : (
-                    l.label
-                  )}
+                  {l.label}
                 </Link>
               ),
             )}
             <div className="mt-2 grid grid-cols-2 gap-2">
-              <a
-                href={company.phoneHref}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-3 py-2.5 text-xs font-semibold"
-              >
-                <Phone className="size-3.5" /> Call
-              </a>
               <Link
                 to="/contact"
                 className="inline-flex items-center justify-center rounded-full bg-brand-gradient px-3 py-2.5 text-xs font-semibold text-primary-foreground"

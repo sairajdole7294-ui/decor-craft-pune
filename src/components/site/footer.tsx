@@ -35,16 +35,14 @@ const columns = [
 export function Footer() {
   return (
     <footer className="surface-ink">
-      <div className="shell grid gap-6 py-6 lg:grid-cols-[1.5fr_2fr_1.4fr] lg:py-8">
+      <div className="shell grid gap-6 py-6 lg:grid-cols-[auto_2fr_1.4fr] lg:py-8">
         <div>
-          <div className="flex items-center">
-            <img
-              src={media.logo}
-              alt="Payal Decor"
-              className="h-14 w-auto max-w-[11rem] object-contain sm:h-16 sm:max-w-[12rem]"
-            />
-          </div>
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-foreground/65">
+          <img
+            src={media.logo}
+            alt="Payal Decor"
+            className="h-14 w-auto max-w-[11rem] object-contain sm:h-16 sm:max-w-[12rem]"
+          />
+          <p className="mt-3 max-w-sm text-left text-sm leading-relaxed text-ink-foreground/65">
             Turnkey commercial interiors, modular furniture and custom manufacturing — designed,
             produced in our own factory and installed by our own teams.
           </p>

@@ -91,30 +91,13 @@ function Index() {
           </Reveal>
           <Reveal delay={280} className="mt-6 flex flex-wrap gap-3">
             <BrandButton to="/contact">Book Free Consultation</BrandButton>
-            <BrandButton to="/gallery" variant="ghost-light">Watch Our Work</BrandButton>
             <BrandButton to="/ai-space-visualizer" variant="outline">
               <Sparkles className="size-4" />
               AI Visualize Your Space
             </BrandButton>
-            <BrandButton to="/shop-with-ai" variant="outline">
-              <Sparkles className="size-4" />
-              Shop with AI
-            </BrandButton>
           </Reveal>
 
-          <Reveal delay={360} className="mt-7 flex flex-wrap gap-2">
-            {chips.map((c) => (
-              <Link
-                key={c.label}
-                to={c.to}
-                className="rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/80 backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:bg-white/15 hover:text-white"
-              >
-                {c.label}
-              </Link>
-            ))}
-          </Reveal>
-
-          <Reveal delay={440} className="mt-9 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <Reveal delay={440} className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {stats.map((s) => (
               <div
                 key={s.label}
@@ -132,9 +115,9 @@ function Index() {
       </section>
 
       {/* Story */}
-      <section className="shell grid gap-6 py-6 lg:grid-cols-2 lg:items-center lg:py-8">
+      <section className="shell grid gap-8 py-8 lg:grid-cols-2 lg:items-center lg:py-12">
         <Reveal className="hover-zoom relative overflow-hidden rounded-3xl border border-border">
-          <img src={media.about1} alt="Payal Decor commercial interior project in Pune" className="h-[22rem] w-full object-cover lg:h-[28rem]" loading="lazy" />
+          <img src={media.about1} alt="Payal Decor commercial interior project in Pune" className="h-[26rem] w-full object-cover lg:h-[32rem]" loading="lazy" />
           <div className="absolute bottom-4 left-4 rounded-2xl bg-card/95 px-4 py-3 shadow-[var(--shadow-card)] backdrop-blur">
             <p className="font-[family-name:var(--font-display)] text-2xl font-bold text-gradient-brand">
               <Counter to={30} suffix="+" />
@@ -191,7 +174,7 @@ function Index() {
       </section>
 
       {/* Services */}
-      <section className="bg-sand py-6 lg:py-8">
+      <section className="bg-sand py-8 lg:py-14">
         <div className="shell">
           <SectionHead
             eyebrow="What We Do"
@@ -199,10 +182,10 @@ function Index() {
             lead="Four disciplines, one delivery team — so nothing falls between design, factory and site."
             action={<BrandButton to="/services" variant="outline">Explore all services</BrandButton>}
           />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:items-start">
             {services.map((s, i) => (
-              <Reveal key={s.id} delay={i * 90}>
-                <article className="card-premium group h-full overflow-hidden">
+              <Reveal key={s.id} delay={i * 90} className="self-start">
+                <article className="card-premium group overflow-hidden">
                   <div className="hover-zoom relative">
                     <img src={s.image} alt={s.title} className="h-40 w-full object-cover" loading="lazy" />
                     <span className="absolute top-3 left-3 rounded-lg bg-ink/70 px-2 py-1 font-[family-name:var(--font-display)] text-xs font-bold text-white backdrop-blur">
@@ -212,14 +195,16 @@ function Index() {
                   <div className="p-4">
                     <h3 className="text-base leading-snug font-semibold">{s.title}</h3>
                     <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{s.summary}</p>
-                    <ul className="mt-3 max-h-0 space-y-1 overflow-hidden opacity-0 transition-all duration-500 group-hover:max-h-40 group-hover:opacity-100">
-                      {s.points.map((p) => (
-                        <li key={p} className="flex gap-1.5 text-[0.72rem] text-muted-foreground">
-                          <Icons.Check className="mt-0.5 size-3 shrink-0 text-primary" />
-                          {p}
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="mt-3 max-h-0 overflow-hidden transition-all duration-300 group-hover:max-h-24">
+                      <ul className="space-y-1">
+                        {s.points.map((p) => (
+                          <li key={p} className="flex gap-1.5 text-[0.72rem] text-muted-foreground">
+                            <Icons.Check className="mt-0.5 size-3 shrink-0 text-primary" />
+                            {p}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </article>
               </Reveal>
@@ -229,7 +214,7 @@ function Index() {
       </section>
 
       {/* USPs */}
-      <section className="shell py-6 lg:py-8">
+      <section className="shell py-8 lg:py-14">
         <SectionHead
           eyebrow="Why Payal Decor"
           title={<>Eight reasons clients keep <span className="text-gradient-brand">coming back</span></>}
@@ -256,7 +241,7 @@ function Index() {
       </section>
 
       {/* Products */}
-      <section className="surface-ink py-6 lg:py-8">
+      <section className="surface-ink py-8 lg:py-14">
         <div className="shell">
           <SectionHead
             tone="ink"
@@ -285,7 +270,7 @@ function Index() {
       </section>
 
       {/* Projects preview */}
-      <section className="shell py-6 lg:py-8">
+      <section className="shell py-8 lg:py-14">
         <SectionHead
           eyebrow="Selected Work"
           title="Projects delivered across Pune"
@@ -315,7 +300,7 @@ function Index() {
       </section>
 
       {/* Factory capability */}
-      <section className="bg-sand py-6 lg:py-8">
+      <section className="bg-sand py-8 lg:py-14">
         <div className="shell grid gap-6 lg:grid-cols-2 lg:items-center">
           <div>
             <SectionHead
@@ -335,7 +320,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="surface-ink py-6 lg:py-8">
+      <section className="surface-ink py-8 lg:py-14">
         <div className="shell">
           <SectionHead tone="ink" eyebrow="Design & Installation Process" title="Six stages, one point of contact" lead="You always know what is happening on your floor plate this week." />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -358,7 +343,7 @@ function Index() {
       </section>
 
       {/* Calculator */}
-      <section className="bg-sand py-6 lg:py-8">
+      <section className="bg-sand py-8 lg:py-14">
         <div className="shell">
           <SectionHead
             eyebrow="Budget Planner"
@@ -370,7 +355,7 @@ function Index() {
       </section>
 
       {/* Clients */}
-      <section className="shell py-6 lg:py-8">
+      <section className="shell py-8 lg:py-14">
         <SectionHead
           eyebrow="Trusted By"
           title="Companies that specify Payal Decor"
@@ -391,11 +376,25 @@ function Index() {
       </section>
 
       {/* Testimonials */}
-      <section className="surface-ink py-6 lg:py-8">
+      <section className="surface-ink py-8 lg:py-14">
         <div className="shell">
           <SectionHead tone="ink" eyebrow="Client Voices" title="What our clients say" lead="Testimonials from the corporates, campuses and studios whose spaces we've delivered." />
-          <div className="relative">
-            <div id="testimonial-scroll" className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById('testimonial-scroll');
+                if (el) el.scrollBy({ left: -300, behavior: 'smooth' });
+              }}
+              aria-label="Previous testimonial"
+              className="shrink-0 flex size-8 items-center justify-center rounded-full bg-card/90 text-ink-foreground shadow-md backdrop-blur transition-all hover:bg-card hover:text-primary md:size-10"
+            >
+              <Icons.ChevronLeft className="size-3.5 md:size-5" />
+            </button>
+            <div
+              id="testimonial-scroll"
+              className="no-scrollbar flex flex-1 snap-x snap-mandatory gap-4 overflow-x-auto pb-2 justify-center"
+            >
               {testimonials.map((t, i) => (
                 <Reveal key={t.name} delay={i * 80} className="w-[85%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]">
                   <figure className="h-full rounded-2xl border border-white/12 bg-white/5 p-5 backdrop-blur-md transition-colors hover:border-primary/50">
@@ -413,30 +412,19 @@ function Index() {
               type="button"
               onClick={() => {
                 const el = document.getElementById('testimonial-scroll');
-                if (el) el.scrollBy({ left: -300, behavior: 'smooth' });
-              }}
-              aria-label="Previous testimonial"
-              className="absolute left-2 top-1/2 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full bg-card/90 text-ink-foreground shadow-md backdrop-blur transition-all hover:bg-card hover:text-primary md:flex"
-            >
-              <Icons.ChevronLeft className="size-5" />
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                const el = document.getElementById('testimonial-scroll');
                 if (el) el.scrollBy({ left: 300, behavior: 'smooth' });
               }}
               aria-label="Next testimonial"
-              className="absolute right-2 top-1/2 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full bg-card/90 text-ink-foreground shadow-md backdrop-blur transition-all hover:bg-card hover:text-primary md:flex"
+              className="shrink-0 flex size-8 items-center justify-center rounded-full bg-card/90 text-ink-foreground shadow-md backdrop-blur transition-all hover:bg-card hover:text-primary md:size-10"
             >
-              <Icons.ChevronRight className="size-5" />
+              <Icons.ChevronRight className="size-3.5 md:size-5" />
             </button>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="shell py-6 lg:py-8">
+      <section className="shell py-8 lg:py-14">
         <div className="max-w-3xl">
           <Eyebrow>Questions</Eyebrow>
           <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">Everything clients ask before award</h2>
@@ -444,7 +432,7 @@ function Index() {
             Still unsure? Call {company.phone} and speak to the team that will actually run your project.
           </p>
         </div>
-        <div className="mt-5 grid items-start gap-4 lg:grid-cols-[1.35fr_1fr]">
+        <div className="mt-5 grid gap-4 lg:grid-cols-[1.35fr_1fr] lg:items-stretch">
           <div className="grid gap-3">
             <div className="divide-y divide-border rounded-2xl border border-border bg-card">
           {faqs.map((f, i) => (

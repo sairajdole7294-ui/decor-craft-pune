@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { media, awards, usps, team, coverage, certifications } from "@/lib/site-data";
 import { PageHero, SectionHead, CtaBand, BrandButton } from "@/components/site/bits";
-import { Reveal, Counter } from "@/components/site/motion";
+import { Reveal } from "@/components/site/motion";
 
 const title = "About Payal Decor — Interiors & Manufacturing Since 1992";
 const description =
@@ -30,22 +30,7 @@ function About() {
         title="Three decades of measured craft"
         lead="Since 1992, Payal Decor has been transforming homes and commercial spaces with modern interiors and modular furniture solutions — designed, manufactured and installed by one accountable team."
         image={media.banner}
-      >
-        <div className="grid max-w-2xl grid-cols-3 gap-3">
-          {[
-            { v: 30, s: "+", l: "Years" },
-            { v: 500, s: "+", l: "Projects" },
-            { v: 100, s: "%", l: "In-house" },
-          ].map((x) => (
-            <div key={x.l} className="rounded-2xl border border-white/15 bg-white/5 p-3 backdrop-blur-md">
-              <p className="font-[family-name:var(--font-display)] text-2xl font-bold text-white">
-                <Counter to={x.v} suffix={x.s} />
-              </p>
-              <p className="text-[0.68rem] text-white/60">{x.l}</p>
-            </div>
-          ))}
-        </div>
-      </PageHero>
+      />
 
       <section className="shell grid gap-6 py-6 lg:grid-cols-[1.2fr_1fr] lg:py-8">
         <div>
@@ -79,7 +64,7 @@ function About() {
           {team.map((t) => (
             <figure
               key={t.name}
-              className="card-premium group relative mx-auto max-w-[26rem] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+              className="card-premium group relative mx-auto max-w-[28rem] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)] lg:max-w-[30rem]"
             >
               <span
                 aria-hidden="true"

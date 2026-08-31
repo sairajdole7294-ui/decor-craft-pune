@@ -158,7 +158,7 @@ export function LogoMarquee({ reverse = false }: { reverse?: boolean }) {
   return (
     <div className="group relative overflow-hidden">
       <div
-        className="flex w-max gap-3 group-hover:[animation-play-state:paused]"
+        className="flex w-max gap-3 py-1.5 group-hover:[animation-play-state:paused]"
         style={{
           animation: `marquee ${reverse ? "58s" : "46s"} linear infinite`,
           animationDirection: reverse ? "reverse" : "normal",
@@ -173,7 +173,7 @@ export function LogoMarquee({ reverse = false }: { reverse?: boolean }) {
               src={src}
               alt="Payal Decor client logo"
               loading="lazy"
-              className="max-h-12 w-auto object-contain opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+              className="max-h-12 w-auto object-contain opacity-70 transition-all duration-300 hover:opacity-100"
             />
           </div>
         ))}

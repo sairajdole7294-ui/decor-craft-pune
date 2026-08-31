@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowUp, MessageCircle, Phone, CalendarDays, FileDown } from "lucide-react";
+import { ArrowUp, MessageCircle, Sparkles, Phone, CalendarDays, FileDown } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import { company } from "@/lib/site-data";
@@ -47,6 +47,14 @@ export function FloatingTools() {
       >
         <MessageCircle className="size-5" />
       </a>
+      <Link
+        to="/shop-with-ai"
+        aria-label="Shop with AI"
+        className="group inline-flex items-center gap-2 rounded-full bg-brand-gradient px-4 py-3 text-xs font-semibold text-primary-foreground shadow-[var(--shadow-lift)] transition-transform duration-300 hover:scale-105 sm:px-4 sm:py-3"
+      >
+        <Sparkles className="size-4" />
+        <span className="hidden sm:inline">Shop with AI</span>
+      </Link>
       <button
         type="button"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

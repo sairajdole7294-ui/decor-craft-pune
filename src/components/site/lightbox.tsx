@@ -104,7 +104,7 @@ export function Lightbox({
           <img
             src={images[index]}
             alt={caption ?? "Project image"}
-            className="max-h-full max-w-full rounded-xl object-contain transition-transform duration-300"
+            className="aspect-[4/3] w-full max-w-3xl rounded-xl object-cover transition-transform duration-300"
             style={{ transform: `scale(${zoom})` }}
           />
           <button

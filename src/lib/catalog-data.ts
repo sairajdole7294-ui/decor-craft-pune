@@ -618,7 +618,7 @@ export const industryPages: IndustryPage[] = [
     points: ["Bespoke space planning", "Modular kitchen & wardrobe systems", "Living and bedroom furniture", "Soft-close hardware throughout"],
     products: ["modular-kitchen", "modular-wardrobe", "premia-series"],
     gallery: ["/media/modular-kitchen.jpg", "/media/modular-wardrobe.jpg", "/media/products/premia-3.jpg", "/media/products/premia-4.jpg"],
-    projects: ["modular-kitchen-suite", "wardrobe-systems"],
+    projects: [],
   },
   {
     slug: "retail-space",

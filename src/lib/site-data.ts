@@ -212,7 +212,7 @@ export const projects: Project[] = [
     client: "MAHLE",
     location: "Pune, Maharashtra",
     year: 2022,
-    area: "15,000 sq.ft.",
+    area: "4,500 sq.ft.",
     category: "Furniture",
     type: "Workstations & Furniture",
     desc: "Linear and cluster workstation systems with privacy screens and integrated cable management, manufactured in-house and installed floor by floor without halting operations.",

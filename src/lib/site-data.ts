@@ -254,7 +254,7 @@ export const projects: Project[] = [
     client: "Bay Watch Hotels",
     location: "Alibaug",
     year: 2026,
-    area: "15,000 sq.ft.",
+    area: "4,500" sq.ft.",
     category: "Hospitality",
     type: "Hotel Interiors",
     desc: "A coastal hospitality interior where natural light, warm textures and local materials create a relaxed yet refined guest experience across public areas, corridors and guest floors.",

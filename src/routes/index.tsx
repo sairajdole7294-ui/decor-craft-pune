@@ -314,7 +314,7 @@ function Index() {
             </div>
           </div>
           <Reveal delay={120}>
-            <BeforeAfter composite={media.transformation} labelBefore="Before" labelAfter="Installed & handed over" />
+            <BeforeAfter before={media.beforeImage} after={media.afterImage} labelBefore="Bare shell" labelAfter="Installed & handed over" />
             <p className="mt-2 text-center text-[0.7rem] text-muted-foreground">Drag to compare factory output with the finished space.</p>
           </Reveal>
         </div>
@@ -379,22 +379,7 @@ function Index() {
       <section className="surface-ink py-8 lg:py-14">
         <div className="shell">
           <SectionHead tone="ink" eyebrow="Client Voices" title="What our clients say" lead="Testimonials from the corporates, campuses and studios whose spaces we've delivered." />
-          <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              type="button"
-              onClick={() => {
-                const el = document.getElementById('testimonial-scroll');
-                if (el) el.scrollBy({ left: -300, behavior: 'smooth' });
-              }}
-              aria-label="Previous testimonial"
-              className="shrink-0 flex size-8 items-center justify-center rounded-full bg-card/90 text-ink-foreground shadow-md backdrop-blur transition-all hover:bg-card hover:text-primary md:size-10"
-            >
-              <Icons.ChevronLeft className="size-3.5 md:size-5" />
-            </button>
-            <div
-              id="testimonial-scroll"
-              className="no-scrollbar flex flex-1 snap-x snap-mandatory gap-4 overflow-x-auto pb-2 justify-center"
-            >
+          <div id="testimonial-scroll" className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">
               {testimonials.map((t, i) => (
                 <Reveal key={t.name} delay={i * 80} className="w-[85%] shrink-0 snap-start sm:w-[46%] lg:w-[31%]">
                   <figure className="h-full rounded-2xl border border-white/12 bg-white/5 p-5 backdrop-blur-md transition-colors hover:border-primary/50">
@@ -408,18 +393,6 @@ function Index() {
                 </Reveal>
               ))}
             </div>
-            <button
-              type="button"
-              onClick={() => {
-                const el = document.getElementById('testimonial-scroll');
-                if (el) el.scrollBy({ left: 300, behavior: 'smooth' });
-              }}
-              aria-label="Next testimonial"
-              className="shrink-0 flex size-8 items-center justify-center rounded-full bg-card/90 text-ink-foreground shadow-md backdrop-blur transition-all hover:bg-card hover:text-primary md:size-10"
-            >
-              <Icons.ChevronRight className="size-3.5 md:size-5" />
-            </button>
-          </div>
         </div>
       </section>
 

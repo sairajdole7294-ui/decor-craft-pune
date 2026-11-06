@@ -1,5 +1,5 @@
 import { useMemo, useEffect, useState } from "react";
-import { Grid2X2, List, MapPin, Ruler, CalendarDays, ArrowUpRight } from "lucide-react";
+import { Grid2X2, List, MapPin, CalendarDays, ArrowUpRight } from "lucide-react";
 import { projects, projectCategories, type Project } from "@/lib/site-data";
 import { Reveal } from "./motion";
 import { Lightbox } from "./lightbox";
@@ -165,7 +165,6 @@ export function ProjectsExplorer({ initialProjectSlug }: { initialProjectSlug?: 
                 </div>
                 <div className="flex items-center justify-between gap-3 px-4 py-3 text-[0.7rem] text-muted-foreground">
                   <span className="inline-flex items-center gap-1"><MapPin className="size-3" />{p.location}</span>
-                  <span className="inline-flex items-center gap-1"><Ruler className="size-3" />{p.area}</span>
                 </div>
               </button>
             </Reveal>
@@ -193,7 +192,6 @@ export function ProjectsExplorer({ initialProjectSlug }: { initialProjectSlug?: 
                   <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{p.desc}</p>
                   <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[0.7rem] text-muted-foreground">
                     <span className="inline-flex items-center gap-1"><MapPin className="size-3" />{p.location}</span>
-                    <span className="inline-flex items-center gap-1"><Ruler className="size-3" />{p.area}</span>
                     <span className="inline-flex items-center gap-1"><CalendarDays className="size-3" />{p.year}</span>
                     <span>Client: {p.client}</span>
                   </div>
@@ -222,7 +220,6 @@ export function ProjectsExplorer({ initialProjectSlug }: { initialProjectSlug?: 
                 {[
                   ["Client", active.client],
                   ["Location", active.location],
-                  ["Area", active.area],
                   ["Completed", String(active.year)],
                 ].map(([k, v]) => (
                   <div key={k}>

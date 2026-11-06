@@ -110,7 +110,19 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="shell flex flex-col items-center justify-between gap-2 py-4 text-xs text-ink-foreground/50 sm:flex-row">
-          <p>© {new Date().getFullYear()} Payal Decor. All rights reserved.</p>
+          <p className="flex items-center gap-1.5 sm:whitespace-nowrap">
+            © {new Date().getFullYear()} Payal Decor. All rights reserved.
+            <span className="text-ink-foreground/35">·</span>
+            Designed &amp; Developed by{" "}
+            <a
+              href="https://www.pawartechnologyservices.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ink-foreground/60 hover:text-primary transition-colors"
+            >
+              Pawar Technology Services (PTS)
+            </a>
+          </p>
           <p>Designed, manufactured and installed in Pune, Maharashtra.</p>
         </div>
       </div>

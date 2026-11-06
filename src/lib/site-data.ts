@@ -132,7 +132,6 @@ export type Project = {
   client: string;
   location: string;
   year: number;
-  area: string;
   category: string;
   type: string;
   desc: string;
@@ -148,7 +147,6 @@ export const projects: Project[] = [
     client: "EKA Mobility",
     location: "Pune, Maharashtra",
     year: 2024,
-    area: "24,000 sq.ft.",
     category: "Commercial",
     type: "Corporate Office",
     desc: "A modern reception and open-plan headquarters in neutral tones, layered with wooden joinery, glass partitions and a curated sculpture that grounds the arrival experience.",
@@ -170,7 +168,6 @@ export const projects: Project[] = [
     client: "Kirloskar Pneumatic Co. Ltd.",
     location: "Pune, Maharashtra",
     year: 2023,
-    area: "18,500 sq.ft.",
     category: "Office",
     type: "Corporate Interiors",
     desc: "Clean-lined workstations and executive cabins where wood and glass are calibrated for warmth and openness — an interior tuned to sophisticated day-to-day operations.",
@@ -192,7 +189,6 @@ export const projects: Project[] = [
     client: "Prakash Masale",
     location: "Pune, Maharashtra",
     year: 2023,
-    area: "9,250 sq.ft.",
     category: "Office",
     type: "Workspace Design",
     desc: "A stylish, modern office with individual cubicles for focused work, a creative ceiling of wooden beams and hanging lights, warm wooden flooring and pastel walls.",
@@ -212,7 +208,6 @@ export const projects: Project[] = [
     client: "MAHLE",
     location: "Pune, Maharashtra",
     year: 2022,
-    area: "4,500 sq.ft.",
     category: "Furniture",
     type: "Workstations & Furniture",
     desc: "Linear and cluster workstation systems with privacy screens and integrated cable management, manufactured in-house and installed floor by floor without halting operations.",
@@ -233,7 +228,6 @@ export const projects: Project[] = [
     client: "Vishwakarma University",
     location: "Pune, Maharashtra",
     year: 2022,
-    area: "13,000 sq.ft.",
     category: "Hospitality",
     type: "Institutional Campus",
     desc: "Campus-wide interiors across administration, faculty and student-facing zones — durable finishes, branded colour blocking and heavy-duty modular furniture built for daily footfall.",
@@ -254,7 +248,6 @@ export const projects: Project[] = [
     client: "Bay Watch Hotels",
     location: "Alibaug",
     year: 2026,
-    area: "4,500 sq.ft.",
     category: "Hospitality",
     type: "Hotel Interiors",
     desc: "A coastal hospitality interior where natural light, warm textures and local materials create a relaxed yet refined guest experience across public areas, corridors and guest floors.",

@@ -188,31 +188,44 @@ export function Header() {
 
         <div
           className={cn(
-            "overflow-hidden border-t border-border bg-background transition-[max-height,opacity] duration-500 lg:hidden",
+            "overflow-y-auto border-t border-border bg-background transition-[max-height,opacity] duration-500 lg:hidden",
             open ? "max-h-[34rem] opacity-100" : "max-h-0 opacity-0",
           )}
         >
           <nav className="shell grid gap-0.5 py-3" aria-label="Mobile">
             {navLinks.map((l) =>
               l.hasDropdown ? (
-                <div key={l.to}>
-                   <button
-                     type="button"
-                     onClick={() => setProductsOpen((v) => !v)}
-                     className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-                      aria-expanded={productsOpen}
+                <div key={l.to} className="flex flex-col">
+                  <div className="flex w-full items-center justify-between gap-2">
+                    <Link
+                      to={l.to}
+                      activeOptions={{ exact: l.to === "/" }}
+                      className="flex-1 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                      activeProps={{ className: "!bg-accent !text-primary !font-semibold" }}
                     >
                       {l.label}
-                      <svg
-                      className={cn("size-4 transition-transform duration-300", productsOpen && "rotate-180")}
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      viewBox="0 0 24 24"
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setProductsOpen((v) => !v);
+                      }}
+                      className="shrink-0 flex size-9 items-center justify-center rounded-lg bg-secondary/50 p-2 text-muted-foreground transition-all hover:bg-secondary hover:text-foreground"
+                      aria-expanded={productsOpen}
+                      aria-label={productsOpen ? "Collapse Products" : "Expand Products"}
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                    </svg>
-                  </button>
+                      <svg
+                        className={cn("size-4 transition-transform duration-300", productsOpen && "rotate-180")}
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </button>
+                  </div>
                   <div
                     className={cn(
                       "overflow-hidden transition-all duration-300",

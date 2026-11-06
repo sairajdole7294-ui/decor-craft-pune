@@ -129,6 +129,42 @@ const QUERY_TO_CATEGORIES: Record<string, string[]> = {
   partition: ["corporate-office", "modular-interiors", "general"],
   cafeteria: ["hostel", "residential", "general"],
   dining: ["residential", "hostel", "general"],
+  lounge: ["residential", "corporate-office", "general"],
+  seating: ["office-workstations", "corporate-office", "general"],
+  bench: ["school-bench", "education-furniture", "general"],
+  cupboard: ["storage solutions", "general", "modular-interiors"],
+  file: ["storage solutions", "general", "modular-interiors"],
+  filing: ["storage solutions", "general", "modular-interiors"],
+  rack: ["storage solutions", "general", "retail-space"],
+  shelving: ["storage solutions", "general", "retail-space"],
+  boardroom: ["conference table", "corporate-office", "general"],
+  board: ["conference table", "corporate-office", "general"],
+  executive: ["corporate-office", "office-workstations", "general"],
+  manager: ["corporate-office", "office-workstations", "general"],
+  visitor: ["office-workstations", "corporate-office", "general"],
+  waiting: ["corporate-office", "general"],
+  breakout: ["corporate-office", "general"],
+  canteen: ["hostel", "residential", "general"],
+  dorm: ["hostel", "general"],
+  dormitory: ["hostel", "general"],
+  student: ["school-bench", "education-furniture", "general"],
+  classroom: ["school-bench", "education-furniture", "general"],
+  campus: ["school-bench", "education-furniture", "general"],
+  college: ["school-bench", "education-furniture", "general"],
+  university: ["school-bench", "education-furniture", "general"],
+  chemical: ["lab-workstations", "technical-furniture", "general"],
+  physics: ["lab-workstations", "technical-furniture", "general"],
+  static: ["esd-workstation", "technical-furniture", "general"],
+  electronics: ["esd-workstation", "technical-furniture", "general"],
+  spark: ["office-workstations", "corporate-office", "general"],
+  impact: ["office-workstations", "corporate-office", "general"],
+  impress: ["office-workstations", "corporate-office", "general"],
+  curve: ["office-workstations", "corporate-office", "general"],
+  magna: ["office-workstations", "corporate-office", "general"],
+  premia: ["office-workstations", "corporate-office", "general"],
+  eco: ["office-workstations", "corporate-office", "general"],
+  element: ["office-workstations", "corporate-office", "general"],
+  series: ["office-workstations", "corporate-office", "general"],
 };
 
 const CATEGORY_ALIASES: Record<string, string> = {
@@ -159,6 +195,17 @@ const CATEGORY_ALIASES: Record<string, string> = {
   "chairs": "chairs",
   "tables": "tables",
   "seating": "seating",
+  "lab workstations": "lab-workstations",
+  "esd workstation": "esd-workstation",
+  "technical furniture": "technical-furniture",
+  "education furniture": "education-furniture",
+  "modular kitchen": "modular-kitchen",
+  "modular wardrobe": "modular-wardrobe",
+  "modular interiors": "modular-interiors",
+  "corporate office": "corporate-office",
+  "office workstations": "office-workstations",
+  "retail space": "retail-space",
+  "storage solution": "storage solutions",
 };
 
 function getRelevantCategories(query: string): string[] {
@@ -227,7 +274,7 @@ function buildCatalogText(products: ShopProduct[]): string {
 function fallbackMatchProducts(query: string, catalog: ShopProduct[]): ShopProduct[] {
   const lower = query.toLowerCase();
   const words = lower.split(/[^a-z0-9]+/).filter(w => w.length > 2);
-  const stopWords = new Set(["i", "need", "want", "looking", "for", "the", "a", "an", "some", "please", "find", "show", "me", "my", "best", "good", "new", "modern", "wooden", "steel", "metal", "plastic", "fabric", "leather", "office", "bedroom", "kitchen", "living", "room", "reception", "retail", "hostel", "pg", "commercial"]);
+  const stopWords = new Set(["i", "need", "want", "looking", "for", "the", "a", "an", "some", "please", "find", "show", "me", "my", "best", "good", "new", "modern", "wooden", "steel", "metal", "plastic", "fabric", "leather"]);
 
   const keywords = words.filter(w => !stopWords.has(w));
   if (keywords.length === 0) {
@@ -236,16 +283,26 @@ function fallbackMatchProducts(query: string, catalog: ShopProduct[]): ShopProdu
 
   const scored = catalog.map(p => {
     let score = 0;
-    const searchText = `${p.name} ${p.category} ${p.type || ""} ${p.desc} ${(p.applications || []).join(" ")} ${(p.materials || []).join(" ")}`.toLowerCase();
+    const searchText = `${p.name} ${p.category} ${p.type || ""} ${p.series || ""} ${p.desc} ${(p.applications || []).join(" ")} ${(p.materials || []).join(" ")}`.toLowerCase();
+    const nameText = p.name.toLowerCase();
+    const catText = (p.category || "").toLowerCase();
+    const seriesText = (p.series || "").toLowerCase();
+    const typeText = (p.type || "").toLowerCase();
 
     for (const kw of keywords) {
       if (searchText.includes(kw)) {
         score += 1;
       }
-      if (p.name.toLowerCase().includes(kw)) {
+      if (nameText.includes(kw)) {
+        score += 4;
+      }
+      if (catText.includes(kw)) {
         score += 3;
       }
-      if ((p.type || "").toLowerCase().includes(kw)) {
+      if (seriesText.includes(kw)) {
+        score += 3;
+      }
+      if (typeText.includes(kw)) {
         score += 2;
       }
     }
